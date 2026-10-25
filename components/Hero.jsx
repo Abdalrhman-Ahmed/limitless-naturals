@@ -16,7 +16,7 @@ export default function Hero() {
       </nav>
 
       <div className="hero-photo">
-        <div className="ph-label">Add /public/images/hero-woman.jpg</div>
+        <div className="ph-label">A daily ritual for your wellbeing</div>
         <Photo src="/images/hero-woman.jpg" alt="Smiling woman among plants" />
       </div>
 
