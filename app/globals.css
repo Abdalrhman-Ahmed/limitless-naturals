@@ -323,3 +323,29 @@ footer { background: linear-gradient(180deg, #5f7f65, #3f5c47); color: #fff; pad
   .sub-row button,
   .hero .badge { transition: none; }
 }
+
+
+/* ---------- FULL-WIDTH PAGE LAYOUT ---------- */
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+body {
+  background: var(--mint);
+}
+.frame {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+.shell {
+  width: 100%;
+  min-height: 100vh;
+  border-radius: 0;
+  overflow: hidden;
+}
+@media (max-width: 900px) {
+  .frame { padding: 0; }
+}
