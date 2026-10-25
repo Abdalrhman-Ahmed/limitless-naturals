@@ -230,3 +230,96 @@ footer { background: linear-gradient(180deg, #5f7f65, #3f5c47); color: #fff; pad
   .news .form { margin-left: 0; }
   .f-top { grid-template-columns: 1fr 1fr; }
 }
+
+
+/* ---------- HERO REFINEMENT ---------- */
+.hero-photo .ph-label {
+  z-index: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(14px, 1.2vw, 17px);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  background:
+    radial-gradient(ellipse at 35% 25%, rgba(233, 248, 237, 0.18), transparent 48%),
+    linear-gradient(160deg, #9fb59a, #6f8f72 60%, #4f7456);
+}
+.hero-photo img { z-index: 1; }
+.hero-card {
+  box-shadow: 0 24px 70px rgba(13, 31, 19, 0.16);
+  backdrop-filter: blur(4px);
+}
+.hero-card h1 { text-wrap: balance; }
+.nav a,
+.btn-outline,
+.sub-row button {
+  -webkit-tap-highlight-color: transparent;
+}
+.nav a { transition: opacity 180ms ease; }
+.nav a:hover { opacity: 0.72; }
+.nav a:focus-visible,
+.btn-outline:focus-visible,
+.badge:focus-visible,
+.sub-row input:focus-visible,
+.sub-row button:focus-visible {
+  outline: 2px solid var(--tan);
+  outline-offset: 4px;
+}
+.hero-canvas { pointer-events: none; }
+.hero .badge { transition: transform 220ms ease, filter 220ms ease; }
+.hero .badge:hover { filter: brightness(1.06); }
+
+@media (max-width: 600px) {
+  .frame { padding: 8px; }
+  .shell { border-radius: 16px; }
+  .hero {
+    min-height: 820px;
+    isolation: isolate;
+  }
+  .nav { top: 20px; left: 20px; right: 20px; }
+  .logo { font-size: 25px; }
+  .hero-photo {
+    height: 49%;
+    border-radius: 0 0 48% 48% / 0 0 24% 24%;
+  }
+  .hero-canvas {
+    top: 38%;
+    height: 48%;
+  }
+  .hero-card {
+    width: min(290px, calc(100% - 40px));
+    padding: 28px 22px 24px;
+    bottom: 17%;
+  }
+  .hero-card h1 { font-size: clamp(24px, 7vw, 28px); }
+  .hero-card p { font-size: 11px; }
+  .hero .badge {
+    width: 64px;
+    height: 64px;
+    left: auto;
+    right: 10%;
+    bottom: 43%;
+  }
+  .hero-rating {
+    left: 18px;
+    bottom: 18px;
+    padding: 8px 11px;
+  }
+  .hero-checks {
+    bottom: 24px;
+    left: 145px;
+    justify-content: flex-end;
+    gap: 8px 12px;
+    padding: 0 14px 0 0;
+    font-size: 9px;
+  }
+  .hero-checks span { white-space: nowrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .nav a,
+  .btn-outline,
+  .sub-row button,
+  .hero .badge { transition: none; }
+}
