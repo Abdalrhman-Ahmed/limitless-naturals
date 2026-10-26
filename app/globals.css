@@ -38,20 +38,23 @@ button, input { font: inherit; }
   display: flex; justify-content: space-between; align-items: center;
 }
 .logo { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; }
-.nav ul {
-  display: flex;
+.hero .nav ul {
+  display: flex !important;
   align-items: center;
-  gap: 22px;
+  justify-content: center;
+  gap: 24px;
   list-style: none;
-  font-size: 11px;
-  opacity: .95;
-  padding: 15px 24px;
-  border: 1px solid rgba(238, 249, 239, .2);
+  font-size: 12px;
+  line-height: 1;
+  opacity: 1;
+  margin: 0;
+  padding: 17px 28px;
+  border: 1px solid rgba(238, 249, 239, .28);
   border-radius: 999px;
-  background: rgba(232, 247, 234, .13);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 8px 28px rgba(20, 43, 28, .08);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  background: rgba(225, 244, 228, .18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 8px 28px rgba(20, 43, 28, .12);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
 }
 .nav li::before { content: ""; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--tan); margin-right: 6px; vertical-align: middle; }
 .nav a { transition: opacity 180ms ease; -webkit-tap-highlight-color: transparent; }
