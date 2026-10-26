@@ -37,6 +37,33 @@ export default function Hero3D() {
     let productTexture;
     let productMaterial;
     let productPlane;
+    let bottleShadow;
+    let shadowTexture;
+
+    // A soft, offset contact shadow grounds the packshot against the green
+    // background so the transparent PNG feels integrated instead of pasted on.
+    const shadowCanvas = document.createElement("canvas");
+    shadowCanvas.width = 256;
+    shadowCanvas.height = 384;
+    const shadowContext = shadowCanvas.getContext("2d");
+    const shadowGradient = shadowContext.createRadialGradient(128, 192, 12, 128, 192, 126);
+    shadowGradient.addColorStop(0, "rgba(8, 22, 13, 0.38)");
+    shadowGradient.addColorStop(0.48, "rgba(8, 22, 13, 0.22)");
+    shadowGradient.addColorStop(1, "rgba(8, 22, 13, 0)");
+    shadowContext.fillStyle = shadowGradient;
+    shadowContext.fillRect(0, 0, 256, 384);
+    shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+    const shadowMaterial = new THREE.MeshBasicMaterial({
+      map: shadowTexture,
+      transparent: true,
+      depthWrite: false,
+      opacity: 0.9,
+      blending: THREE.NormalBlending,
+    });
+    bottleShadow = new THREE.Mesh(new THREE.PlaneGeometry(3.2, 4.7), shadowMaterial);
+    bottleShadow.position.set(0.1, -0.08, -0.12);
+    bottleShadow.renderOrder = 0;
+    product.add(bottleShadow);
 
     // Glossy green capsules float around the packshot, restoring the original
     // green accent while keeping the existing 3D hero feel.
@@ -126,6 +153,8 @@ export default function Hero3D() {
           new THREE.PlaneGeometry(height * aspect, height),
           productMaterial
         );
+        productPlane.position.z = 0.02;
+        productPlane.renderOrder = 1;
         product.add(productPlane);
         product.scale.setScalar(0.86);
         gsap.fromTo(
@@ -208,6 +237,9 @@ export default function Hero3D() {
       if (productPlane?.geometry) productPlane.geometry.dispose();
       if (productMaterial) productMaterial.dispose();
       if (productTexture) productTexture.dispose();
+      if (bottleShadow?.geometry) bottleShadow.geometry.dispose();
+      if (shadowMaterial) shadowMaterial.dispose();
+      if (shadowTexture) shadowTexture.dispose();
       renderer.dispose();
       if (renderer.domElement.parentNode === el) el.removeChild(renderer.domElement);
     };
