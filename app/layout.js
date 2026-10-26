@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Radiance+ | Daily Wellness, One Simple Habit",
+  title: "Limitless | Daily Wellness, One Simple Habit",
   description:
     "Science-backed nutrition designed to support energy, immunity and everyday performance with just two capsules a day.",
 };
