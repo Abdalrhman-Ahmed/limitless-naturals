@@ -134,13 +134,6 @@ export default function Hero3D() {
           { x: 0.86, y: 0.86, z: 0.86, duration: 1.15, ease: "power3.out" }
         );
 
-        // Single-image spin illusion: narrow the bottle at the midpoint, then reveal it again.
-        spinTimeline = gsap.timeline({ delay: 1.2, repeat: -1, repeatDelay: 0.8 });
-        spinTimeline
-          .to(spinState, { y: Math.PI, duration: 0.72, ease: "power2.inOut" }, 0)
-          .to(product.scale, { x: 0.035, duration: 0.72, ease: "power2.in" }, 0)
-          .to(spinState, { y: Math.PI * 2, duration: 0.72, ease: "power2.inOut" }, 0.72)
-          .to(product.scale, { x: 0.86, duration: 0.72, ease: "power2.out" }, 0.72);
       },
       undefined,
       (error) => {
@@ -148,8 +141,6 @@ export default function Hero3D() {
       }
     );
 
-    const spinState = { y: 0 };
-    let spinTimeline;
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
     const onMove = (event) => {
       const rect = el.getBoundingClientRect();
@@ -178,9 +169,10 @@ export default function Hero3D() {
 
       // The packshot remains almost front-facing; the capsules provide the
       // surrounding 3D motion and visual depth.
-      product.rotation.y = spinState.y + Math.sin(time * 0.65) * 0.025 + pointer.x * 0.015;
-      product.rotation.x = -pointer.y * 0.035;
-      product.position.x = -0.32;
+      product.rotation.y = Math.sin(time * 0.65) * 0.025 + pointer.x * 0.055;
+      product.rotation.x = -pointer.y * 0.025;
+      // Subtle horizontal follow effect: the bottle gently tracks the mouse.
+      product.position.x = -0.32 + pointer.x * 0.22;
       product.position.y = Math.sin(time * 0.9) * 0.07;
       product.rotation.z = -0.11;
 
@@ -206,8 +198,6 @@ export default function Hero3D() {
       window.removeEventListener("pointermove", onMove);
       observer.disconnect();
       gsap.killTweensOf(product.scale);
-      if (spinTimeline) spinTimeline.kill();
-      gsap.killTweensOf(spinState);
       floatingCapsules.forEach((capsule) => {
         gsap.killTweensOf(capsule.scale);
         scene.remove(capsule);
