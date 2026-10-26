@@ -38,16 +38,16 @@ export default function Hero3D() {
     let productMaterial;
     let productPlane;
 
-    // Glossy magenta capsules float around the packshot, matching the
-    // Limitless Woman bottle color and keeping the existing 3D hero feel.
+    // Glossy green capsules float around the packshot, restoring the original
+    // green accent while keeping the existing 3D hero feel.
     const capsuleGeometry = new THREE.CapsuleGeometry(0.105, 0.27, 8, 16);
     const capsuleMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xd82b83,
+      color: 0x63b33f,
       roughness: 0.2,
       metalness: 0.12,
       clearcoat: 1,
       clearcoatRoughness: 0.12,
-      emissive: 0x4d0828,
+      emissive: 0x173d0a,
       emissiveIntensity: 0.18,
     });
     const capsuleSpecs = [
