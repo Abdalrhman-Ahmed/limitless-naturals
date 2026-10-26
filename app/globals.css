@@ -78,7 +78,7 @@ button, input { font: inherit; }
 .hero-card {
   position: absolute; z-index: 4; left: 33%; bottom: 14%; width: 290px;
   padding: 34px 26px 26px; text-align: center; background: #213629;
-  border-radius: 42% 58% 16% 24% / 28% 20% 30% 34%;
+  border-radius: 38% 62% 12% 18% / 46% 18% 26% 32%;
   box-shadow: 0 24px 70px rgba(13,31,19,.16); backdrop-filter: blur(4px);
 }
 .hero-card h1 { font-size: 26px; font-weight: 500; line-height: 1.1; letter-spacing: -.01em; text-wrap: balance; }
