@@ -167,7 +167,7 @@ export function Footer() {
         </div>
       </div>
       <div className="f-bottom">©Peno Lab. All rights reserved.</div>
-      <div className="mega"><span data-mega>Radiance+</span></div>
+      <div className="mega"><span data-mega>Limitless</span></div>
     </footer>
   );
 }
