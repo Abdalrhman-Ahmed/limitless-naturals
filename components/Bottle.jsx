@@ -27,7 +27,7 @@ export default function Bottle({
       <path d="M22 44 h76 a14 14 0 0 1 14 14 v136 a14 14 0 0 1 -14 14 h-76 a14 14 0 0 1 -14 -14 v-136 a14 14 0 0 1 14 -14z" fill={`url(#${id})`} />
       {/* label copy */}
       <g fill={nameColor} textAnchor="middle" fontFamily="Instrument Sans, sans-serif">
-        <text x="60" y="70" fontSize="4.4" opacity=".7">RADIANCE+</text>
+        <text x="60" y="70" fontSize="4.4" opacity=".7">LIMITLESS</text>
         <text x="60" y="76" fontSize="3" opacity=".5">ADVANCED REPAIR</text>
         <text x="60" y="134" fontSize={name.length > 10 ? 9 : 10.5} letterSpacing="1" fontWeight="500">{name}</text>
         <rect x="26" y="145" width="68" height="9" fill={accent} opacity=".85" />
