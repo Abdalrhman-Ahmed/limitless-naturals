@@ -56,7 +56,7 @@ button, input { font: inherit; }
   text-align: center; padding: 20px; opacity: .6;
   background: radial-gradient(ellipse at 35% 25%, rgba(233,248,237,.18), transparent 48%), linear-gradient(160deg,#9fb59a,#6f8f72 60%,#4f7456);
 }
-.hero-photo img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.hero-photo img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 12%; }
 
 .hero-card {
   position: absolute; z-index: 4; left: 33%; bottom: 14%; width: 290px;
@@ -74,7 +74,8 @@ button, input { font: inherit; }
 }
 .badge svg.spin { position: absolute; inset: 0; width: 100%; height: 100%; }
 .badge .arrow { position: absolute; width: 30px; height: 30px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
-.hero .badge { left: 41%; top: auto; bottom: 46%; transform: translate(-50%,0); transition: transform 220ms ease, filter 220ms ease; }
+.hero .badge { width: 58px; height: 58px; left: 41%; top: auto; bottom: 46%; transform: translate(-50%,0); transition: transform 220ms ease, filter 220ms ease; }
+.hero .badge .arrow { width: 24px; height: 24px; }
 .hero .badge:hover { filter: brightness(1.06); }
 
 .hero-rating {
@@ -208,7 +209,7 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .hero-photo { width: 100%; height: 55%; border-radius: 0 0 50% 50% / 0 0 30% 30%; }
   .hero-canvas { width: 100%; height: 55%; top: 45%; }
   .hero-card { left: 50%; transform: translateX(-50%); bottom: 22%; }
-  .hero .badge { left: 60%; bottom: 52%; }
+  .hero .badge { width: 54px; height: 54px; left: 60%; bottom: 52%; }
   .hero-checks { justify-content: center; gap: 16px; flex-wrap: wrap; }
   section.pad { padding: 60px 22px; }
   h2.title { font-size: 34px; }
@@ -235,7 +236,8 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .hero-card { width: min(290px,calc(100% - 40px)); padding: 28px 22px 24px; bottom: 17%; }
   .hero-card h1 { font-size: clamp(24px,7vw,28px); }
   .hero-card p { font-size: 11px; }
-  .hero .badge { width: 64px; height: 64px; left: auto; right: 10%; bottom: 43%; }
+  .hero .badge { width: 50px; height: 50px; left: auto; right: 10%; bottom: 43%; }
+  .hero .badge .arrow { width: 22px; height: 22px; }
   .hero-rating { left: 18px; bottom: 18px; padding: 8px 11px; }
   .hero-checks { bottom: 24px; left: 145px; justify-content: flex-end; gap: 8px 12px; padding: 0 14px 0 0; font-size: 9px; }
   .hero-checks span { white-space: nowrap; }
