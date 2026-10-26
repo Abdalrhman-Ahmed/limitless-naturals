@@ -114,7 +114,7 @@ export default function Hero3D() {
         productTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
         const aspect = canvas.width / canvas.height;
-        const height = 5.15;
+        const height = 4.65;
         productMaterial = new THREE.MeshBasicMaterial({
           map: productTexture,
           transparent: true,
@@ -127,7 +127,7 @@ export default function Hero3D() {
           productMaterial
         );
         product.add(productPlane);
-        product.scale.setScalar(0.94);
+        product.scale.setScalar(0.86);
         gsap.fromTo(
           product.scale,
           { x: 0.82, y: 0.82, z: 0.82 },
@@ -170,8 +170,9 @@ export default function Hero3D() {
       // surrounding 3D motion and visual depth.
       product.rotation.y = Math.sin(time * 0.65) * 0.07 + pointer.x * 0.06;
       product.rotation.x = -pointer.y * 0.035;
+      product.position.x = -0.32;
       product.position.y = Math.sin(time * 0.9) * 0.07;
-      product.rotation.z = -0.025;
+      product.rotation.z = -0.11;
 
       floatingCapsules.forEach((capsule) => {
         const { baseY, phase } = capsule.userData;
