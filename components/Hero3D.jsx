@@ -174,7 +174,7 @@ export default function Hero3D() {
       // Subtle horizontal follow effect: the bottle gently tracks the mouse.
       product.position.x = -0.32 + pointer.x * 0.22;
       product.position.y = Math.sin(time * 0.9) * 0.07;
-      product.rotation.z = -0.11;
+      product.rotation.z = 0.11;
 
       floatingCapsules.forEach((capsule) => {
         const { baseY, phase } = capsule.userData;
