@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <header className="hero" id="top">
       <nav className="nav">
-        <span className="logo">Radiance+</span>
+        <span className="logo">Limitless</span>
         <ul>
           <li><a href="#why">Why It Works</a></li>
           <li><a href="#products">Products</a></li>
