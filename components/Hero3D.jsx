@@ -26,7 +26,7 @@ export default function Hero3D() {
     const key = new THREE.DirectionalLight(0xffffff, 1.6);
     key.position.set(3, 4, 6);
     scene.add(key);
-    const rim = new THREE.PointLight(0x9be0ae, 12, 20);
+    const rim = new THREE.PointLight(0xf28ac0, 14, 20);
     rim.position.set(-3, 1, -2);
     scene.add(rim);
 
@@ -37,6 +37,45 @@ export default function Hero3D() {
     let productTexture;
     let productMaterial;
     let productPlane;
+
+    // Glossy magenta capsules float around the packshot, matching the
+    // Limitless Woman bottle color and keeping the existing 3D hero feel.
+    const capsuleGeometry = new THREE.CapsuleGeometry(0.105, 0.27, 8, 16);
+    const capsuleMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xd82b83,
+      roughness: 0.2,
+      metalness: 0.12,
+      clearcoat: 1,
+      clearcoatRoughness: 0.12,
+      emissive: 0x4d0828,
+      emissiveIntensity: 0.18,
+    });
+    const capsuleSpecs = [
+      { x: -1.85, y: 1.5, z: 0.35, rot: 0.85, scale: 0.82, phase: 0.2 },
+      { x: 1.8, y: 1.0, z: -0.35, rot: -0.7, scale: 0.72, phase: 1.4 },
+      { x: -1.75, y: -0.45, z: 0.7, rot: -0.9, scale: 0.9, phase: 2.2 },
+      { x: 1.9, y: -1.15, z: 0.5, rot: 0.55, scale: 0.82, phase: 3.1 },
+      { x: 0.95, y: 2.05, z: -0.6, rot: 1.0, scale: 0.58, phase: 4.0 },
+      { x: -0.8, y: -2.0, z: -0.25, rot: -0.3, scale: 0.62, phase: 5.0 },
+    ];
+    const floatingCapsules = capsuleSpecs.map((spec) => {
+      const capsule = new THREE.Mesh(capsuleGeometry, capsuleMaterial);
+      capsule.position.set(spec.x, spec.y, spec.z);
+      capsule.rotation.z = spec.rot;
+      capsule.rotation.x = 0.35 + spec.phase * 0.05;
+      capsule.scale.setScalar(0.01);
+      capsule.userData = { ...spec, baseY: spec.y };
+      scene.add(capsule);
+      gsap.to(capsule.scale, {
+        x: spec.scale,
+        y: spec.scale,
+        z: spec.scale,
+        duration: 0.75,
+        delay: 0.25 + spec.phase * 0.08,
+        ease: "back.out(1.7)",
+      });
+      return capsule;
+    });
 
     textureLoader.load(
       "/images/ashwagandha.png",
@@ -75,7 +114,7 @@ export default function Hero3D() {
         productTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
         const aspect = canvas.width / canvas.height;
-        const height = 5.7;
+        const height = 5.15;
         productMaterial = new THREE.MeshBasicMaterial({
           map: productTexture,
           transparent: true,
@@ -127,12 +166,20 @@ export default function Hero3D() {
       pointer.x += (pointer.targetX - pointer.x) * 0.045;
       pointer.y += (pointer.targetY - pointer.y) * 0.045;
 
-      // A single packshot is a flat image, so keep rotation subtle to avoid
-      // pretending it is a fully modelled 3D bottle.
-      product.rotation.y = Math.sin(time * 0.65) * 0.1 + pointer.x * 0.1;
-      product.rotation.x = -pointer.y * 0.045;
-      product.position.y = Math.sin(time * 0.9) * 0.09;
+      // The packshot remains almost front-facing; the capsules provide the
+      // surrounding 3D motion and visual depth.
+      product.rotation.y = Math.sin(time * 0.65) * 0.07 + pointer.x * 0.06;
+      product.rotation.x = -pointer.y * 0.035;
+      product.position.y = Math.sin(time * 0.9) * 0.07;
       product.rotation.z = -0.025;
+
+      floatingCapsules.forEach((capsule) => {
+        const { baseY, phase } = capsule.userData;
+        capsule.position.y = baseY + Math.sin(time * 1.15 + phase) * 0.16;
+        capsule.rotation.z += 0.0025;
+        capsule.rotation.x = 0.35 + Math.sin(time * 0.7 + phase) * 0.12;
+      });
+
       camera.position.x = pointer.x * 0.12;
       camera.position.y = -pointer.y * 0.08;
       camera.lookAt(0, 0, 0);
@@ -148,6 +195,12 @@ export default function Hero3D() {
       window.removeEventListener("pointermove", onMove);
       observer.disconnect();
       gsap.killTweensOf(product.scale);
+      floatingCapsules.forEach((capsule) => {
+        gsap.killTweensOf(capsule.scale);
+        scene.remove(capsule);
+      });
+      capsuleGeometry.dispose();
+      capsuleMaterial.dispose();
       product.clear();
       if (productPlane?.geometry) productPlane.geometry.dispose();
       if (productMaterial) productMaterial.dispose();
