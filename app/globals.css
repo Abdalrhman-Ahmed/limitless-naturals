@@ -268,7 +268,7 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .hero-card { width: min(290px,calc(100% - 40px)); padding: 28px 22px 24px; bottom: 17%; }
   .hero-card h1 { font-size: clamp(24px,7vw,28px); }
   .hero-card p { font-size: 11px; }
-  .hero .badge { width: 50px; height: 50px; left: auto; right: 10%; bottom: 43%; opacity: 1 !important; visibility: visible !important; display: grid !important; z-index: 10 !important; }
+  .hero .badge { width: 50px; height: 50px; left: auto; right: 8%; bottom: 10%; opacity: 1 !important; visibility: visible !important; display: grid !important; z-index: 10 !important; }
   .hero .badge .arrow { width: 22px; height: 22px; }
   .hero-rating { left: 18px; bottom: 18px; padding: 8px 11px; }
   .hero-checks { bottom: 24px; left: 145px; justify-content: flex-end; gap: 8px 12px; padding: 0 14px 0 0; font-size: 9px; }
