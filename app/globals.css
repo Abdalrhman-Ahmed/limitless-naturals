@@ -449,3 +449,20 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .ashwa-copy .ashwa-benefits { gap: 6px; margin-top: 14px; }
   .ashwa-copy .ashwa-benefits span { padding: 7px 9px; font-size: 9px; }
 }
+
+
+/* Small rightward adjustment for the Ashwagandha text only */
+.prow.l .ashwa-copy {
+  left: calc(21% + 198px);
+}
+@media (max-width: 1200px) and (min-width: 901px) {
+  .prow.l .ashwa-copy {
+    left: calc(17% + 180px);
+  }
+}
+@media (max-width: 900px) {
+  .prow.l .ashwa-copy {
+    left: 132px;
+    max-width: calc(100% - 142px);
+  }
+}
