@@ -1,5 +1,5 @@
-import Photo from "./Photo";
 import Hero3D from "./Hero3D";
+import Photo from "./Photo";
 import { ShopBadge } from "./ShopBadge";
 
 export default function Hero() {
