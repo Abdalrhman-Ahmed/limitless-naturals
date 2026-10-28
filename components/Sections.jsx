@@ -43,7 +43,6 @@ export function Benefits() {
 
 export function Products() {
   const rows = [
-    // travel: the hero bottle scrolls down and lands in the empty hand, then the full photo (hand) fades in
     { side: "l", name: "Luna Balance", sub: "Complete daily nutrition", price: "$39", color: "#22406b", nameColor: "#e8d9b0", hand: "/images/hand-1.png", handEmpty: "/images/hand-1-empty.png", travel: true },
     { side: "r", name: "Verde Renew", sub: "Energy & recovery", price: "$49", color: "#3d5a45", nameColor: "#e8d9b0", hand: "/images/hand-2.png", badge: true },
     { side: "l", name: "Solara Vital", sub: "Energy & recovery", price: "$49", color: "#6d2b2b", nameColor: "#e8d9b0", hand: "/images/hand-3.png" },
