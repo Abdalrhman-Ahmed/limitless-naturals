@@ -168,7 +168,7 @@ h2.title { font-size: 44px; line-height: 1.04; font-weight: 500; letter-spacing:
 .products { position: relative; padding-top: 60px; }
 .products .title { text-align: right; }
 .prow { position: relative; display: flex; align-items: center; min-height: 250px; margin-top: 10px; }
-.prow .hand { position: absolute; top: 50%; width: 300px; height: 230px; transform: translateY(-50%); }
+.prow .hand { position: absolute; top: 50%; width: 380px; height: 280px; transform: translateY(-50%); }
 .prow .hand img { width: 100%; height: 100%; object-fit: contain; }
 .prow .pbottle { position: relative; width: 130px; z-index: 2; }
 .prow .info { position: absolute; font-size: 12px; }
