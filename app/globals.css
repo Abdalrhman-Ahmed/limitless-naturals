@@ -75,6 +75,10 @@ button, input { font: inherit; }
   background: radial-gradient(ellipse at 35% 25%, rgba(233,248,237,.18), transparent 48%), linear-gradient(160deg,#9fb59a,#6f8f72 60%,#4f7456);
 }
 .hero-photo img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 4%; }
+.hand-scroll-transition { position: absolute; z-index: 7; left: 0; right: 0; bottom: 0; height: 58%; pointer-events: none; opacity: 0; }
+.hand-scroll-transition img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+.hand-scroll-transition .hand-held { opacity: 0; }
+
 
 .hero-card {
   position: absolute; z-index: 4; left: 33%; bottom: 14%; width: 290px;
@@ -320,6 +324,9 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .mobile-menu[open] a { display: block; padding: 12px; font-size: 13px; }
   .hero-photo { width: 100%; height: 45%; border-radius: 0 0 42% 42% / 0 0 18% 18%; }
   .hero-photo img { object-position: center 8%; }
+  .hand-scroll-transition { height: 44%; bottom: 4%; }
+  .hand-scroll-transition img { object-position: center bottom; }
+
   .hero-canvas { top: 35%; height: 43%; width: 100%; z-index: 6; }
   .hero-card { z-index: 4; left: 50%; bottom: 16%; width: min(405px,calc(100% - 42px)); min-height: 255px; padding: 100px 24px 26px; transform: translateX(-50%); border: 1px solid rgba(236,248,237,.32); border-radius: 24px; background: rgba(220,239,222,.18); box-shadow: 0 10px 32px rgba(25,54,34,.12), inset 0 1px 0 rgba(255,255,255,.12); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
   .hero-card-shape { display: none; }
@@ -371,6 +378,8 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .logo { font-size: 20px; }
   .mobile-menu summary { width: 42px; height: 42px; }
   .hero-photo { height: 42%; }
+  .hand-scroll-transition { height: 42%; bottom: 4%; }
+
   .hero-canvas { top: 32%; height: 42%; }
   .hero-card { bottom: 17%; width: calc(100% - 28px); padding: 92px 16px 20px; min-height: 238px; }
   .hero-card-content { transform: translateY(10px); }
