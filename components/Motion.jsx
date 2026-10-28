@@ -27,10 +27,6 @@ export default function Motion() {
         yPercent: 8, ease: "none",
         scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true },
       });
-      gsap.to(".hero-canvas", {
-        yPercent: -8, ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true },
-      });
 
       // ---- generic reveals ----
       gsap.utils.toArray("[data-reveal]").forEach((el) => {

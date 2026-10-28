@@ -1,4 +1,3 @@
-import Hero3D from "./Hero3D";
 import Photo from "./Photo";
 import { ShopBadge } from "./ShopBadge";
 
@@ -19,8 +18,6 @@ export default function Hero() {
         <div className="ph-label">Add /public/images/hero-woman.jpg</div>
         <Photo src="/images/hero-woman.jpg" alt="Smiling woman among plants" />
       </div>
-
-      <Hero3D />
 
       <div className="hero-card">
         <h1>Daily Wellness<br />One Simple Habit</h1>

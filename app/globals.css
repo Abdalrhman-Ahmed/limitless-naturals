@@ -84,7 +84,8 @@ button, input { font: inherit; }
 .stars { color: #f2a81d; font-size: 14px; letter-spacing: 1px; }
 .stars b { color: var(--ink); font-size: 12px; margin-left: 6px; letter-spacing: 0; }
 
-.hero-canvas { position: absolute; right: 0; top: 0; width: 56%; height: 100%; z-index: 3; }
+/* fixed to the viewport so the bottle can travel down the page; Hero3D.jsx positions it */
+.hero-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
 .hero-canvas canvas { width: 100% !important; height: 100% !important; display: block; }
 
 .hero-checks {
@@ -125,6 +126,10 @@ h2.title { font-size: 44px; line-height: 1.04; font-weight: 500; letter-spacing:
 .prow { position: relative; display: flex; align-items: center; min-height: 250px; margin-top: 10px; }
 .prow .hand { position: absolute; top: 50%; width: 300px; height: 230px; transform: translateY(-50%); }
 .prow .hand img { width: 100%; height: 100%; object-fit: contain; }
+/* travelling row: empty hand + full hand stacked, and an empty slot the 3D bottle lands in */
+.prow .hand-layer { position: absolute; inset: 0; }
+.prow .hand-layer img { position: absolute; inset: 0; }
+.prow .pbottle.slot { aspect-ratio: 120 / 210; }
 .prow .pbottle { position: relative; width: 130px; z-index: 2; }
 .prow .info { position: absolute; font-size: 12px; }
 .prow .info h4 { font-size: 17px; font-weight: 500; }
@@ -211,7 +216,6 @@ footer { background: linear-gradient(180deg, #5f7f65, #3f5c47); color: #fff; pad
   .nav ul { display: none; }
   .hero { min-height: 900px; }
   .hero-photo { width: 100%; height: 55%; border-radius: 0 0 50% 50% / 0 0 30% 30%; }
-  .hero-canvas { width: 100%; height: 55%; top: 45%; }
   .hero-card { left: 50%; transform: translateX(-50%); bottom: 22%; }
   .hero .badge { left: 60%; bottom: 52%; }
   .hero-checks { justify-content: center; gap: 16px; flex-wrap: wrap; }

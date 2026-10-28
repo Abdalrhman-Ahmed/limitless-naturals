@@ -1,4 +1,5 @@
 import Hero from "../components/Hero";
+import Hero3D from "../components/Hero3D";
 import Motion from "../components/Motion";
 import { Benefits, Products, Compare, Reviews, Newsletter, Footer } from "../components/Sections";
 
@@ -14,6 +15,7 @@ export default function Page() {
         <Newsletter />
         <Footer />
       </div>
+      <Hero3D />
       <Motion />
     </main>
   );
