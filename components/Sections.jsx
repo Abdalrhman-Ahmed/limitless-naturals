@@ -51,7 +51,7 @@ export function Products() {
     <section className="pad products" id="products">
       <h2 className="title" data-reveal>Find Your Daily<br />Formula</h2>
       {rows.map((r) => (
-        <div className={`prow ${r.side}`} key={r.name}>
+        <div className={`prow ${r.side} ${r.transitionTarget ? "ashwa-row" : ""}`} key={r.name}>
           {r.transitionTarget ? (
             <div className="hand">
               <div className="hand-layer" data-hand-empty><Photo src={r.handEmpty} alt="" /></div>
