@@ -43,7 +43,7 @@ export function Benefits() {
 
 export function Products() {
   const rows = [
-    { side: "l", name: "Luna Balance", sub: "Complete daily nutrition", price: "$39", color: "#22406b", nameColor: "#e8d9b0", hand: "/images/hand-1.png" },
+    { side: "l", name: "Luna Balance", sub: "Complete daily nutrition", price: "$39", color: "#22406b", nameColor: "#e8d9b0", hand: "/images/hand.png", transitionTarget: true },
     { side: "r", name: "Verde Renew", sub: "Energy & recovery", price: "$49", color: "#3d5a45", nameColor: "#e8d9b0", hand: "/images/hand-2.png", badge: true },
     { side: "l", name: "Solara Vital", sub: "Energy & recovery", price: "$49", color: "#6d2b2b", nameColor: "#e8d9b0", hand: "/images/hand-3.png" },
   ];
@@ -55,9 +55,11 @@ export function Products() {
           <div className="hand" data-parallax={r.side === "l" ? "-12" : "12"}>
             <Photo src={r.hand} alt="" />
           </div>
-          <div className="pbottle" data-float>
-            <Bottle color={r.color} name={r.name.toUpperCase()} nameColor={r.nameColor} />
-          </div>
+          {!r.transitionTarget && (
+            <div className="pbottle" data-float>
+              <Bottle color={r.color} name={r.name.toUpperCase()} nameColor={r.nameColor} />
+            </div>
+          )}
           {r.badge && <ShopBadge />}
           <div className="info" data-reveal>
             <h4>{r.name}</h4>
