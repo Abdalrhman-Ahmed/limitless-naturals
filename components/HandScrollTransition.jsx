@@ -72,8 +72,8 @@ export default function HandScrollTransition() {
       }, 0);
       tl.to(bottle, { opacity: 0, ease: "none" }, 0.94);
       tl.to(heldHand, { opacity: 1, ease: "none" }, 0.94);
-      tl.to(emptyHand, { opacity: 0, ease: "none" }, 0.94);
-      tl.to(overlay, { opacity: 0, duration: 0.02 }, 0.995);
+      // Keep the final held-bottle image visible after the transition.
+      // Do not fade the overlay out at the end of the timeline.
     }, overlay);
 
     const onResize = () => {
