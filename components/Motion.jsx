@@ -46,33 +46,30 @@ export default function Motion() {
         scrollTrigger: { trigger: ".benefits", start: "top 85%" },
       });
 
-      // ---- Hold the product row while the copy reveals after the hand/bottle landing ----
-      // The pin starts late, once the hand is already in view. Hero3D.jsx is untouched.
+      // ---- Scroll-controlled Ashwagandha copy: each item appears as the user scrolls ----
+      // Pin the row after the hand is visible; text progression is tied to scroll progress.
       const ashwaSteps = gsap.utils.toArray(".ashwa-copy [data-ashwa-step]");
       if (ashwaSteps.length) {
+        gsap.set(ashwaSteps, { y: 24, opacity: 0 });
         const ashwaTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: ".prow.l",
             start: "top 36%",
-            end: "+=900",
+            end: "+=1050",
             pin: true,
             pinSpacing: true,
+            scrub: 0.6,
             anticipatePin: 1,
             invalidateOnRefresh: true,
-            toggleActions: "play none none reverse",
           },
         });
-        ashwaTimeline.fromTo(
-          ashwaSteps,
-          { y: 24, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            stagger: 0.22,
-            ease: "power3.out",
-          }
-        );
+        ashwaTimeline.to(ashwaSteps, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 1.15,
+          ease: "none",
+        });
       }
 
       // ---- products ----
