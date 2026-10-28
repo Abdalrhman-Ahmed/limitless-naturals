@@ -223,7 +223,7 @@ footer { background: linear-gradient(180deg, #5f7f65, #3f5c47); color: #fff; pad
   h2.title { font-size: 34px; }
   .benefits { grid-template-columns: 1fr 1fr; }
   .benefits-head { flex-direction: column; gap: 20px; }
-  .prow .hand { display: none; }
+  .prow .hand { display: block; width: 42%; height: 180px; left: -8px; right: auto; z-index: 1; }
   .prow.l .pbottle, .prow.r .pbottle { margin-left: 8%; }
   .prow.l .info, .prow.r .info { left: calc(8% + 150px); text-align: left; }
   .prow .badge { left: 40%; }
