@@ -12,6 +12,15 @@ export default function Hero3D() {
   useEffect(() => {
     const el = mount.current;
     if (!el) return;
+    const hero = document.querySelector(".hero");
+    const slot = document.querySelector("[data-bottle-slot]");
+    const handEmpty = document.querySelector("[data-hand-empty]");
+    const handFull = document.querySelector("[data-hand-full]");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const cameraZ = 8.5;
+    const visibleWorldHeight = 2 * cameraZ * Math.tan((32 * Math.PI) / 360);
+    const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
+    const smooth = (v) => v * v * (3 - 2 * v);
 
     let disposed = false;
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -40,7 +49,6 @@ export default function Hero3D() {
     let productMaterial;
     let productPlane;
     let bottleShadow;
-    let scrollTimeline;
     const entranceScale = { value: 0.88 };
     let shadowTexture;
 
@@ -160,30 +168,13 @@ export default function Hero3D() {
         productPlane.position.z = 0.02;
         productPlane.renderOrder = 1;
         product.add(productPlane);
-        const mobileLayout = window.matchMedia("(max-width: 600px)").matches;
-        const targetScale = mobileLayout ? 0.72 : 0.86;
-        product.scale.setScalar(targetScale * entranceScale.value);
+        const mobileLayout = window.matchMedia("(max-width: 900px)").matches;
+        product.scale.setScalar(mobileLayout ? 0.72 : 0.86);
         gsap.to(entranceScale, {
           value: 1,
           duration: 1.15,
           ease: "power3.out",
         });
-
-        // The DOM overlay takes over the bottle movement across sections.
-        // Fade only the original WebGL bottle so it cannot remain oversized
-        // in the hero while the overlay bottle travels toward the hand.
-        scrollTimeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            endTrigger: ".prow.l",
-            end: "center center",
-            scrub: 0.65,
-            invalidateOnRefresh: true,
-          },
-        });
-        scrollTimeline.to(productMaterial, { opacity: 0, ease: "none" }, 0);
-        productMaterial.transparent = true;
       },
       undefined,
       (error) => {
@@ -191,7 +182,6 @@ export default function Hero3D() {
       }
     );
 
-    const targetScaleForLayout = (isMobile) => (isMobile ? 0.72 : 0.86);
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
     const onMove = (event) => {
       const rect = el.getBoundingClientRect();
@@ -218,16 +208,47 @@ export default function Hero3D() {
       pointer.x += (pointer.targetX - pointer.x) * 0.045;
       pointer.y += (pointer.targetY - pointer.y) * 0.045;
 
-      // The packshot remains almost front-facing; the capsules provide the
-      // surrounding 3D motion and visual depth.
-      product.rotation.y = Math.sin(time * 0.65) * 0.025 + pointer.x * 0.055;
-      product.rotation.x = -pointer.y * 0.025;
-      // Subtle horizontal follow effect: the bottle gently tracks the mouse.
-      const mobileLayout = window.matchMedia("(max-width: 600px)").matches;
-      product.position.x = (mobileLayout ? 0.02 : -0.32) + pointer.x * (mobileLayout ? 0.08 : 0.22);
-      product.position.y = (mobileLayout ? 0.12 : 0) + Math.sin(time * 0.9) * 0.07;
-      product.scale.setScalar(targetScaleForLayout(mobileLayout) * entranceScale.value);
-      product.rotation.z = 0.11;
+      // Original scroll-driven motion: the WebGL packshot travels into the hand slot.
+      const mobileLayout = window.innerWidth <= 900;
+      const viewportW = Math.max(window.innerWidth, 1);
+      const viewportH = Math.max(window.innerHeight, 1);
+      const heroRect = hero?.getBoundingClientRect();
+      const slotRect = slot?.getBoundingClientRect();
+      const ppu = viewportH / visibleWorldHeight;
+      const toX = (px) => (px - viewportW / 2) / ppu;
+      const toY = (py) => -(py - viewportH / 2) / ppu;
+      const canvasH = mobileLayout ? (heroRect?.height || viewportH) * 0.55 : (heroRect?.height || viewportH);
+      const startX = (heroRect?.left || 0) + (heroRect?.width || viewportW) * (mobileLayout ? 0.5 : 0.72);
+      const startY = (heroRect?.top || 0) + (heroRect?.height || viewportH) * (mobileLayout ? 0.725 : 0.5);
+      const startHeight = canvasH * 4.65 / visibleWorldHeight;
+      let progress = 0;
+      if (!reduceMotion && slotRect) {
+        const slotDocumentY = slotRect.top + window.scrollY + slotRect.height / 2;
+        const landScrollY = slotDocumentY - viewportH * 0.5;
+        progress = landScrollY > 1 ? clamp(window.scrollY / landScrollY) : 0;
+      }
+      const eased = smooth(progress);
+      const targetX = slotRect ? startX + (slotRect.left + slotRect.width / 2 - startX) * eased : startX;
+      const targetY = slotRect ? startY + (slotRect.top + slotRect.height / 2 - startY) * progress : startY;
+      const targetHeight = slotRect ? startHeight + (slotRect.height - startHeight) * eased : startHeight;
+
+      product.position.set(
+        toX(targetX) + pointer.x * 0.06 * (1 - eased),
+        toY(targetY) + Math.sin(time * 0.9) * 0.12 * (1 - eased),
+        0
+      );
+      product.scale.setScalar((targetHeight / (4.65 * ppu)) * entranceScale.value);
+      product.rotation.y = (Math.sin(time * 0.6) * 0.035 + pointer.x * 0.16) * (1 - eased);
+      product.rotation.x = (-pointer.y * 0.08) * (1 - eased);
+      product.rotation.z = 0.11 * (1 - eased);
+
+      const fullImage = handFull?.querySelector("img");
+      const fullImageLoaded = !!(fullImage && fullImage.complete && fullImage.naturalWidth > 0);
+      const handFade = fullImageLoaded && slotRect ? smooth(clamp((progress - 0.88) / 0.12)) : 0;
+      if (handFull) handFull.style.opacity = String(handFade);
+      if (handEmpty) handEmpty.style.opacity = String(1 - handFade);
+      if (productMaterial) productMaterial.opacity = 1 - handFade;
+      el.style.opacity = "1";
 
       floatingCapsules.forEach((capsule) => {
         const { baseY, phase } = capsule.userData;
@@ -250,8 +271,6 @@ export default function Hero3D() {
       cancelAnimationFrame(frameId);
       window.removeEventListener("pointermove", onMove);
       observer.disconnect();
-      scrollTimeline?.scrollTrigger?.kill();
-      scrollTimeline?.kill();
       gsap.killTweensOf(entranceScale);
       gsap.killTweensOf(product.scale);
       floatingCapsules.forEach((capsule) => {
