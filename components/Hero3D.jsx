@@ -157,7 +157,7 @@ export default function Hero3D() {
         productPlane.renderOrder = 1;
         product.add(productPlane);
         const mobileLayout = window.matchMedia("(max-width: 600px)").matches;
-        const targetScale = mobileLayout ? 0.61 : 0.86;
+        const targetScale = mobileLayout ? 0.72 : 0.86;
         product.scale.setScalar(targetScale);
         gsap.fromTo(
           product.scale,
@@ -205,7 +205,7 @@ export default function Hero3D() {
       // Subtle horizontal follow effect: the bottle gently tracks the mouse.
       const mobileLayout = window.matchMedia("(max-width: 600px)").matches;
       product.position.x = (mobileLayout ? 0.02 : -0.32) + pointer.x * (mobileLayout ? 0.08 : 0.22);
-      product.position.y = (mobileLayout ? 0.28 : 0) + Math.sin(time * 0.9) * 0.07;
+      product.position.y = (mobileLayout ? 0.12 : 0) + Math.sin(time * 0.9) * 0.07;
       product.rotation.z = 0.11;
 
       floatingCapsules.forEach((capsule) => {
