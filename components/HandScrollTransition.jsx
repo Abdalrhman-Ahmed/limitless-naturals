@@ -13,44 +13,41 @@ export default function HandScrollTransition() {
     const overlay = root.current;
     const hero = document.querySelector(".hero");
     const products = document.querySelector(".prow.l");
-    const emptyHand = products?.querySelector(".hand img");
     const canvas = hero?.querySelector(".hero-canvas");
     const bottle = overlay?.querySelector(".travel-bottle");
-    const heldHand = overlay?.querySelector(".hand-held");
-    if (!overlay || !hero || !products || !emptyHand || !canvas || !bottle || !heldHand) return;
+    const hand = products?.querySelector(".hand");
+    const handImage = hand?.querySelector("img");
+    if (!overlay || !hero || !products || !canvas || !bottle || !hand || !handImage) return;
 
-    const measure = () => {
-      const canvasRect = canvas.getBoundingClientRect();
-      const handRect = emptyHand.getBoundingClientRect();
-      // Match the overlay bottle to the WebGL bottle footprint in the hero.
-      // The product plane is approximately 82% of the canvas height.
-      const startWidth = Math.min((canvasRect.height * 0.82) / 1.8, 420);
-      const endWidth = Math.min(handRect.width * 0.28, 100);
-      const endScroll = window.scrollY + products.getBoundingClientRect().top
+    // Reuse the exact bottle image already used by the WebGL hero.
+    const heroBottleTexture = "/images/ashwagandha.png";
+    bottle.src = heroBottleTexture;
+
+    const getPositions = () => {
+      const heroRect = canvas.getBoundingClientRect();
+      const handRect = hand.getBoundingClientRect();
+      const scrollTo = window.scrollY + products.getBoundingClientRect().top
         + products.getBoundingClientRect().height / 2 - window.innerHeight / 2;
-      const handDocumentTop = window.scrollY + handRect.top;
-      const handDocumentLeft = window.scrollX + handRect.left;
-      const targetViewportTop = handDocumentTop - endScroll + handRect.height * 0.08;
-      const targetViewportLeft = handDocumentLeft - window.scrollX + handRect.width * 0.34;
 
+      const startHeight = Math.min(heroRect.height * 0.86, 520);
+      const startWidth = startHeight * 0.42;
+      const endWidth = Math.min(handRect.width * 0.3, 120);
       const start = {
-        x: canvasRect.left + canvasRect.width * 0.48 - startWidth / 2,
-        y: canvasRect.top + canvasRect.height * 0.45 - startWidth * 0.9,
+        x: heroRect.left + heroRect.width * 0.5 - startWidth / 2,
+        y: heroRect.top + heroRect.height * 0.5 - startHeight / 2,
         width: startWidth,
+        height: startHeight,
       };
-      const end = { x: targetViewportLeft, y: targetViewportTop, width: endWidth };
-      gsap.set(bottle, { left: start.x, top: start.y, width: start.width, height: start.width * 1.8 });
-      gsap.set(heldHand, {
-        left: targetViewportLeft - handRect.width * 0.1,
-        top: targetViewportTop - handRect.height * 0.08,
-        width: handRect.width,
-        height: handRect.height,
-        opacity: 0,
-      });
-      return { start, end, handRect };
+      const end = {
+        x: handRect.left + handRect.width * 0.27,
+        y: handRect.top + handRect.height * 0.14,
+        width: endWidth,
+        height: endWidth * 2.35,
+      };
+      return { start, end, scrollTo };
     };
 
-    let positions = measure();
+    let positions = getPositions();
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -60,30 +57,35 @@ export default function HandScrollTransition() {
           end: "center center",
           scrub: 0.65,
           invalidateOnRefresh: true,
-          onRefresh: () => { positions = measure(); },
+          onRefresh: () => { positions = getPositions(); },
         },
       });
 
       tl.set(overlay, { opacity: 0 }, 0);
-      tl.to(overlay, { opacity: 1, duration: 0.035, ease: "none" }, 0.015);
+      tl.to(overlay, { opacity: 1, duration: 0.03, ease: "none" }, 0.01);
+      tl.set(bottle, {
+        left: () => positions.start.x,
+        top: () => positions.start.y,
+        width: () => positions.start.width,
+        height: () => positions.start.height,
+      }, 0);
       tl.to(bottle, {
         left: () => positions.end.x,
         top: () => positions.end.y,
         width: () => positions.end.width,
-        height: () => positions.end.width * 1.8,
+        height: () => positions.end.height,
         ease: "none",
       }, 0);
       tl.to(bottle, { opacity: 0, ease: "none" }, 0.94);
-      tl.to(heldHand, { opacity: 1, ease: "none" }, 0.94);
-      // Keep the final held-bottle image visible after the transition.
-      // Do not fade the overlay out at the end of the timeline.
     }, overlay);
 
     const onResize = () => {
-      positions = measure();
+      positions = getPositions();
       ScrollTrigger.refresh();
     };
     window.addEventListener("resize", onResize);
+    ScrollTrigger.refresh();
+
     return () => {
       window.removeEventListener("resize", onResize);
       ctx.revert();
@@ -93,7 +95,6 @@ export default function HandScrollTransition() {
   return (
     <div className="hand-scroll-transition" ref={root} aria-hidden="true">
       <img className="travel-bottle" src="/images/ashwagandha.png" alt="" />
-      <img className="hand-held" src="/images/handashwa.png" alt="" />
     </div>
   );
 }
