@@ -326,8 +326,8 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .hero-card-content { max-width: 340px; margin: 0 auto; transform: translateY(14px); }
   .hero-card h1 { font-size: clamp(26px,7vw,31px); line-height: 1.04; font-weight: 600; letter-spacing: -.035em; }
   .hero-card p { margin-top: 14px; font-size: 11px; line-height: 1.45; opacity: .9; }
-  .hero .badge { width: 68px; height: 68px; left: auto; right: 8%; bottom: 16%; top: auto; transform: none; background: rgba(226,239,225,.92); border: 1px solid rgba(255,255,255,.72); box-shadow: 0 4px 12px rgba(20,43,28,.18); color: #2b4233; opacity: 1 !important; visibility: visible !important; display: grid !important; z-index: 10 !important; }
-  .hero .badge .arrow { width: 30px; height: 30px; background: transparent; color: #2b4233; }
+  .hero .badge { width: 62px; height: 62px; left: auto; right: 2%; bottom: 16%; top: auto; transform: none; background: var(--tan); border: 0; box-shadow: 0 4px 12px rgba(20,43,28,.18); color: #213629; opacity: 1 !important; visibility: visible !important; display: grid !important; z-index: 10 !important; }
+  .hero .badge .arrow { width: 30px; height: 30px; background: #fff; color: #213629; }
   .hero .badge .arrow svg { width: 25px; height: 25px; }
   .hero .badge svg.spin { opacity: .85; }
   .hero .badge .badge-shop-text { display: none; }
@@ -376,7 +376,7 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .hero-card-content { transform: translateY(10px); }
   .hero-card h1 { font-size: clamp(23px, 7.2vw, 27px); }
   .hero-card p { font-size: 10px; }
-  .hero .badge { width: 58px; height: 58px; right: 5%; }
+  .hero .badge { width: 56px; height: 56px; right: 1%; }
   .hero-rating { left: 10px; bottom: 58px; transform: scale(.8); transform-origin: bottom left; }
   .hero-checks { bottom: 18px; left: 0; right: 0; gap: 5px 7px; font-size: 7px; padding: 0 8px; }
   .col .bottle-wrap { width: 64px; }
