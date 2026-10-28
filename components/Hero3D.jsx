@@ -182,7 +182,7 @@ export default function Hero3D() {
             invalidateOnRefresh: true,
           },
         });
-        scrollTimeline.to(productMaterial, { opacity: 0, ease: "none" }, 0.08);
+        scrollTimeline.to(productMaterial, { opacity: 0, ease: "none" }, 0);
         productMaterial.transparent = true;
       },
       undefined,
