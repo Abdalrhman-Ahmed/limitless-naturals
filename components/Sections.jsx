@@ -70,10 +70,25 @@ export function Products() {
             </div>
           )}
           {r.badge && <ShopBadge />}
-          <div className="info" data-reveal>
-            <h4>{r.name}</h4>
-            <div className="sub">{r.sub}</div>
-            <div className="price">Starting at <b>{r.price}</b></div>
+          <div className={`info ${r.transitionTarget ? "ashwa-copy" : ""}`} {...(r.transitionTarget ? {} : { "data-reveal": true })}>
+            {r.transitionTarget ? (
+              <>
+                <h4 data-ashwa-step>ASHWAGANDHA</h4>
+                <div className="ashwa-dose" data-ashwa-step>600 mg</div>
+                <p className="ashwa-description" data-ashwa-step>Supports stress relief, mood balance, and restful sleep.</p>
+                <div className="ashwa-benefits" data-ashwa-step>
+                  <span>Stress Support</span>
+                  <span>Mood Balance</span>
+                  <span>Better Sleep</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <h4>{r.name}</h4>
+                <div className="sub">{r.sub}</div>
+                <div className="price">Starting at <b>{r.price}</b></div>
+              </>
+            )}
           </div>
         </div>
       ))}
