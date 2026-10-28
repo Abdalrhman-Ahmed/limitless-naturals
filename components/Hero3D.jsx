@@ -235,8 +235,8 @@ export default function Hero3D() {
         progress = landScrollY > 1 ? clamp(window.scrollY / landScrollY) : 0;
       }
       const eased = smooth(progress);
-      const targetX = slotRect ? startX + (slotRect.left + slotRect.width / 2 - startX) * eased : startX;
-      const targetY = slotRect ? startY + (slotRect.top + slotRect.height / 2 - startY) * progress : startY;
+      const targetX = slotRect ? startX + (slotRect.left + slotRect.width / 2 - startX) * eased + 24 * eased : startX;
+      const targetY = slotRect ? startY + (slotRect.top + slotRect.height / 2 - startY) * progress + 18 * progress : startY;
       const targetHeight = slotRect ? startHeight + (slotRect.height - startHeight) * eased : startHeight;
 
       product.position.set(
