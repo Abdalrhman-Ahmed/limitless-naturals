@@ -7,12 +7,21 @@ export default function Hero() {
     <header className="hero" id="top">
       <nav className="nav">
         <span className="logo">Limitless</span>
-        <ul>
+        <ul className="desktop-nav">
           <li><a href="#why">Why It Works</a></li>
           <li><a href="#products">Products</a></li>
           <li><a href="#compare">Compare</a></li>
           <li><a href="#reviews">Reviews</a></li>
         </ul>
+        <details className="mobile-menu">
+          <summary aria-label="Open navigation menu"><span /></summary>
+          <ul>
+            <li><a href="#why">Why It Works</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#compare">Compare</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+          </ul>
+        </details>
       </nav>
 
       <div className="hero-photo">
