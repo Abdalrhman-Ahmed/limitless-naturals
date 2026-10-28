@@ -251,7 +251,7 @@ export default function Hero3D() {
 
       const fullImage = handFull?.querySelector("img");
       const fullImageLoaded = !!(fullImage && fullImage.complete && fullImage.naturalWidth > 0);
-      const handFade = fullImageLoaded && slotRect ? smooth(clamp((progress - 0.88) / 0.12)) : 0;
+      const handFade = fullImageLoaded && slotRect ? smooth(clamp((progress - 0.72) / 0.28)) : 0;
       if (handFull) handFull.style.opacity = String(handFade);
       if (handEmpty) handEmpty.style.opacity = String(1 - handFade);
       if (productMaterial) productMaterial.opacity = 1 - handFade;
