@@ -22,7 +22,9 @@ export default function HandScrollTransition() {
     const measure = () => {
       const canvasRect = canvas.getBoundingClientRect();
       const handRect = emptyHand.getBoundingClientRect();
-      // Match the overlay bottle to the WebGL bottle footprint in the hero. The camera\n      // shows about 82% of the canvas height as the product plane height.\n      const startWidth = Math.min(canvasRect.height * 0.82 / 1.8, 420);
+      // Match the overlay bottle to the WebGL bottle footprint in the hero.
+      // The product plane is approximately 82% of the canvas height.
+      const startWidth = Math.min((canvasRect.height * 0.82) / 1.8, 420);
       const endWidth = Math.min(handRect.width * 0.28, 100);
       const endScroll = window.scrollY + products.getBoundingClientRect().top
         + products.getBoundingClientRect().height / 2 - window.innerHeight / 2;
