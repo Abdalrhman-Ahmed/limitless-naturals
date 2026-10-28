@@ -54,8 +54,10 @@ export default function Motion() {
         const ashwaTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: ".prow.l",
-            start: "top 36%",
-            end: "+=1050",
+            // Wait until the hand/bottle landing point reaches the viewport center.
+            // This prevents pinning while the hand is still travelling upward.
+            start: "center center",
+            end: "+=1200",
             pin: true,
             pinSpacing: true,
             scrub: 0.6,
