@@ -75,9 +75,6 @@ button, input { font: inherit; }
   background: radial-gradient(ellipse at 35% 25%, rgba(233,248,237,.18), transparent 48%), linear-gradient(160deg,#9fb59a,#6f8f72 60%,#4f7456);
 }
 .hero-photo img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 4%; }
-.hand-scroll-transition { position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: 0; overflow: visible; }
-.hand-scroll-transition .travel-bottle { position: fixed; left: 0; top: 0; width: 100px; height: auto; object-fit: contain; opacity: 1; will-change: left, top, width, opacity; }
-.hand-scroll-transition .hand-held { position: fixed; left: 0; top: 0; width: 300px; height: 230px; object-fit: contain; opacity: 0; will-change: left, top, opacity; }
 
 
 .hero-card {
@@ -130,8 +127,11 @@ button, input { font: inherit; }
 .stars { color: #f2a81d; font-size: 14px; letter-spacing: 1px; }
 .stars b { color: var(--ink); font-size: 12px; margin-left: 6px; letter-spacing: 0; }
 
-.hero-canvas { position: absolute; right: 0; top: 0; width: 56%; height: 100%; z-index: 3; pointer-events: none; }
+.hero-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
 .hero-canvas canvas { width: 100% !important; height: 100% !important; display: block; }
+.hand-layer { position: absolute; inset: 0; }
+.hand-layer img { width: 100%; height: 100%; object-fit: contain; }
+.pbottle.slot { visibility: hidden; }
 
 .hero-checks {
   position: absolute; z-index: 5; bottom: 28px; left: 0; right: 0;
