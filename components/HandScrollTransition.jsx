@@ -19,28 +19,36 @@ export default function HandScrollTransition() {
     const heldHand = overlay?.querySelector(".hand-held");
     if (!overlay || !hero || !products || !emptyHand || !canvas || !bottle || !heldHand) return;
 
-    const setPositions = () => {
+    const measure = () => {
       const canvasRect = canvas.getBoundingClientRect();
       const handRect = emptyHand.getBoundingClientRect();
       const startWidth = Math.min(window.innerWidth * 0.22, 210);
-      const endWidth = handRect.width;
+      const endWidth = Math.min(handRect.width * 0.28, 100);
+      const endScroll = window.scrollY + products.getBoundingClientRect().top
+        + products.getBoundingClientRect().height / 2 - window.innerHeight / 2;
+      const handDocumentTop = window.scrollY + handRect.top;
+      const handDocumentLeft = window.scrollX + handRect.left;
+      const targetViewportTop = handDocumentTop - endScroll + handRect.height * 0.08;
+      const targetViewportLeft = handDocumentLeft - window.scrollX + handRect.width * 0.34;
+
       const start = {
         x: canvasRect.left + canvasRect.width * 0.48 - startWidth / 2,
         y: canvasRect.top + canvasRect.height * 0.42 - startWidth * 0.9,
         width: startWidth,
       };
-      const end = {
-        x: handRect.left,
-        y: handRect.top,
-        width: endWidth,
-      };
-
+      const end = { x: targetViewportLeft, y: targetViewportTop, width: endWidth };
       gsap.set(bottle, { left: start.x, top: start.y, width: start.width, height: start.width * 1.8 });
-      gsap.set(heldHand, { left: end.x, top: end.y, width: end.width, height: handRect.height, opacity: 0 });
+      gsap.set(heldHand, {
+        left: targetViewportLeft - handRect.width * 0.1,
+        top: targetViewportTop - handRect.height * 0.08,
+        width: handRect.width,
+        height: handRect.height,
+        opacity: 0,
+      });
       return { start, end, handRect };
     };
 
-    let positions = setPositions();
+    let positions = measure();
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -48,28 +56,28 @@ export default function HandScrollTransition() {
           start: "top top",
           endTrigger: products,
           end: "center center",
-          scrub: 0.7,
+          scrub: 0.65,
           invalidateOnRefresh: true,
-          onRefresh: () => { positions = setPositions(); },
+          onRefresh: () => { positions = measure(); },
         },
       });
 
-      tl.to(overlay, { opacity: 1, duration: 0.08 }, 0.28);
+      tl.set(overlay, { opacity: 1 }, 0);
       tl.to(bottle, {
-        left: () => positions.end.x + positions.end.width * 0.34,
-        top: () => positions.end.y + positions.handRect.height * 0.12,
-        width: () => Math.min(positions.end.width * 0.28, 100),
-        height: () => Math.min(positions.end.width * 0.28, 100) * 1.8,
+        left: () => positions.end.x,
+        top: () => positions.end.y,
+        width: () => positions.end.width,
+        height: () => positions.end.width * 1.8,
         ease: "none",
-      }, 0.15);
-      tl.to(bottle, { opacity: 0, ease: "none" }, 0.88);
-      tl.to(heldHand, { opacity: 1, ease: "none" }, 0.88);
-      tl.to(emptyHand, { opacity: 0, ease: "none" }, 0.88);
-      tl.to(overlay, { opacity: 0, duration: 0.04 }, 0.99);
+      }, 0);
+      tl.to(bottle, { opacity: 0, ease: "none" }, 0.94);
+      tl.to(heldHand, { opacity: 1, ease: "none" }, 0.94);
+      tl.to(emptyHand, { opacity: 0, ease: "none" }, 0.94);
+      tl.to(overlay, { opacity: 0, duration: 0.02 }, 0.995);
     }, overlay);
 
     const onResize = () => {
-      positions = setPositions();
+      positions = measure();
       ScrollTrigger.refresh();
     };
     window.addEventListener("resize", onResize);
