@@ -1,7 +1,6 @@
 import Hero3D from "./Hero3D";
 import Photo from "./Photo";
 import { ShopBadge } from "./ShopBadge";
-import HandScrollTransition from "./HandScrollTransition";
 
 export default function Hero() {
   return (
@@ -31,7 +30,6 @@ export default function Hero() {
       </div>
 
       <Hero3D />
-      <HandScrollTransition />
 
       <div className="hero-card">
         <svg className="hero-card-shape" viewBox="0 0 600 360" preserveAspectRatio="none" aria-hidden="true">
