@@ -22,7 +22,7 @@ export default function HandScrollTransition() {
     const measure = () => {
       const canvasRect = canvas.getBoundingClientRect();
       const handRect = emptyHand.getBoundingClientRect();
-      const startWidth = Math.min(window.innerWidth * 0.22, 210);
+      const startWidth = Math.min(window.innerWidth * 0.23, 420);
       const endWidth = Math.min(handRect.width * 0.28, 100);
       const endScroll = window.scrollY + products.getBoundingClientRect().top
         + products.getBoundingClientRect().height / 2 - window.innerHeight / 2;
@@ -33,7 +33,7 @@ export default function HandScrollTransition() {
 
       const start = {
         x: canvasRect.left + canvasRect.width * 0.48 - startWidth / 2,
-        y: canvasRect.top + canvasRect.height * 0.42 - startWidth * 0.9,
+        y: canvasRect.top + canvasRect.height * 0.45 - startWidth * 0.9,
         width: startWidth,
       };
       const end = { x: targetViewportLeft, y: targetViewportTop, width: endWidth };
@@ -62,7 +62,8 @@ export default function HandScrollTransition() {
         },
       });
 
-      tl.set(overlay, { opacity: 1 }, 0);
+      tl.set(overlay, { opacity: 0 }, 0);
+      tl.to(overlay, { opacity: 1, duration: 0.035, ease: "none" }, 0.015);
       tl.to(bottle, {
         left: () => positions.end.x,
         top: () => positions.end.y,
