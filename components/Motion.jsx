@@ -46,6 +46,20 @@ export default function Motion() {
         scrollTrigger: { trigger: ".benefits", start: "top 85%" },
       });
 
+      // ---- Ashwagandha copy only: keep the existing bottle/3D scroll motion untouched ----
+      gsap.from(".ashwa-copy [data-ashwa-step]", {
+        y: 24,
+        opacity: 0,
+        duration: 0.65,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".prow.l",
+          start: "top 72%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
       // ---- products ----
       gsap.utils.toArray("[data-float]").forEach((el, i) => {
         gsap.from(el, {
