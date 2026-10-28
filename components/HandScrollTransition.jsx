@@ -16,40 +16,36 @@ export default function HandScrollTransition() {
     const canvas = hero?.querySelector(".hero-canvas");
     const bottle = overlay?.querySelector(".travel-bottle");
     const hand = products?.querySelector(".hand");
-    const handImage = hand?.querySelector("img");
-    if (!overlay || !hero || !products || !canvas || !bottle || !hand || !handImage) return;
+    if (!overlay || !hero || !products || !canvas || !bottle || !hand) return;
 
-    // Reuse the exact bottle image already used by the WebGL hero.
-    const heroBottleTexture = "/images/ashwagandha.png";
-    bottle.src = heroBottleTexture;
-
+    // Keep the travelling packshot synchronized with the hero product asset.
     const getPositions = () => {
-      const heroRect = canvas.getBoundingClientRect();
+      const canvasRect = canvas.getBoundingClientRect();
       const handRect = hand.getBoundingClientRect();
-      const scrollTo = window.scrollY + products.getBoundingClientRect().top
-        + products.getBoundingClientRect().height / 2 - window.innerHeight / 2;
+      const mobile = window.matchMedia("(max-width: 600px)").matches;
 
-      const startHeight = Math.min(heroRect.height * 0.86, 520);
-      const startWidth = startHeight * 0.42;
-      const endWidth = Math.min(handRect.width * 0.3, 120);
+      // Match the visual height of the product plane in Hero3D.
+      const startHeight = Math.min(canvasRect.height * (mobile ? 0.74 : 0.83), mobile ? 310 : 500);
+      const startWidth = startHeight * 0.43;
+      const endWidth = Math.min(handRect.width * (mobile ? 0.25 : 0.28), mobile ? 82 : 112);
       const start = {
-        x: heroRect.left + heroRect.width * 0.5 - startWidth / 2,
-        y: heroRect.top + heroRect.height * 0.5 - startHeight / 2,
+        x: canvasRect.left + canvasRect.width * (mobile ? 0.5 : 0.5) - startWidth / 2,
+        y: canvasRect.top + canvasRect.height * 0.5 - startHeight / 2,
         width: startWidth,
         height: startHeight,
       };
       const end = {
-        x: handRect.left + handRect.width * 0.27,
-        y: handRect.top + handRect.height * 0.14,
+        x: handRect.left + handRect.width * 0.26,
+        y: handRect.top + handRect.height * 0.12,
         width: endWidth,
         height: endWidth * 2.35,
       };
-      return { start, end, scrollTo };
+      return { start, end };
     };
 
     let positions = getPositions();
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
+      const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: hero,
           start: "top top",
@@ -61,22 +57,23 @@ export default function HandScrollTransition() {
         },
       });
 
-      tl.set(overlay, { opacity: 0 }, 0);
-      tl.to(overlay, { opacity: 1, duration: 0.03, ease: "none" }, 0.01);
-      tl.set(bottle, {
+      timeline.set(overlay, { autoAlpha: 0 }, 0);
+      timeline.to(overlay, { autoAlpha: 1, duration: 0.025, ease: "none" }, 0.01);
+      timeline.set(bottle, {
         left: () => positions.start.x,
         top: () => positions.start.y,
         width: () => positions.start.width,
         height: () => positions.start.height,
+        opacity: 1,
       }, 0);
-      tl.to(bottle, {
+      timeline.to(bottle, {
         left: () => positions.end.x,
         top: () => positions.end.y,
         width: () => positions.end.width,
         height: () => positions.end.height,
         ease: "none",
       }, 0);
-      tl.to(bottle, { opacity: 0, ease: "none" }, 0.94);
+      timeline.to(bottle, { opacity: 0, ease: "none" }, 0.94);
     }, overlay);
 
     const onResize = () => {
