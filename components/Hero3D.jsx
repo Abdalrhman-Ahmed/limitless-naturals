@@ -42,6 +42,7 @@ export default function Hero3D() {
     let bottleShadow;
     let scrollTimeline;
     const scrollOffset = { x: 0, y: 0, scale: 1 };
+    const entranceScale = { value: 0.88 };
     let shadowTexture;
 
     // A soft, offset contact shadow grounds the packshot against the green
@@ -162,12 +163,12 @@ export default function Hero3D() {
         product.add(productPlane);
         const mobileLayout = window.matchMedia("(max-width: 600px)").matches;
         const targetScale = mobileLayout ? 0.72 : 0.86;
-        product.scale.setScalar(targetScale);
-        gsap.fromTo(
-          product.scale,
-          { x: targetScale * 0.88, y: targetScale * 0.88, z: targetScale * 0.88 },
-          { x: targetScale, y: targetScale, z: targetScale, duration: 1.15, ease: "power3.out" }
-        );
+        product.scale.setScalar(targetScale * entranceScale.value);
+        gsap.to(entranceScale, {
+          value: 1,
+          duration: 1.15,
+          ease: "power3.out",
+        });
 
         // Scroll-controlled handoff: move the rendered bottle down toward the
         // hand, then fade it as the supplied held-bottle cutout takes over.
@@ -230,7 +231,7 @@ export default function Hero3D() {
       const mobileLayout = window.matchMedia("(max-width: 600px)").matches;
       product.position.x = (mobileLayout ? 0.02 : -0.32) + pointer.x * (mobileLayout ? 0.08 : 0.22) + scrollOffset.x;
       product.position.y = (mobileLayout ? 0.12 : 0) + Math.sin(time * 0.9) * 0.07 + scrollOffset.y;
-      product.scale.setScalar(targetScaleForLayout(mobileLayout) * scrollOffset.scale);
+      product.scale.setScalar(targetScaleForLayout(mobileLayout) * entranceScale.value * scrollOffset.scale);
       product.rotation.z = 0.11;
 
       floatingCapsules.forEach((capsule) => {
@@ -256,6 +257,7 @@ export default function Hero3D() {
       observer.disconnect();
       scrollTimeline?.scrollTrigger?.kill();
       scrollTimeline?.kill();
+      gsap.killTweensOf(entranceScale);
       gsap.killTweensOf(product.scale);
       floatingCapsules.forEach((capsule) => {
         gsap.killTweensOf(capsule.scale);
