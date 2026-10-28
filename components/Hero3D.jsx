@@ -88,7 +88,14 @@ export default function Hero3D() {
       clearcoatRoughness: 0.12,
       emissive: 0x173d0a,
       emissiveIntensity: 0.18,
+      transparent: true,
+      opacity: 1,
+      depthWrite: false,
     });
+    // Keep the floating capsules anchored to the bottle's original hero position.
+    // This prevents them drifting left as the bottle travels toward the hand.
+    const capsuleGroup = new THREE.Group();
+    scene.add(capsuleGroup);
     const capsuleSpecs = [
       { x: -1.85, y: 1.5, z: 0.35, rot: 0.85, scale: 0.82, phase: 0.2 },
       { x: 1.8, y: 1.0, z: -0.35, rot: -0.7, scale: 0.72, phase: 1.4 },
@@ -104,7 +111,7 @@ export default function Hero3D() {
       capsule.rotation.x = 0.35 + spec.phase * 0.05;
       capsule.scale.setScalar(0.01);
       capsule.userData = { ...spec, baseY: spec.y };
-      scene.add(capsule);
+      capsuleGroup.add(capsule);
       gsap.to(capsule.scale, {
         x: spec.scale,
         y: spec.scale,
@@ -250,6 +257,13 @@ export default function Hero3D() {
       if (productMaterial) productMaterial.opacity = 1 - handFade;
       el.style.opacity = "1";
 
+      // Keep capsules orbiting the bottle's starting anchor, then fade them
+      // away progressively as the bottle leaves the hero during scroll.
+      capsuleGroup.position.set(toX(startX), toY(startY), -0.05);
+      capsuleGroup.scale.setScalar(canvasH / viewportH);
+      const capsuleFade = 1 - smooth(clamp(progress / 0.36));
+      capsuleMaterial.opacity = capsuleFade;
+      capsuleGroup.visible = capsuleFade > 0.01;
       floatingCapsules.forEach((capsule) => {
         const { baseY, phase } = capsule.userData;
         capsule.position.y = baseY + Math.sin(time * 1.15 + phase) * 0.16;
@@ -275,8 +289,9 @@ export default function Hero3D() {
       gsap.killTweensOf(product.scale);
       floatingCapsules.forEach((capsule) => {
         gsap.killTweensOf(capsule.scale);
-        scene.remove(capsule);
+        capsuleGroup.remove(capsule);
       });
+      scene.remove(capsuleGroup);
       capsuleGeometry.dispose();
       capsuleMaterial.dispose();
       product.clear();
