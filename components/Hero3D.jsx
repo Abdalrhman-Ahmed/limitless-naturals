@@ -41,6 +41,7 @@ export default function Hero3D() {
     let productPlane;
     let bottleShadow;
     let scrollTimeline;
+    const scrollOffset = { x: 0, y: 0, scale: 1 };
     let shadowTexture;
 
     // A soft, offset contact shadow grounds the packshot against the green
@@ -179,15 +180,10 @@ export default function Hero3D() {
             invalidateOnRefresh: true,
           },
         });
-        scrollTimeline.to(product.position, {
-          x: mobileLayout ? 0.06 : 0.28,
-          y: mobileLayout ? -0.95 : -0.72,
-          ease: "none",
-        }, 0);
-        scrollTimeline.to(product.scale, {
-          x: targetScale * (mobileLayout ? 0.82 : 0.9),
-          y: targetScale * (mobileLayout ? 0.82 : 0.9),
-          z: targetScale * (mobileLayout ? 0.82 : 0.9),
+        scrollTimeline.to(scrollOffset, {
+          x: mobileLayout ? 0.04 : 0.6,
+          y: mobileLayout ? -0.82 : -0.72,
+          scale: mobileLayout ? 0.82 : 0.9,
           ease: "none",
         }, 0);
         scrollTimeline.to(productMaterial, { opacity: 0, ease: "none" }, 0.62);
@@ -199,6 +195,7 @@ export default function Hero3D() {
       }
     );
 
+    const targetScaleForLayout = (isMobile) => (isMobile ? 0.72 : 0.86);
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
     const onMove = (event) => {
       const rect = el.getBoundingClientRect();
@@ -231,8 +228,9 @@ export default function Hero3D() {
       product.rotation.x = -pointer.y * 0.025;
       // Subtle horizontal follow effect: the bottle gently tracks the mouse.
       const mobileLayout = window.matchMedia("(max-width: 600px)").matches;
-      product.position.x = (mobileLayout ? 0.02 : -0.32) + pointer.x * (mobileLayout ? 0.08 : 0.22);
-      product.position.y = (mobileLayout ? 0.12 : 0) + Math.sin(time * 0.9) * 0.07;
+      product.position.x = (mobileLayout ? 0.02 : -0.32) + pointer.x * (mobileLayout ? 0.08 : 0.22) + scrollOffset.x;
+      product.position.y = (mobileLayout ? 0.12 : 0) + Math.sin(time * 0.9) * 0.07 + scrollOffset.y;
+      product.scale.setScalar(targetScaleForLayout(mobileLayout) * scrollOffset.scale);
       product.rotation.z = 0.11;
 
       floatingCapsules.forEach((capsule) => {
