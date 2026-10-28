@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero3D() {
   const mount = useRef(null);
@@ -38,6 +40,7 @@ export default function Hero3D() {
     let productMaterial;
     let productPlane;
     let bottleShadow;
+    let scrollTimeline;
     let shadowTexture;
 
     // A soft, offset contact shadow grounds the packshot against the green
@@ -165,6 +168,30 @@ export default function Hero3D() {
           { x: targetScale, y: targetScale, z: targetScale, duration: 1.15, ease: "power3.out" }
         );
 
+        // Scroll-controlled handoff: move the rendered bottle down toward the
+        // hand, then fade it as the supplied held-bottle cutout takes over.
+        scrollTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.8,
+            invalidateOnRefresh: true,
+          },
+        });
+        scrollTimeline.to(product.position, {
+          x: mobileLayout ? 0.06 : 0.28,
+          y: mobileLayout ? -0.95 : -0.72,
+          ease: "none",
+        }, 0);
+        scrollTimeline.to(product.scale, {
+          x: targetScale * (mobileLayout ? 0.82 : 0.9),
+          y: targetScale * (mobileLayout ? 0.82 : 0.9),
+          z: targetScale * (mobileLayout ? 0.82 : 0.9),
+          ease: "none",
+        }, 0);
+        scrollTimeline.to(productMaterial, { opacity: 0, ease: "none" }, 0.62);
+        productMaterial.transparent = true;
       },
       undefined,
       (error) => {
@@ -229,6 +256,8 @@ export default function Hero3D() {
       cancelAnimationFrame(frameId);
       window.removeEventListener("pointermove", onMove);
       observer.disconnect();
+      scrollTimeline?.scrollTrigger?.kill();
+      scrollTimeline?.kill();
       gsap.killTweensOf(product.scale);
       floatingCapsules.forEach((capsule) => {
         gsap.killTweensOf(capsule.scale);
