@@ -453,16 +453,16 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 
 /* Small rightward adjustment for the Ashwagandha text only */
 .prow.l .ashwa-copy {
-  left: calc(21% + 198px);
+  left: calc(21% + 250px);
 }
 @media (max-width: 1200px) and (min-width: 901px) {
   .prow.l .ashwa-copy {
-    left: calc(17% + 180px);
+    left: calc(17% + 220px);
   }
 }
 @media (max-width: 900px) {
   .prow.l .ashwa-copy {
-    left: 132px;
-    max-width: calc(100% - 142px);
+    left: 150px;
+    max-width: calc(100% - 160px);
   }
 }
