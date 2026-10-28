@@ -279,7 +279,7 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .hero-canvas { top: 35%; height: 43%; width: 100%; z-index: 6; }
   .hero-card { z-index: 4; left: 50%; bottom: 16%; width: min(405px,calc(100% - 42px)); min-height: 255px; padding: 100px 24px 26px; transform: translateX(-50%); border: 1px solid rgba(236,248,237,.32); border-radius: 24px; background: rgba(220,239,222,.18); box-shadow: 0 10px 32px rgba(25,54,34,.12), inset 0 1px 0 rgba(255,255,255,.12); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
   .hero-card-shape { display: none; }
-  .hero-card-content { max-width: 340px; margin: 0 auto; }
+  .hero-card-content { max-width: 340px; margin: 0 auto; transform: translateY(14px); }
   .hero-card h1 { font-size: clamp(26px,7vw,31px); line-height: 1.04; font-weight: 600; letter-spacing: -.035em; }
   .hero-card p { margin-top: 14px; font-size: 11px; line-height: 1.45; opacity: .9; }
   .hero .badge { width: 68px; height: 68px; left: auto; right: 8%; bottom: 16%; top: auto; transform: none; background: rgba(226,239,225,.92); border: 1px solid rgba(255,255,255,.72); box-shadow: 0 4px 12px rgba(20,43,28,.18); color: #2b4233; opacity: 1 !important; visibility: visible !important; display: grid !important; z-index: 10 !important; }
