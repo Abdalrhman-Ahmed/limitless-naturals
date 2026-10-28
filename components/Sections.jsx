@@ -71,7 +71,7 @@ export function Products() {
             </div>
           )}
           {r.badge && <ShopBadge />}
-          <div className={`info ${r.transitionTarget ? "ashwa-copy" : ""}`} {...(r.transitionTarget ? {} : { "data-reveal": true })}>
+          <div className={`info ${r.transitionTarget ? "ashwa-copy" : r.manProduct ? "man-copy" : ""}`} {...(r.transitionTarget ? {} : { "data-reveal": true })}>
             {r.transitionTarget ? (
               <>
                 <h4 data-ashwa-step>ASHWAGANDHA</h4>
