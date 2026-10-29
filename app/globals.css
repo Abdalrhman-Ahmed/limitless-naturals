@@ -534,8 +534,10 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   text-align: left;
 }
 .prow.r:has(.man-copy) .man-copy::before {
-  left: -14px;
+  left: -18px;
   right: auto;
+  top: -4px;
+  bottom: -4px;
 }
 .prow.r:has(.man-copy) .man-copy .man-description {
   margin-left: 0;
@@ -564,8 +566,10 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
     text-align: left;
   }
   .prow.r:has(.man-copy) .man-copy::before {
-    left: -10px;
+    left: -12px;
     right: auto;
+    top: -3px;
+    bottom: -3px;
   }
   .man-copy .man-dose { font-size: clamp(34px, 8vw, 46px); }
   .man-copy .man-description { margin-left: 0; margin-right: auto; font-size: 11px; }
