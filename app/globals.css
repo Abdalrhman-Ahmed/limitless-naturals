@@ -518,8 +518,8 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 .prow.r:has(.man-copy) > .hand {
   left: auto;
   right: -7%;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 18%;
+  transform: translateY(-18%);
   width: min(58vw, 760px);
   height: 460px;
   z-index: 3;
@@ -547,8 +547,8 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .prow.r:has(.man-copy) > .hand {
     left: auto;
     right: -12%;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 20%;
+    transform: translateY(-20%);
     width: 64vw;
     height: 340px;
   }
