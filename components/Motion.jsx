@@ -74,6 +74,31 @@ export default function Motion() {
         });
       }
 
+      // ---- Scroll-controlled Limitless Man Max copy, matching Ashwagandha ----
+      const manSteps = gsap.utils.toArray(".man-copy [data-ashwa-step]");
+      if (manSteps.length) {
+        gsap.set(manSteps, { y: 24, opacity: 0 });
+        const manTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".prow.r:has(.man-copy)",
+            start: "center center",
+            end: "+=1200",
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.6,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+        manTimeline.to(manSteps, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 1.15,
+          ease: "none",
+        });
+      }
+
       // ---- products ----
       gsap.utils.toArray("[data-float]").forEach((el, i) => {
         gsap.from(el, {
