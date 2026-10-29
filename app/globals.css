@@ -576,3 +576,73 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .man-copy .man-benefits { justify-content: flex-start; gap: 5px; }
   .man-copy .man-benefits span { padding: 6px 7px; font-size: 8px; }
 }
+
+
+/* ---------- SOLARA VITAL: left-entering hand with scroll-revealed copy ---------- */
+.prow.l:has(.women-copy) {
+  min-height: 420px;
+}
+.prow.l:has(.women-copy) > .hand {
+  left: -7%;
+  right: auto;
+  top: 12%;
+  transform: translateY(-12%);
+  width: min(58vw, 760px);
+  height: 460px;
+  z-index: 3;
+}
+.prow.l:has(.women-copy) > .pbottle {
+  display: none;
+}
+.prow.l:has(.women-copy) .women-copy {
+  left: 48%;
+  right: auto;
+  width: min(330px, 30%);
+  text-align: left;
+  z-index: 4;
+}
+.prow.l:has(.women-copy) .women-copy::before {
+  left: -16px;
+  right: auto;
+  top: -4px;
+  bottom: -4px;
+}
+.women-copy h4 {
+  font-size: clamp(18px, 1.8vw, 25px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.women-copy .sub {
+  font-size: 13px !important;
+  margin-top: 7px !important;
+}
+.women-copy .price {
+  font-size: 11px !important;
+  margin-top: 14px !important;
+}
+@media (max-width: 900px) {
+  .prow.l:has(.women-copy) {
+    min-height: 340px;
+  }
+  .prow.l:has(.women-copy) > .hand {
+    left: -12%;
+    right: auto;
+    top: 12%;
+    transform: translateY(-12%);
+    width: 64vw;
+    height: 340px;
+  }
+  .prow.l:has(.women-copy) .women-copy {
+    left: 44%;
+    right: auto;
+    width: 42%;
+    max-width: 42%;
+    text-align: left;
+  }
+  .prow.l:has(.women-copy) .women-copy::before {
+    left: -12px;
+    right: auto;
+    top: -3px;
+    bottom: -3px;
+  }
+}
