@@ -85,10 +85,10 @@ export function Products() {
               </>
             ) : r.manProduct ? (
               <>
-                <h4 className="man-eyebrow">LIMITLESS MAN</h4>
-                <div className="man-dose">MAX</div>
-                <p className="man-description">Daily multivitamin support with 27 key vitamins and minerals to help maintain health and energy.</p>
-                <div className="man-benefits">
+                <h4 className="man-eyebrow" data-ashwa-step>LIMITLESS MAN</h4>
+                <div className="man-dose" data-ashwa-step>MAX</div>
+                <p className="man-description" data-ashwa-step>Daily multivitamin support with 27 key vitamins and minerals to help maintain health and energy.</p>
+                <div className="man-benefits" data-ashwa-step>
                   <span>Daily Energy</span>
                   <span>27 Key Elements</span>
                   <span>Men's Wellness</span>
