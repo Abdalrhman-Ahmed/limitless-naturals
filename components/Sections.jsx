@@ -96,9 +96,14 @@ export function Products() {
               </>
             ) : r.womenProduct ? (
               <>
-                <h4 data-women-step>SOLARA VITAL</h4>
-                <div className="sub" data-women-step>{r.sub}</div>
-                <div className="price" data-women-step>Starting at <b>{r.price}</b></div>
+                <h4 data-women-step>LIMITLESS WOMAN</h4>
+                <div className="women-dose" data-women-step>50+</div>
+                <p className="women-description" data-women-step>Daily multivitamin support designed for women 50+ to help support energy, immunity, and overall wellness.</p>
+                <div className="women-benefits" data-women-step>
+                  <span>Energy Support</span>
+                  <span>Immune Health</span>
+                  <span>Women's Wellness</span>
+                </div>
               </>
             ) : (
               <>
