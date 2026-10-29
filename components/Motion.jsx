@@ -99,6 +99,31 @@ export default function Motion() {
         });
       }
 
+      // ---- Scroll-controlled Solara Vital copy, matching Ashwagandha ----
+      const womenSteps = gsap.utils.toArray(".women-copy [data-women-step]");
+      if (womenSteps.length) {
+        gsap.set(womenSteps, { y: 24, opacity: 0 });
+        const womenTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".prow.l:has(.women-copy)",
+            start: "center center",
+            end: "+=1000",
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.6,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+        womenTimeline.to(womenSteps, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 1.15,
+          ease: "none",
+        });
+      }
+
       // ---- products ----
       gsap.utils.toArray("[data-float]").forEach((el, i) => {
         gsap.from(el, {
