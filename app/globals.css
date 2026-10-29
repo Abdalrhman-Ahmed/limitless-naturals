@@ -664,7 +664,7 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 
 /* ---------- LIMITLESS WOMAN: Ashwagandha-style product copy ---------- */
 .prow.l:has(.women-copy) > .hand {
-  left: -9%;
+  left: -15%;
   right: auto;
   top: 35%;
   transform: translateY(-35%);
@@ -715,12 +715,12 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   line-height: 1;
 }
 @media (max-width: 1200px) and (min-width: 901px) {
-  .prow.l:has(.women-copy) > .hand { left: -10%; right: auto; top: 36%; width: 68vw; height: 500px; }
+  .prow.l:has(.women-copy) > .hand { left: -16%; right: auto; top: 36%; width: 68vw; height: 500px; }
   .prow.l:has(.women-copy) .women-copy { left: 54%; width: 40%; }
 }
 @media (max-width: 900px) {
   .prow.l:has(.women-copy) > .hand {
-    left: -12%;
+    left: -18%;
     right: auto;
     top: 40%;
     transform: translateY(-40%);
