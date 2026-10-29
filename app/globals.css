@@ -534,8 +534,8 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   text-align: left;
 }
 .prow.r:has(.man-copy) .man-copy::before {
-  left: -18px;
-  right: auto;
+  left: auto;
+  right: -18px;
   top: -4px;
   bottom: -4px;
 }
@@ -566,8 +566,8 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
     text-align: left;
   }
   .prow.r:has(.man-copy) .man-copy::before {
-    left: -12px;
-    right: auto;
+    left: auto;
+    right: -12px;
     top: -3px;
     bottom: -3px;
   }
