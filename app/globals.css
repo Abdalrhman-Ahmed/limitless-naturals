@@ -511,13 +511,13 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   font-size: 9px;
   line-height: 1;
 }
-/* Limitless Man Max: hand enters from the left, copy follows on the right. */
+/* Limitless Man Max: copy on the left, hand and bottle on the right. */
 .prow.r:has(.man-copy) {
   min-height: 420px;
 }
 .prow.r:has(.man-copy) > .hand {
-  left: -7%;
-  right: auto;
+  left: auto;
+  right: -7%;
   top: 50%;
   transform: translateY(-50%);
   width: min(58vw, 760px);
@@ -528,38 +528,39 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   display: none;
 }
 .prow.r:has(.man-copy) .man-copy {
-  left: 52%;
+  left: 5%;
   right: auto;
   width: min(390px, 40%);
-  text-align: left;
+  text-align: right;
 }
 .prow.r:has(.man-copy) .man-copy .man-description {
-  margin-left: 0;
+  margin-left: auto;
+  margin-right: 0;
 }
 .prow.r:has(.man-copy) .man-copy .man-benefits {
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 @media (max-width: 900px) {
   .prow.r:has(.man-copy) {
     min-height: 340px;
   }
   .prow.r:has(.man-copy) > .hand {
-    left: -12%;
-    right: auto;
+    left: auto;
+    right: -12%;
     top: 50%;
     transform: translateY(-50%);
     width: 64vw;
     height: 340px;
   }
   .prow.r:has(.man-copy) .man-copy {
-    left: 48%;
+    left: 0;
     right: auto;
-    width: 50%;
-    max-width: 50%;
-    text-align: left;
+    width: 46%;
+    max-width: 46%;
+    text-align: right;
   }
   .man-copy .man-dose { font-size: clamp(34px, 8vw, 46px); }
-  .man-copy .man-description { margin-left: 0; font-size: 11px; }
-  .man-copy .man-benefits { justify-content: flex-start; gap: 5px; }
+  .man-copy .man-description { margin-left: auto; margin-right: 0; font-size: 11px; }
+  .man-copy .man-benefits { justify-content: flex-end; gap: 5px; }
   .man-copy .man-benefits span { padding: 6px 7px; font-size: 8px; }
 }
