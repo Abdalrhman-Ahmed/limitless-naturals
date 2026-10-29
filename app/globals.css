@@ -511,24 +511,26 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   font-size: 9px;
   line-height: 1;
 }
-/* Keep the combined hand-and-bottle artwork on the upper-left,
-   with the product copy beside it on the right. */
+/* Limitless Man Max: hand enters from the left, copy follows on the right. */
+.prow.r:has(.man-copy) {
+  min-height: 420px;
+}
 .prow.r:has(.man-copy) > .hand {
-  left: -2%;
+  left: -7%;
   right: auto;
-  top: 12%;
-  transform: translateY(-18%);
-  width: min(55vw, 700px);
-  height: 440px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(58vw, 760px);
+  height: 460px;
   z-index: 3;
 }
 .prow.r:has(.man-copy) > .pbottle {
   display: none;
 }
 .prow.r:has(.man-copy) .man-copy {
-  left: auto;
-  right: 3%;
-  width: min(360px, 32%);
+  left: 52%;
+  right: auto;
+  width: min(390px, 40%);
   text-align: left;
 }
 .prow.r:has(.man-copy) .man-copy .man-description {
@@ -538,18 +540,22 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   justify-content: flex-start;
 }
 @media (max-width: 900px) {
+  .prow.r:has(.man-copy) {
+    min-height: 340px;
+  }
   .prow.r:has(.man-copy) > .hand {
-    left: -8%;
+    left: -12%;
     right: auto;
-    top: 12%;
-    width: 66vw;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64vw;
     height: 340px;
   }
   .prow.r:has(.man-copy) .man-copy {
-    left: auto;
-    right: 0;
-    width: 46%;
-    max-width: 46%;
+    left: 48%;
+    right: auto;
+    width: 50%;
+    max-width: 50%;
     text-align: left;
   }
   .man-copy .man-dose { font-size: clamp(34px, 8vw, 46px); }
