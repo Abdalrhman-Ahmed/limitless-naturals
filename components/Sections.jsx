@@ -46,7 +46,7 @@ export function Products() {
     { side: "l", name: "Luna Balance", sub: "Complete daily nutrition", price: "$39", color: "#22406b", nameColor: "#e8d9b0", hand: "/images/handashwa.png", handEmpty: "/images/hand.png", transitionTarget: true },
     { side: "r", name: "Verde Renew", sub: "Energy & recovery", price: "$49", color: "#3d5a45", nameColor: "#e8d9b0", hand: "/images/hand-2.png", badge: true },
     { side: "r", name: "Limitless Man Max", sub: "Multivitamin & Minerals", price: "$29", color: "#123b91", nameColor: "#ffffff", hand: "/images/hand-limitless-man.png", manProduct: true },
-    { side: "l", name: "Solara Vital", sub: "Energy & recovery", price: "$49", color: "#6d2b2b", nameColor: "#e8d9b0", hand: "/images/hand-women.png", womenProduct: true },
+    { side: "l", name: "Solara Vital", sub: "Energy & recovery", price: "$49", color: "#6d2b2b", nameColor: "#e8d9b0", hand: "/images/hand-woman.png", womenProduct: true },
   ];
   return (
     <section className="pad products" id="products">
