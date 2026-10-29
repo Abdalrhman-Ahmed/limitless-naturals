@@ -527,10 +527,10 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 .prow.r:has(.man-copy) > .pbottle {
   display: none;
 }
-.prow.r:has(.man-copy) .man-copy {
-  left: 34%;
+ .prow.r:has(.man-copy) .man-copy {
+  left: 28%;
   right: auto;
-  width: min(390px, 32%);
+  width: min(390px, 28%);
   text-align: left;
 }
 .prow.r:has(.man-copy) .man-copy::before {
@@ -557,10 +557,10 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
     height: 340px;
   }
   .prow.r:has(.man-copy) .man-copy {
-    left: 24%;
+    left: 18%;
     right: auto;
-    width: 42%;
-    max-width: 42%;
+    width: 34%;
+    max-width: 34%;
     text-align: left;
   }
   .prow.r:has(.man-copy) .man-copy::before {
