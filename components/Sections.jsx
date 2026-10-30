@@ -58,6 +58,21 @@ export function Products() {
               <div className="hand-layer" data-hand-empty><Photo src={r.handEmpty} alt="" /></div>
               <div className="hand-layer" data-hand-full style={{ opacity: 0 }}><Photo src={r.hand} alt="" /></div>
             </div>
+          ) : r.womenProduct ? (
+            <div className="hand women-hand">
+              <div className="hand-layer women-hand-full" data-women-hand-full>
+                <Photo src={r.hand} alt="" />
+              </div>
+              <div className="hand-layer women-hand-empty" data-women-hand-empty>
+                <Photo src="/images/hand-woman-empty.png" alt="" />
+              </div>
+              <img
+                className="women-floating-bottle"
+                data-women-bottle
+                src="/images/bottle-woman.png"
+                alt=""
+              />
+            </div>
           ) : (
             <div className="hand" data-parallax={r.side === "l" ? "-12" : "12"}>
               <Photo src={r.hand} alt="" />
