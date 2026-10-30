@@ -137,10 +137,10 @@ export default function Motion() {
           .to(emptyHand, { opacity: 1, duration: 0.35, ease: "none" }, "<")
           .to(floatingBottle, { opacity: 1, duration: 0.35, ease: "none" }, "<")
           .to(floatingBottle, {
-            x: 240,
-            y: 35,
+            x: "-32vw",
+            y: "75vh",
             scale: 0.78,
-            duration: 1.8,
+            duration: 2.6,
             ease: "none",
           }, "+=0.1");
       }
