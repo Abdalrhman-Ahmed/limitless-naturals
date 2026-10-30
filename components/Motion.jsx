@@ -116,10 +116,10 @@ export default function Motion() {
           scrollTrigger: {
             trigger: ".prow.l:has(.women-copy)",
             start: "center center",
-            end: "+=1800",
+            end: "+=3600",
             pin: true,
             pinSpacing: true,
-            scrub: 0.6,
+            scrub: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
           },
