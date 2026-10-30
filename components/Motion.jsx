@@ -107,7 +107,7 @@ export default function Motion() {
           scrollTrigger: {
             trigger: ".prow.l:has(.women-copy)",
             start: "center center",
-            end: "+=1450",
+            end: "+=1000",
             pin: true,
             pinSpacing: true,
             scrub: 0.6,
@@ -115,25 +115,13 @@ export default function Motion() {
             invalidateOnRefresh: true,
           },
         });
-        womenTimeline
-          .to(womenSteps, {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 1.15,
-            ease: "none",
-          })
-          // After the copy has fully appeared, keep the section pinned and
-          // let the hand-held product travel downward with the next scroll.
-          .to(
-            ".prow.l:has(.women-copy) > .hand",
-            {
-              y: 220,
-              duration: 1.5,
-              ease: "none",
-            },
-            "+=0.2"
-          );
+        womenTimeline.to(womenSteps, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 1.15,
+          ease: "none",
+        });
       }
 
       // ---- products ----
