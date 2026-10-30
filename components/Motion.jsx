@@ -99,15 +99,24 @@ export default function Motion() {
         });
       }
 
-      // ---- Scroll-controlled Solara Vital copy, matching Ashwagandha ----
+      // ---- Limitless Woman: reveal copy, swap the hand image, then move only the bottle ----
+      const womenRow = document.querySelector(".prow.l:has(.women-copy)");
       const womenSteps = gsap.utils.toArray(".women-copy [data-women-step]");
-      if (womenSteps.length) {
+      if (womenRow && womenSteps.length) {
+        const fullHand = womenRow.querySelector("[data-women-hand-full]");
+        const emptyHand = womenRow.querySelector("[data-women-hand-empty]");
+        const floatingBottle = womenRow.querySelector("[data-women-bottle]");
+
         gsap.set(womenSteps, { y: 24, opacity: 0 });
+        gsap.set(fullHand, { opacity: 1 });
+        gsap.set(emptyHand, { opacity: 0 });
+        gsap.set(floatingBottle, { opacity: 0, x: 0, y: 0, transformOrigin: "50% 50%" });
+
         const womenTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: ".prow.l:has(.women-copy)",
             start: "center center",
-            end: "+=1000",
+            end: "+=1800",
             pin: true,
             pinSpacing: true,
             scrub: 0.6,
@@ -115,13 +124,24 @@ export default function Motion() {
             invalidateOnRefresh: true,
           },
         });
-        womenTimeline.to(womenSteps, {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 1.15,
-          ease: "none",
-        });
+
+        womenTimeline
+          .to(womenSteps, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 1.15,
+            ease: "none",
+          })
+          .to(fullHand, { opacity: 0, duration: 0.35, ease: "none" }, "+=0.15")
+          .to(emptyHand, { opacity: 1, duration: 0.35, ease: "none" }, "<")
+          .to(floatingBottle, { opacity: 1, duration: 0.35, ease: "none" }, "<")
+          .to(floatingBottle, {
+            x: 240,
+            y: 35,
+            duration: 1.8,
+            ease: "none",
+          }, "+=0.1");
       }
 
       // ---- products ----
