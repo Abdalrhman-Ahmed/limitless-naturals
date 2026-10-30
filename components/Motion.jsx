@@ -115,12 +115,10 @@ export default function Motion() {
         const womenTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: ".prow.l:has(.women-copy)",
-            start: "center center",
-            end: "+=3600",
-            pin: true,
-            pinSpacing: true,
+            start: "top center",
+            end: "+=1800",
+            pin: false,
             scrub: true,
-            anticipatePin: 1,
             invalidateOnRefresh: true,
           },
         });
