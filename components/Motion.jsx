@@ -139,6 +139,7 @@ export default function Motion() {
           .to(floatingBottle, {
             x: 240,
             y: 35,
+            scale: 0.78,
             duration: 1.8,
             ease: "none",
           }, "+=0.1");
