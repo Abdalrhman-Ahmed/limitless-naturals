@@ -112,18 +112,21 @@ export default function Motion() {
         gsap.set(emptyHand, { opacity: 0 });
         gsap.set(floatingBottle, { opacity: 0, x: 0, y: 0, transformOrigin: "50% 50%" });
 
-        const womenTimeline = gsap.timeline({
+        // Phase 1: hold the product section while its copy finishes revealing.
+        const womenReveal = gsap.timeline({
           scrollTrigger: {
-            trigger: ".prow.l:has(.women-copy)",
+            trigger: womenRow,
             start: "top center",
-            end: "+=1800",
-            pin: false,
+            end: "+=1500",
+            pin: true,
+            pinSpacing: true,
             scrub: true,
+            anticipatePin: 1,
             invalidateOnRefresh: true,
           },
         });
 
-        womenTimeline
+        womenReveal
           .to(womenSteps, {
             y: 0,
             opacity: 1,
@@ -133,14 +136,23 @@ export default function Motion() {
           })
           .to(fullHand, { opacity: 0, duration: 0.35, ease: "none" }, "+=0.15")
           .to(emptyHand, { opacity: 1, duration: 0.35, ease: "none" }, "<")
-          .to(floatingBottle, { opacity: 1, duration: 0.35, ease: "none" }, "<")
-          .to(floatingBottle, {
-            x: "-32vw",
-            y: "75vh",
-            scale: 0.78,
-            duration: 2.6,
-            ease: "none",
-          }, "+=0.1");
+          .to(floatingBottle, { opacity: 1, duration: 0.35, ease: "none" }, "<");
+
+        // Phase 2: after the pinned copy section releases, let the page scroll
+        // naturally while the bottle travels toward the comparison section.
+        gsap.to(floatingBottle, {
+          x: "-32vw",
+          y: "75vh",
+          scale: 0.78,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".compare",
+            start: "top bottom",
+            end: "top 35%",
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
       }
 
       // ---- products ----
