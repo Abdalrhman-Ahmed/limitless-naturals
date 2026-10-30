@@ -672,9 +672,9 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   height: 560px;
 }
 .prow.l:has(.women-copy) .women-copy {
-  left: 56%;
+  left: calc(21% + 250px);
   right: auto;
-  width: min(390px, 36%);
+  width: min(390px, 38%);
   color: var(--ink);
   z-index: 4;
   text-align: left;
@@ -687,7 +687,7 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 }
 .women-copy .women-dose {
   margin-top: 10px;
-  color: #a82e68;
+  color: var(--green-dark);
   font-size: clamp(38px, 4.2vw, 60px);
   font-weight: 600;
   line-height: .98;
@@ -707,16 +707,16 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   margin-top: 20px;
 }
 .women-copy .women-benefits span {
-  border: 1px solid rgba(168, 46, 104, .3);
+  border: 1px solid rgba(59, 88, 67, .32);
   border-radius: 999px;
   padding: 8px 10px;
-  color: #8e2858;
+  color: var(--green-dark);
   font-size: 9px;
   line-height: 1;
 }
 @media (max-width: 1200px) and (min-width: 901px) {
   .prow.l:has(.women-copy) > .hand { left: -16%; right: auto; top: 36%; width: 68vw; height: 500px; }
-  .prow.l:has(.women-copy) .women-copy { left: 54%; width: 40%; }
+  .prow.l:has(.women-copy) .women-copy { left: calc(17% + 220px); width: 38%; }
 }
 @media (max-width: 900px) {
   .prow.l:has(.women-copy) > .hand {
@@ -728,9 +728,9 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
     height: 390px;
   }
   .prow.l:has(.women-copy) .women-copy {
-    left: 48%;
-    width: 48%;
-    max-width: 48%;
+    left: 150px;
+    width: auto;
+    max-width: calc(100% - 160px);
   }
   .women-copy .women-dose { font-size: clamp(34px, 8vw, 46px); }
   .women-copy .women-description { font-size: 11px; margin-top: 12px; }
