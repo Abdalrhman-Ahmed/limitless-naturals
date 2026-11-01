@@ -706,8 +706,8 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 .prow.l:has(.women-copy) > .hand {
   left: -18%;
   right: auto;
-  top: 35%;
-  transform: translateY(-35%);
+  top: 30%;
+  transform: translateY(-30%);
   width: min(64vw, 820px);
   height: 540px;
 }
