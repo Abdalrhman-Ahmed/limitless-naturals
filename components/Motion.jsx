@@ -100,14 +100,18 @@ export default function Motion() {
       }
 
       // ---- Scroll-controlled Limitless Woman copy: same pin/reveal behavior as Ashwagandha ----
+      const womenRow = document.querySelector(".prow.l:has(.women-copy)");
       const womenSteps = gsap.utils.toArray(".women-copy [data-women-step]");
-      if (womenSteps.length) {
+      const womenBottle = womenRow?.querySelector("[data-women-bottle]");
+      if (womenSteps.length && womenBottle) {
+        // Keep the separate bottle hidden until the copy has fully revealed.
+        gsap.set(womenBottle, { opacity: 0, y: 0, scale: 1, transformOrigin: "50% 50%" });
         gsap.set(womenSteps, { y: 24, opacity: 0 });
         const womenTimeline = gsap.timeline({
           scrollTrigger: {
-            trigger: ".prow.l:has(.women-copy)",
+            trigger: womenRow,
             start: "center center",
-            end: "+=1200",
+            end: "+=1800",
             pin: true,
             pinSpacing: true,
             scrub: 0.6,
@@ -115,13 +119,22 @@ export default function Motion() {
             invalidateOnRefresh: true,
           },
         });
-        womenTimeline.to(womenSteps, {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 1.15,
-          ease: "none",
-        });
+        womenTimeline
+          .to(womenSteps, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 1.15,
+            ease: "none",
+          })
+          // Once all copy is visible, reveal the standalone bottle and let it
+          // travel downward while the pinned section remains in place.
+          .to(womenBottle, {
+            opacity: 1,
+            y: "42vh",
+            duration: 1.4,
+            ease: "none",
+          }, "+=0.15");
       }
 
       // ---- products ----
