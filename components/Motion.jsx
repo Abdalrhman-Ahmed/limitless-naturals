@@ -112,7 +112,16 @@ export default function Motion() {
         gsap.set(emptyHand, { opacity: 0 });
         gsap.set(floatingBottle, { opacity: 0, x: 0, y: 0, transformOrigin: "50% 50%" });
 
-        // Phase 1: hold the product section while its copy finishes revealing.
+        const getViewportCenterOffset = () => {
+          const rect = floatingBottle.getBoundingClientRect();
+          return {
+            x: window.innerWidth / 2 - (rect.left + rect.width / 2),
+            y: window.innerHeight / 2 - (rect.top + rect.height / 2),
+          };
+        };
+
+        // Phase 1: pin the product section, reveal the copy, then bring the
+        // standalone bottle to the viewport center and hold it there.
         const womenReveal = gsap.timeline({
           scrollTrigger: {
             trigger: womenRow,
@@ -136,10 +145,15 @@ export default function Motion() {
           })
           .to(fullHand, { opacity: 0, duration: 0.35, ease: "none" }, "+=0.15")
           .to(emptyHand, { opacity: 1, duration: 0.35, ease: "none" }, "<")
-          .to(floatingBottle, { opacity: 1, duration: 0.35, ease: "none" }, "<");
+          .to(floatingBottle, {
+            opacity: 1,
+            ...getViewportCenterOffset(),
+            duration: 0.6,
+            ease: "none",
+          }, "<");
 
-        // Phase 2: after the pinned copy section releases, let the page scroll
-        // naturally while the bottle travels toward the comparison section.
+        // Phase 2: once the copy is complete and the pin releases, the bottle
+        // follows normal page scroll down into the comparison section.
         const compareBottleTarget = document.querySelector(".compare .ours [data-compare-bottle]");
         if (compareBottleTarget) {
           // Keep the existing compare bottle wrapper as a layout target, but hide its green bottle.
