@@ -114,7 +114,7 @@ export default function Motion() {
         const womenTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: womenRow,
-            start: "center center",
+            start: "top 18%",
             end: "+=1800",
             pin: true,
             pinSpacing: true,
@@ -137,8 +137,8 @@ export default function Motion() {
           .to(womenHandEmpty, { opacity: 1, duration: 0.5, ease: "none" }, "<")
           .to(womenBottle, {
             opacity: 1,
-            y: "42vh",
-            duration: 1.4,
+            y: "65vh",
+            duration: 1.8,
             ease: "none",
           }, "<");
       }
