@@ -113,14 +113,6 @@ export default function Motion() {
         gsap.set(emptyHand, { opacity: 0 });
         gsap.set(floatingBottle, { opacity: 0, x: 0, y: 0, transformOrigin: "50% 50%" });
 
-        const getHandCenterOffset = () => {
-          const rect = hand.getBoundingClientRect();
-          return {
-            x: window.innerWidth / 2 - (rect.left + rect.width / 2),
-            y: window.innerHeight / 2 - (rect.top + rect.height / 2),
-          };
-        };
-
         // Pin the row, center the complete hand/product image, and reveal copy
         // alongside it during the same scroll-controlled pause.
         const womenReveal = gsap.timeline({
@@ -137,11 +129,6 @@ export default function Motion() {
         });
 
         womenReveal
-          .to(hand, {
-            ...getHandCenterOffset(),
-            duration: 0.35,
-            ease: "none",
-          }, 0)
           .to(womenSteps, {
             y: 0,
             opacity: 1,
