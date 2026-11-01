@@ -122,11 +122,17 @@ export default function Motion() {
             anticipatePin: 1,
             invalidateOnRefresh: true,
             onEnter: () => {
-              gsap.set(womenHandFull, { opacity: 0 });
-              gsap.set(womenHandEmpty, { opacity: 1 });
+              gsap.set(womenHandFull, { display: "none" });
+              gsap.set(womenHandEmpty, { display: "block", opacity: 1 });
+            },
+            onUpdate: (self) => {
+              if (self.progress > 0) {
+                gsap.set(womenHandFull, { display: "none" });
+                gsap.set(womenHandEmpty, { display: "block", opacity: 1 });
+              }
             },
             onLeaveBack: () => {
-              gsap.set(womenHandFull, { opacity: 1 });
+              gsap.set(womenHandFull, { display: "block", opacity: 1 });
               gsap.set(womenHandEmpty, { opacity: 0 });
             },
           },
