@@ -105,7 +105,11 @@ export default function Motion() {
       const womenBottle = womenRow?.querySelector("[data-women-bottle]");
       if (womenSteps.length && womenBottle) {
         // Keep the separate bottle hidden until the copy has fully revealed.
+        const womenHandFull = womenRow.querySelector("[data-women-hand-full]");
+        const womenHandEmpty = womenRow.querySelector("[data-women-hand-empty]");
         gsap.set(womenBottle, { opacity: 0, y: 0, scale: 1, transformOrigin: "50% 50%" });
+        gsap.set(womenHandFull, { opacity: 1 });
+        gsap.set(womenHandEmpty, { opacity: 0 });
         gsap.set(womenSteps, { y: 24, opacity: 0 });
         const womenTimeline = gsap.timeline({
           scrollTrigger: {
@@ -129,12 +133,14 @@ export default function Motion() {
           })
           // Once all copy is visible, reveal the standalone bottle and let it
           // travel downward while the pinned section remains in place.
+          .to(womenHandFull, { opacity: 0, duration: 0.5, ease: "none" }, "+=0.15")
+          .to(womenHandEmpty, { opacity: 1, duration: 0.5, ease: "none" }, "<")
           .to(womenBottle, {
             opacity: 1,
             y: "42vh",
             duration: 1.4,
             ease: "none",
-          }, "+=0.15");
+          }, "<");
       }
 
       // ---- products ----
