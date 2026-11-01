@@ -105,6 +105,7 @@ export default function Motion() {
       if (womenRow && womenSteps.length) {
         const fullHand = womenRow.querySelector("[data-women-hand-full]");
         const emptyHand = womenRow.querySelector("[data-women-hand-empty]");
+        const hand = womenRow.querySelector(".women-hand");
         const floatingBottle = womenRow.querySelector("[data-women-bottle]");
 
         gsap.set(womenSteps, { y: 24, opacity: 0 });
@@ -112,16 +113,16 @@ export default function Motion() {
         gsap.set(emptyHand, { opacity: 0 });
         gsap.set(floatingBottle, { opacity: 0, x: 0, y: 0, transformOrigin: "50% 50%" });
 
-        const getViewportCenterOffset = () => {
-          const rect = floatingBottle.getBoundingClientRect();
+        const getHandCenterOffset = () => {
+          const rect = hand.getBoundingClientRect();
           return {
             x: window.innerWidth / 2 - (rect.left + rect.width / 2),
             y: window.innerHeight / 2 - (rect.top + rect.height / 2),
           };
         };
 
-        // Phase 1: pin the product section, reveal the copy, then bring the
-        // standalone bottle to the viewport center and hold it there.
+        // Pin the row, center the complete hand/product image, and reveal copy
+        // alongside it during the same scroll-controlled pause.
         const womenReveal = gsap.timeline({
           scrollTrigger: {
             trigger: womenRow,
@@ -136,6 +137,11 @@ export default function Motion() {
         });
 
         womenReveal
+          .to(hand, {
+            ...getHandCenterOffset(),
+            duration: 0.35,
+            ease: "none",
+          }, 0)
           .to(womenSteps, {
             y: 0,
             opacity: 1,
@@ -143,15 +149,8 @@ export default function Motion() {
             stagger: 1.15,
             ease: "none",
           })
-          .to(fullHand, { opacity: 0, duration: 0.35, ease: "none" }, "+=0.15")
-          .to(emptyHand, { opacity: 1, duration: 0.35, ease: "none" }, "<")
-          .to(floatingBottle, {
-            opacity: 1,
-            ...getViewportCenterOffset(),
-            duration: 0.6,
-            ease: "none",
-          }, "<")
-          // Hold the centered bottle for a short scroll beat before releasing the pin.
+          // Keep the original hand-with-bottle visible through the full copy reveal,
+          // then hold the centered product before allowing the page to continue.
           .to({}, { duration: 1.2, ease: "none" });
 
         // Phase 2: once the copy is complete and the pin releases, the bottle
