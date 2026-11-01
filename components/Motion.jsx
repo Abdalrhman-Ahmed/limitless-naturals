@@ -99,78 +99,29 @@ export default function Motion() {
         });
       }
 
-      // ---- Limitless Woman: reveal copy, swap the hand image, then move only the bottle ----
-      const womenRow = document.querySelector(".prow.l:has(.women-copy)");
+      // ---- Scroll-controlled Limitless Woman copy: same pin/reveal behavior as Ashwagandha ----
       const womenSteps = gsap.utils.toArray(".women-copy [data-women-step]");
-      if (womenRow && womenSteps.length) {
-        const fullHand = womenRow.querySelector("[data-women-hand-full]");
-        const emptyHand = womenRow.querySelector("[data-women-hand-empty]");
-        const hand = womenRow.querySelector(".women-hand");
-        const floatingBottle = womenRow.querySelector("[data-women-bottle]");
-
+      if (womenSteps.length) {
         gsap.set(womenSteps, { y: 24, opacity: 0 });
-        gsap.set(fullHand, { opacity: 1 });
-        gsap.set(emptyHand, { opacity: 0 });
-        gsap.set(floatingBottle, { opacity: 0, x: 0, y: 0, transformOrigin: "50% 50%" });
-
-        // Pin the row, center the complete hand/product image, and reveal copy
-        // alongside it during the same scroll-controlled pause.
-        const womenReveal = gsap.timeline({
+        const womenTimeline = gsap.timeline({
           scrollTrigger: {
-            trigger: womenRow,
-            start: "top center",
-            end: "+=2400",
+            trigger: ".prow.l:has(.women-copy)",
+            start: "center center",
+            end: "+=1200",
             pin: true,
             pinSpacing: true,
-            scrub: true,
+            scrub: 0.6,
             anticipatePin: 1,
             invalidateOnRefresh: true,
           },
         });
-
-        womenReveal
-          .to(womenSteps, {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 1.15,
-            ease: "none",
-          })
-          // Keep the original hand-with-bottle visible through the full copy reveal,
-          // then hold the centered product before allowing the page to continue.
-          .to({}, { duration: 1.2, ease: "none" });
-
-        // Phase 2: once the copy is complete and the pin releases, the bottle
-        // follows normal page scroll down into the comparison section.
-        const compareBottleTarget = document.querySelector(".compare .ours [data-compare-bottle]");
-        if (compareBottleTarget) {
-          // Keep the existing compare bottle wrapper as a layout target, but hide its green bottle.
-          compareBottleTarget.style.visibility = "hidden";
-
-          const getBottleLanding = () => {
-            const sourceRect = floatingBottle.getBoundingClientRect();
-            const targetRect = compareBottleTarget.getBoundingClientRect();
-            return {
-              x: targetRect.left - sourceRect.left,
-              y: targetRect.top - sourceRect.top,
-              scale: targetRect.width / sourceRect.width,
-            };
-          };
-
-          gsap.to(floatingBottle, {
-            ...getBottleLanding(),
-            rotation: -8,
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".compare",
-              start: "top bottom",
-              end: "top 35%",
-              scrub: true,
-              invalidateOnRefresh: true,
-              onRefresh: () => gsap.set(floatingBottle, getBottleLanding()),
-            },
-          });
-        }
+        womenTimeline.to(womenSteps, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 1.15,
+          ease: "none",
+        });
       }
 
       // ---- products ----
