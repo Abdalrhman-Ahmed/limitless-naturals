@@ -121,12 +121,17 @@ export default function Motion() {
             scrub: 0.6,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            onEnter: () => {
+              gsap.set(womenHandFull, { opacity: 0 });
+              gsap.set(womenHandEmpty, { opacity: 1 });
+            },
+            onLeaveBack: () => {
+              gsap.set(womenHandFull, { opacity: 1 });
+              gsap.set(womenHandEmpty, { opacity: 0 });
+            },
           },
         });
         womenTimeline
-          // Swap to the empty hand as soon as the pinned scroll sequence begins.
-          .to(womenHandFull, { opacity: 0, duration: 0.6, ease: "none" }, 0)
-          .to(womenHandEmpty, { opacity: 1, duration: 0.6, ease: "none" }, 0)
           .to(womenBottle, {
             opacity: 1,
             y: "65vh",
