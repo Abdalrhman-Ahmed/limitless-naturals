@@ -152,7 +152,6 @@ export function Compare() {
           <span className="compare-arrow" aria-hidden="true" />
           <img className="compare-flowers" src="/images/flower-1.png" alt="" />
           <img className="compare-woman-bottle" src="/images/bottle-woman.png" alt="Limitless Woman 50+ bottle" />
-          <div className="bottle-wrap" data-compare-bottle><Bottle color="#2f4a38" name="VIDA GLOW" /></div>
           <div className="pills">
             {rowsCompare.map((t) => (
               <div className="pill" data-pill="l" key={t}><i className="ok">✓</i>{t}</div>
