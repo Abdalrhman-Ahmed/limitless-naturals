@@ -681,25 +681,25 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 .prow.l:has(.women-copy) .women-hand-empty {
   opacity: 0;
 }
-.prow.l:has(.women-copy) .women-floating-bottle {
+.prow.l:has(.women-copy) > .women-hand .women-floating-bottle {
   position: absolute;
   z-index: 4;
-  /* Fine-tune these offsets against the transparent source images if needed. */
-  left: 43%;
-  top: 31%;
-  width: clamp(72px, 9.5vw, 132px);
-  height: 34%;
+  /* Align over the bottle in the hand image before it separates. */
+  left: 69%;
+  top: 30%;
+  width: 25%;
+  height: 46%;
   object-fit: contain;
   opacity: 0;
   pointer-events: none;
   will-change: transform, opacity;
 }
 @media (max-width: 900px) {
-  .prow.l:has(.women-copy) .women-floating-bottle {
-    left: 43%;
-    top: 31%;
-    width: clamp(58px, 15vw, 96px);
-    height: 32%;
+  .prow.l:has(.women-copy) > .women-hand .women-floating-bottle {
+    left: 69%;
+    top: 30%;
+    width: 25%;
+    height: 44%;
   }
 }
 
