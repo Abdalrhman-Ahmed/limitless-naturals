@@ -202,6 +202,7 @@ h2.title { font-size: 44px; line-height: 1.04; font-weight: 500; letter-spacing:
   width: min(38vw, 520px);
   height: min(38vw, 520px);
   object-fit: contain;
+  mix-blend-mode: lighten;
   left: -2%;
   bottom: -12%;
   z-index: 0;
