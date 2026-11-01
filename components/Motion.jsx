@@ -140,20 +140,35 @@ export default function Motion() {
 
         // Phase 2: after the pinned copy section releases, let the page scroll
         // naturally while the bottle travels toward the comparison section.
-        gsap.to(floatingBottle, {
-          x: "-12vw",
-          y: "48vh",
-          scale: 0.48,
-          rotation: -8,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".compare",
-            start: "top bottom",
-            end: "top 35%",
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        });
+        const compareBottleTarget = document.querySelector(".compare .ours [data-compare-bottle]");
+        if (compareBottleTarget) {
+          // Keep the existing compare bottle wrapper as a layout target, but hide its green bottle.
+          compareBottleTarget.style.visibility = "hidden";
+
+          const getBottleLanding = () => {
+            const sourceRect = floatingBottle.getBoundingClientRect();
+            const targetRect = compareBottleTarget.getBoundingClientRect();
+            return {
+              x: targetRect.left - sourceRect.left,
+              y: targetRect.top - sourceRect.top,
+              scale: targetRect.width / sourceRect.width,
+            };
+          };
+
+          gsap.to(floatingBottle, {
+            ...getBottleLanding(),
+            rotation: -8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".compare",
+              start: "top bottom",
+              end: "top 35%",
+              scrub: true,
+              invalidateOnRefresh: true,
+              onRefresh: () => gsap.set(floatingBottle, getBottleLanding()),
+            },
+          });
+        }
       }
 
       // ---- products ----
