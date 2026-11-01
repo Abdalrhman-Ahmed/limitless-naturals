@@ -199,6 +199,7 @@ h2.title { font-size: 44px; line-height: 1.04; font-weight: 500; letter-spacing:
 .col.others .tag { right: 6%; transform: rotate(-30deg); }
 .col .blob { position: absolute; width: 190px; height: 190px; border-radius: 50%; background: #d6ead9; left: 0; bottom: 20px; z-index: 0; }
 .col .bottle-wrap { width: 100px; z-index: 1; flex: none; }
+.compare .ours [data-compare-bottle] { visibility: hidden; }
 .pills { display: flex; flex-direction: column; gap: 14px; z-index: 1; }
 .pill { background: #fff; border-radius: 999px; padding: 10px 18px 10px 12px; display: flex; align-items: center; gap: 8px; font-size: 9.5px; white-space: nowrap; box-shadow: 0 1px 0 rgba(0,0,0,.03); }
 .pill i { width: 14px; height: 14px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-style: normal; font-size: 8px; flex: none; }
