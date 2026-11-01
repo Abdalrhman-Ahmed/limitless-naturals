@@ -126,7 +126,7 @@ export default function Motion() {
           scrollTrigger: {
             trigger: womenRow,
             start: "top center",
-            end: "+=1500",
+            end: "+=2400",
             pin: true,
             pinSpacing: true,
             scrub: true,
@@ -150,7 +150,9 @@ export default function Motion() {
             ...getViewportCenterOffset(),
             duration: 0.6,
             ease: "none",
-          }, "<");
+          }, "<")
+          // Hold the centered bottle for a short scroll beat before releasing the pin.
+          .to({}, { duration: 1.2, ease: "none" });
 
         // Phase 2: once the copy is complete and the pin releases, the bottle
         // follows normal page scroll down into the comparison section.
