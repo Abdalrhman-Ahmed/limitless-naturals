@@ -124,23 +124,22 @@ export default function Motion() {
           },
         });
         womenTimeline
+          // Swap to the empty hand as soon as the pinned scroll sequence begins.
+          .to(womenHandFull, { opacity: 0, duration: 0.6, ease: "none" }, 0)
+          .to(womenHandEmpty, { opacity: 1, duration: 0.6, ease: "none" }, 0)
+          .to(womenBottle, {
+            opacity: 1,
+            y: "65vh",
+            duration: 1.8,
+            ease: "none",
+          }, 0)
           .to(womenSteps, {
             y: 0,
             opacity: 1,
             duration: 1,
             stagger: 1.15,
             ease: "none",
-          })
-          // Once all copy is visible, reveal the standalone bottle and let it
-          // travel downward while the pinned section remains in place.
-          .to(womenHandFull, { opacity: 0, duration: 0.5, ease: "none" }, "+=0.15")
-          .to(womenHandEmpty, { opacity: 1, duration: 0.5, ease: "none" }, "<")
-          .to(womenBottle, {
-            opacity: 1,
-            y: "65vh",
-            duration: 1.8,
-            ease: "none",
-          }, "<");
+          }, 0);
       }
 
       // ---- products ----
