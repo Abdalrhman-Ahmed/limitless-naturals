@@ -728,7 +728,7 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 }
 .women-copy .women-dose {
   margin-top: 10px;
-  color: var(--green-dark);
+  color: #d12b78;
   font-size: clamp(38px, 4.2vw, 60px);
   font-weight: 600;
   line-height: .98;
