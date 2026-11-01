@@ -64,7 +64,7 @@ export function Products() {
                 <Photo src={r.hand} alt="" />
               </div>
               <div className="hand-layer women-hand-empty" data-women-hand-empty>
-                <Photo src="/images/hand-woman-empty.png" alt="" />
+                <Photo src={r.handEmpty} alt="" />
               </div>
               <img
                 className="women-floating-bottle"
