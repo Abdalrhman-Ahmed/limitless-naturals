@@ -141,9 +141,10 @@ export default function Motion() {
         // Phase 2: after the pinned copy section releases, let the page scroll
         // naturally while the bottle travels toward the comparison section.
         gsap.to(floatingBottle, {
-          x: "-32vw",
-          y: "75vh",
-          scale: 0.78,
+          x: "-12vw",
+          y: "48vh",
+          scale: 0.48,
+          rotation: -8,
           ease: "none",
           scrollTrigger: {
             trigger: ".compare",
