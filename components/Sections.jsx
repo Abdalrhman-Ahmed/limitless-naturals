@@ -149,7 +149,10 @@ export function Compare() {
       <div className="grid">
         <div className="col ours">
           <span className="tag">Our Formula</span>
+          <span className="compare-arrow" aria-hidden="true" />
+          <span className="compare-circle" aria-hidden="true" />
           <img className="compare-flowers" src="/images/flowers.png" alt="" />
+          <img className="compare-woman-bottle" src="/images/bottle-woman.png" alt="Limitless Woman 50+ bottle" />
           <div className="bottle-wrap" data-compare-bottle><Bottle color="#2f4a38" name="VIDA GLOW" /></div>
           <div className="pills">
             {rowsCompare.map((t) => (
