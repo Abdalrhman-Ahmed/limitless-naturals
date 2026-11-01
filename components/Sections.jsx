@@ -164,9 +164,7 @@ export function Compare() {
               <div className="pill rev" data-pill="r" key={t}>{t}<i className="no">✕</i></div>
             ))}
           </div>
-          <div className="bottle-wrap" data-compare-bottle>
-            <Bottle color="#6b3a1d" cap="#f4f1ea" labelBg="#ffffff" name="Others Formula" nameColor="#3b7a4a" accent="#8bc27a" />
-          </div>
+
         </div>
       </div>
     </section>
