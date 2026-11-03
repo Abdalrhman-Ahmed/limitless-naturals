@@ -45,9 +45,9 @@ export function Products() {
     const rows = [
     { side: "l", name: "Luna Balance", sub: "Complete daily nutrition", price: "$39", color: "#22406b", nameColor: "#e8d9b0", hand: "/images/handashwa.png", handEmpty: "/images/hand.png", transitionTarget: true },
     { side: "r", name: "Limitless Man Max", sub: "Multivitamin & Minerals", price: "$29", color: "#123b91", nameColor: "#ffffff", hand: "/images/hand-limitless-man.png", manProduct: true },
-    { side: "l", name: "Solara Vital", sub: "Energy & recovery", price: "$49", color: "#6d2b2b", nameColor: "#e8d9b0", hand: "/images/hand-woman.png", handEmpty: "/images/hand-woman-empty.png", womenProduct: true },
+    { side: "l", name: "Solara Vital", sub: "Energy & recovery", price: "$49", color: "#6d2b2b", nameColor: "#e8d9b0", hand: "/images/hand-woman.png", womenProduct: true },
   ];
-
+    
   return (
     <section className="pad products" id="products">
       <h2 className="title" data-reveal>Find Your Daily<br />Formula</h2>
@@ -62,13 +62,13 @@ export function Products() {
             <div className="hand women-hand">
               <div className="hand-layer women-hand-full" data-women-hand-full>
                 <Photo src={r.hand} alt="" />
-              </div>
+              </div>      
               <div className="hand-layer women-hand-empty" data-women-hand-empty>
-                <Photo src={r.handEmpty} alt="" />
-              </div>
+                <Photo src="/images/hand-woman-empty.png" alt="" /> 
+              </div>          
               <img
                 className="women-floating-bottle"
-                data-women-bottle
+                data-women-bottle 
                 src="/images/bottle-woman.png"
                 alt=""
               />
@@ -150,9 +150,9 @@ export function Compare() {
         <div className="col ours">
           <span className="tag">Our Formula</span>
           <span className="compare-arrow" aria-hidden="true" />
-          <span className="compare-circle" aria-hidden="true" />
-          <img className="compare-flowers" src="/images/flowers-1.png" alt="" />
+          <img className="compare-flowers" src="/images/flower-1.png" alt="" />
           <img className="compare-woman-bottle" src="/images/bottle-woman.png" alt="Limitless Woman 50+ bottle" />
+          <div className="bottle-wrap" data-compare-bottle><Bottle color="#2f4a38" name="VIDA GLOW" /></div>
           <div className="pills">
             {rowsCompare.map((t) => (
               <div className="pill" data-pill="l" key={t}><i className="ok">✓</i>{t}</div>
