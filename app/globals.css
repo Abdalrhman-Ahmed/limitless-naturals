@@ -1052,3 +1052,65 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 #why .benefit:hover {
   transform: translateY(-6px);
 }
+
+
+/* ---------- COMPARISON SECTION REDESIGN ---------- */
+.compare { padding-top: 72px; padding-bottom: 88px; text-align: center; }
+.compare-heading { position: relative; z-index: 3; }
+.compare-kicker {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 9px 22px; border: 1px solid rgba(225, 105, 160, .55);
+  border-radius: 999px; color: #d85b98; font-size: 13px; margin-bottom: 18px;
+}
+.compare-heading h2 { font-size: clamp(32px, 4.2vw, 58px); line-height: 1.04; font-weight: 500; letter-spacing: -.04em; }
+.compare-heading h2 em { color: #d12b78; font-style: normal; font-weight: 600; }
+.compare-heading p { margin-top: 14px; color: var(--muted); font-size: 14px; }
+.compare-layout { display: grid; grid-template-columns: minmax(280px, .78fr) minmax(0, 1.6fr); align-items: center; gap: clamp(24px, 4vw, 64px); margin-top: 42px; }
+.compare-visual { position: relative; min-height: 420px; display: flex; align-items: center; justify-content: center; }
+.compare-visual .compare-flowers { position: absolute; width: 125%; max-width: 580px; height: auto; left: -12%; bottom: -8%; z-index: 0; object-fit: contain; pointer-events: none; }
+.compare-visual .compare-woman-bottle { position: relative; z-index: 2; width: clamp(190px, 21vw, 300px); max-height: 420px; object-fit: contain; transform: rotate(7deg); filter: drop-shadow(0 18px 12px rgba(25,35,28,.18)); }
+.compare-visual .compare-arrow { position: absolute; z-index: 3; left: 9%; top: 42%; width: 34px; height: 40px; border-left: 3px solid var(--ink); border-top: 3px solid var(--ink); border-radius: 28px 0 0; transform: rotate(8deg); }
+.compare-visual .compare-arrow::after { content: ""; position: absolute; right: -2px; top: -7px; width: 12px; height: 12px; border-top: 3px solid var(--ink); border-right: 3px solid var(--ink); transform: rotate(35deg); }
+.compare-table-wrap { min-width: 0; }
+.compare-table { position: relative; padding-top: 0; }
+.compare-table-head, .compare-row { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(110px, .8fr) minmax(110px, .8fr); }
+.compare-table-head { align-items: end; }
+.compare-brand { min-height: 112px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; border-radius: 26px 26px 0 0; }
+.compare-brand strong { font-size: clamp(14px, 1.3vw, 19px); font-weight: 600; }
+.compare-brand-icon { font-size: 30px; line-height: 1; }
+.ours-brand { background: linear-gradient(145deg, #e77caf, #d12b78); color: #fff; }
+.other-brand { background: rgba(255,255,255,.58); border: 1px solid rgba(255,255,255,.7); color: var(--ink); }
+.compare-row { min-height: 68px; align-items: stretch; margin-top: 3px; }
+.compare-feature, .compare-result { display: flex; align-items: center; background: rgba(255,255,255,.88); }
+.compare-feature { text-align: left; padding: 14px 18px; border-radius: 999px 0 0 999px; font-size: clamp(11px, .95vw, 14px); line-height: 1.35; }
+.compare-result { justify-content: center; }
+.ours-result { background: rgba(248, 222, 235, .92); }
+.other-result { border-radius: 0 999px 999px 0; background: rgba(255,255,255,.88); }
+.compare-result i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 22px; font-style: normal; font-weight: 600; }
+.compare-result i.ok { background: #299c58; }
+.compare-result i.no { background: #ed4545; }
+@media (max-width: 900px) {
+  .compare-layout { grid-template-columns: 1fr; gap: 8px; margin-top: 28px; }
+  .compare-visual { min-height: 300px; }
+  .compare-visual .compare-woman-bottle { width: 210px; max-height: 300px; }
+  .compare-visual .compare-flowers { width: min(90%, 420px); left: 5%; bottom: -10%; }
+  .compare-table-head, .compare-row { grid-template-columns: minmax(0, 1.5fr) minmax(86px, .75fr) minmax(86px, .75fr); }
+  .compare-brand { min-height: 90px; }
+  .compare-brand strong { font-size: 13px; }
+  .compare-feature { padding: 12px 12px; font-size: 11px; }
+  .compare-result i { width: 28px; height: 28px; font-size: 18px; }
+}
+@media (max-width: 520px) {
+  .compare { padding-top: 54px; padding-bottom: 56px; }
+  .compare-heading h2 { font-size: 32px; }
+  .compare-heading p { max-width: 300px; margin: 10px auto 0; font-size: 12px; }
+  .compare-visual { min-height: 250px; }
+  .compare-visual .compare-woman-bottle { width: 175px; max-height: 250px; }
+  .compare-table-head, .compare-row { grid-template-columns: minmax(0, 1.35fr) minmax(70px, .7fr) minmax(70px, .7fr); }
+  .compare-brand { min-height: 76px; border-radius: 18px 18px 0 0; gap: 6px; }
+  .compare-brand-icon { font-size: 22px; }
+  .compare-brand strong { font-size: 10px; }
+  .compare-row { min-height: 58px; }
+  .compare-feature { padding: 9px 10px; font-size: 9px; }
+  .compare-result i { width: 24px; height: 24px; font-size: 16px; }
+}
