@@ -257,43 +257,39 @@ export function Reviews() {
 }
 
 export function Newsletter() {
-  return (
-    <section className="news">
-      <div className="hand" data-parallax="-10">
-        <Photo src="/images/hand-capsule.png" alt="" />
-        <span className="caps" />
-      </div>
-      <div className="form" data-reveal>
-        <h2>Stay in the Loop</h2>
-        <p>Be the first to hear about new formulas, wellness tips and exclusive offers.</p>
-        <form className="sub-row" action="#" onSubmit={undefined}>
-          <input type="email" placeholder="Email Address" aria-label="Email address" />
-          <button type="button">Subscribe ↗</button>
-        </form>
-      </div>
-    </section>
-  );
+  return null;
 }
 
 export function Footer() {
   const cols = [
-    ["All Products", "Bundles", "Subscriptions", "Gift Cards"],
-    ["Ingredients", "Science", "FAQs", "Blog"],
-    ["About", "Contact", "Careers", "Wholesale"],
+    { title: "Shop", links: ["All Products", "Bundles", "Subscriptions", "Gift Cards"] },
+    { title: "Discover", links: ["Ingredients", "Science", "FAQs", "Blog"] },
+    { title: "Company", links: ["About", "Contact", "Careers", "Wholesale"] },
   ];
   return (
-    <footer>
-      <div className="f-top">
-        {cols.map((c, i) => (
-          <ul key={i}>{c.map((l) => <li key={l}><a href="#top">{l}</a></li>)}</ul>
+    <footer className="site-footer">
+      <div className="footer-main">
+        <div className="footer-brand">
+          <a className="footer-logo" href="#top">Limitless<span>+</span></a>
+          <p>Wellness, made thoughtfully.<br />Feel good about what goes in.</p>
+          <div className="socials" aria-label="Social links"><a href="#instagram" aria-label="Instagram">◎</a><a href="#facebook" aria-label="Facebook">f</a><a href="#x" aria-label="X">𝕏</a></div>
+        </div>
+        {cols.map((c) => (
+          <div className="footer-links" key={c.title}>
+            <h3>{c.title}</h3>
+            <ul>{c.links.map((l) => <li key={l}><a href="#top">{l}</a></li>)}</ul>
+          </div>
         ))}
-        <div>
-          <p className="tagline">Get the scoop on new formulas, wellness tips, and sweet exclusive deals!</p>
-          <div className="socials"><i>f</i><i>𝕏</i><i>◎</i></div>
+        <div className="footer-signoff">
+          <span className="footer-note">Made for your everyday wellness</span>
+          <p>Clean formulas. Clear standards. A little more care in every detail.</p>
         </div>
       </div>
-      <div className="f-bottom">©Peno Lab. All rights reserved.</div>
-      <div className="mega"><span data-mega>Limitless</span></div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} Limitless Naturals. All rights reserved.</span>
+        <div><a href="#privacy">Privacy</a><a href="#terms">Terms</a></div>
+      </div>
+      <div className="footer-wordmark" aria-hidden="true">Limitless</div>
     </footer>
   );
 }
