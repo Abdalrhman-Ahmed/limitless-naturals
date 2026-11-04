@@ -827,10 +827,10 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   margin-top: 20px;
 }
 .women-copy .women-benefits span {
-  border: 1px solid rgba(59, 88, 67, .32);
+  border: 1px solid rgba(225, 105, 160, .4);
   border-radius: 999px;
   padding: 8px 10px;
-  color: var(--green-dark);
+  color: #d85b98;
   font-size: 9px;
   line-height: 1;
 }
