@@ -9,7 +9,7 @@ export default function Hero() {
         <span className="logo">Limitless</span>
         <ul className="desktop-nav">
           <li><a href="#why">Why It Works</a></li>
-          <li><a href="#products">Products</a></li>
+          <li><a href="/shop">Shop</a></li>
           <li><a href="#compare">Compare</a></li>
           <li><a href="#reviews">Reviews</a></li>
         </ul>
@@ -17,7 +17,7 @@ export default function Hero() {
           <summary aria-label="Open navigation menu"><span /></summary>
           <ul>
             <li><a href="#why">Why It Works</a></li>
-            <li><a href="#products">Products</a></li>
+            <li><a href="/shop">Shop</a></li>
             <li><a href="#compare">Compare</a></li>
             <li><a href="#reviews">Reviews</a></li>
           </ul>
