@@ -1114,3 +1114,36 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   .compare-feature { padding: 9px 10px; font-size: 9px; }
   .compare-result i { width: 24px; height: 24px; font-size: 16px; }
 }
+
+
+/* ---------- WRITTEN TESTIMONIALS ---------- */
+.reviews-section { padding-top: 64px; padding-bottom: 76px; }
+.reviews { grid-template-columns: minmax(220px, .72fr) minmax(0, 2.5fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
+.reviews-intro .title { font-size: clamp(34px, 3.3vw, 52px); line-height: 1.02; }
+.reviews .score { margin-top: 34px; display: flex; align-items: center; gap: 12px; font-size: 30px; }
+.reviews .score span { color: #d85b98; font-size: 14px; letter-spacing: 2px; }
+.reviews .small { max-width: 220px; font-size: 13px; line-height: 1.55; }
+.reviews .avatars i { width: 30px; height: 30px; display: inline-block; border: 2px solid var(--bg); border-radius: 50%; margin-right: -9px; background: linear-gradient(135deg,#d9b69a,#8d6b55); }
+.reviews .avatars i:nth-child(2) { background: linear-gradient(135deg,#ead1b1,#9f8268); }
+.reviews .avatars i:nth-child(3) { background: linear-gradient(135deg,#9ab5a1,#4d7059); }
+.review-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; min-width: 0; }
+.review-card { min-height: 210px; display: flex; flex-direction: column; padding: 22px; border: 1px solid rgba(59,88,67,.12); border-radius: 22px; background: rgba(255,255,255,.72); box-shadow: 0 10px 30px rgba(30,48,37,.04); }
+.review-card-stars { color: #d85b98; font-size: 12px; letter-spacing: 2px; }
+.review-quote { margin-top: 14px; font-size: 14px; line-height: 1.55; flex: 1; }
+.review-person { display: flex; align-items: center; gap: 10px; margin-top: 22px; }
+.review-person img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; background: #e5eee7; }
+.review-person div { display: flex; flex-direction: column; gap: 3px; }
+.review-person strong { font-size: 12px; font-weight: 600; }
+.review-person div span { font-size: 10px; color: var(--muted); }
+.review-verified { margin-left: auto; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: #e9f5ec; color: #397b4c; font-size: 12px; }
+@media (max-width: 900px) {
+  .reviews { grid-template-columns: 1fr; }
+  .reviews-intro .title br { display: none; }
+  .reviews .score { margin-top: 20px; }
+}
+@media (max-width: 560px) {
+  .reviews-section { padding-top: 44px; padding-bottom: 52px; }
+  .review-cards { grid-template-columns: 1fr; gap: 12px; }
+  .review-card { min-height: 180px; padding: 18px; border-radius: 18px; }
+  .review-quote { font-size: 13px; }
+}
