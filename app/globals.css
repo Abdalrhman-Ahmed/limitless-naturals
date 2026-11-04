@@ -651,6 +651,14 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   z-index: 4;
   text-align: left;
 }
+.prow-man .man-copy,
+.prow-man .man-copy > [data-man-step] {
+  text-align: left !important;
+}
+.prow-man .man-copy .man-benefits {
+  justify-content: flex-start !important;
+  margin-left: 0 !important;
+}
 .prow-man .man-copy::before {
   left: -20px;
   right: auto;
