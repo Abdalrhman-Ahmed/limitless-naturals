@@ -1029,3 +1029,18 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
   filter: drop-shadow(0 18px 10px rgba(25, 35, 28, .18));
   will-change: transform, left, top, width, opacity;
 }
+
+
+/* ---------- BENEFITS SECTION REFINEMENTS ---------- */
+/* Give the supporting copy more breathing room below the headline. */
+#why .benefits-left > p {
+  margin-top: 22px;
+}
+
+/* Keep all benefit cards level while preserving the subtle hover lift. */
+#why .benefit {
+  transform: none;
+}
+#why .benefit:hover {
+  transform: translateY(-6px);
+}
