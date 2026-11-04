@@ -46,16 +46,16 @@ export default function Motion() {
         scrollTrigger: { trigger: ".benefits", start: "top 85%" },
       });
 
-      // ---- Scroll-controlled Ashwagandha copy: each item appears as the user scrolls ----
-      // Pin the row after the hand is visible; text progression is tied to scroll progress.
+      // =========================================================================
+      // 1. Ashwagandha (Luna Balance): Hand holds bottle -> text reveals on scroll
+      // =========================================================================
       const ashwaSteps = gsap.utils.toArray(".ashwa-copy [data-ashwa-step]");
-      if (ashwaSteps.length) {
+      const ashwaRow = document.querySelector(".prow-ashwa");
+      if (ashwaRow && ashwaSteps.length) {
         gsap.set(ashwaSteps, { y: 24, opacity: 0 });
         const ashwaTimeline = gsap.timeline({
           scrollTrigger: {
-            trigger: ".prow.l",
-            // Wait until the hand/bottle landing point reaches the viewport center.
-            // This prevents pinning while the hand is still travelling upward.
+            trigger: ashwaRow,
             start: "center center",
             end: "+=1200",
             pin: true,
@@ -74,13 +74,16 @@ export default function Motion() {
         });
       }
 
-      // ---- Scroll-controlled Limitless Man Max copy, matching Ashwagandha ----
-      const manSteps = gsap.utils.toArray(".man-copy [data-ashwa-step]");
-      if (manSteps.length) {
+      // =========================================================================
+      // 2. Limitless Man Max: Hand holds bottle -> text reveals on scroll
+      // =========================================================================
+      const manSteps = gsap.utils.toArray(".man-copy [data-man-step]");
+      const manRow = document.querySelector(".prow-man");
+      if (manRow && manSteps.length) {
         gsap.set(manSteps, { y: 24, opacity: 0 });
         const manTimeline = gsap.timeline({
           scrollTrigger: {
-            trigger: ".prow.r:has(.man-copy)",
+            trigger: manRow,
             start: "center center",
             end: "+=1200",
             pin: true,
@@ -99,61 +102,141 @@ export default function Motion() {
         });
       }
 
-      // ---- Scroll-controlled Limitless Woman copy: same pin/reveal behavior as Ashwagandha ----
-      const womenRow = document.querySelector(".prow.l:has(.women-copy)");
+      // =========================================================================
+      // 3. Limitless Woman:
+      //    Step 1: Pinned text reveal with hand holding bottle
+      //    Step 2: Swap to empty hand at end of text -> UNPIN!
+      //    Step 3: User descends down page with the bottle into Compare!
+      // =========================================================================
+      const womenRow = document.querySelector(".prow-woman");
       const womenSteps = gsap.utils.toArray(".women-copy [data-women-step]");
-      const womenBottle = womenRow?.querySelector("[data-women-bottle]");
-      if (womenSteps.length && womenBottle) {
-        // Keep the separate bottle hidden until the copy has fully revealed.
-        const womenHandFull = womenRow.querySelector("[data-women-hand-full]");
-        const womenHandEmpty = womenRow.querySelector("[data-women-hand-empty]");
-        gsap.set(womenBottle, { opacity: 0, y: 0, scale: 1, transformOrigin: "50% 50%" });
-        gsap.set(womenHandFull, { opacity: 1 });
-        gsap.set(womenHandEmpty, { opacity: 0 });
+      const womenHandFull = womenRow?.querySelector("[data-women-hand-full]");
+      const womenHandEmpty = womenRow?.querySelector("[data-women-hand-empty]");
+      const travelBottle = document.querySelector("[data-travel-woman-bottle]");
+      const compareSection = document.querySelector(".compare");
+      const compareBottle = document.querySelector("[data-compare-woman-bottle]");
+
+      if (womenRow && womenSteps.length && womenHandFull && womenHandEmpty && travelBottle) {
+        // Initial setup
         gsap.set(womenSteps, { y: 24, opacity: 0 });
-        const womenTimeline = gsap.timeline({
+        gsap.set(womenHandFull, { autoAlpha: 1 });
+        gsap.set(womenHandEmpty, { autoAlpha: 0 });
+        gsap.set(travelBottle, { autoAlpha: 0, position: "fixed", zIndex: 99 });
+        if (compareBottle) gsap.set(compareBottle, { autoAlpha: 0 });
+
+        // Step 1 & 2: Text reveal pin (unpins immediately after text finishes!)
+        const womenPinTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: womenRow,
-            start: "top 18%",
-            end: "+=1800",
+            start: "center center",
+            end: "+=650",
             pin: true,
             pinSpacing: true,
             scrub: 0.6,
             anticipatePin: 1,
             invalidateOnRefresh: true,
-            onEnter: () => {
-              gsap.set(womenHandFull, { display: "none" });
-              gsap.set(womenHandEmpty, { display: "block", opacity: 1 });
-            },
-            onUpdate: (self) => {
-              if (self.progress > 0) {
-                gsap.set(womenHandFull, { display: "none" });
-                gsap.set(womenHandEmpty, { display: "block", opacity: 1 });
-              }
-            },
             onLeaveBack: () => {
-              gsap.set(womenHandFull, { display: "block", opacity: 1 });
-              gsap.set(womenHandEmpty, { opacity: 0 });
+              gsap.set(womenHandFull, { autoAlpha: 1 });
+              gsap.set(womenHandEmpty, { autoAlpha: 0 });
+              gsap.set(womenSteps, { y: 24, opacity: 0 });
+              gsap.set(travelBottle, { autoAlpha: 0 });
+              if (compareBottle) gsap.set(compareBottle, { autoAlpha: 0 });
             },
           },
         });
-        womenTimeline
-          .to(womenBottle, {
-            opacity: 1,
-            y: "65vh",
-            duration: 1.8,
-            ease: "none",
-          }, 0)
-          .to(womenSteps, {
+
+        // Reveal texts step-by-step
+        womenPinTimeline.to(
+          womenSteps,
+          {
             y: 0,
             opacity: 1,
-            duration: 1,
-            stagger: 1.15,
+            duration: 0.75,
+            stagger: 0.18,
             ease: "none",
-          }, 0);
+          },
+          0
+        );
+
+        // At end of text, swap to empty hand
+        womenPinTimeline.to(
+          womenHandFull,
+          { autoAlpha: 0, duration: 0.1, ease: "none" },
+          0.85
+        );
+        womenPinTimeline.to(
+          womenHandEmpty,
+          { autoAlpha: 1, duration: 0.1, ease: "none" },
+          0.85
+        );
+
+        // Step 3: Descend with the bottle! (NO PIN! Natural page scroll!)
+        let startX = 0, startY = 0, startW = 180;
+
+        const updateStartCoords = () => {
+          const handFrame = womenRow.querySelector(".hand-inner-frame") || womenRow.querySelector(".women-hand");
+          const handRect = handFrame ? handFrame.getBoundingClientRect() : null;
+          if (handRect) {
+            startW = Math.round(handRect.width * 0.44);
+            startX = Math.round(handRect.left + handRect.width * 0.47);
+            startY = Math.round(handRect.top + handRect.height * 0.1);
+          } else {
+            startW = 180;
+            startX = Math.round(window.innerWidth * 0.18);
+            startY = Math.round(window.innerHeight * 0.35);
+          }
+        };
+
+        ScrollTrigger.create({
+          trigger: compareSection || ".compare",
+          start: "top bottom",
+          end: "top 18%",
+          scrub: 0.4,
+          onEnter: () => {
+            updateStartCoords();
+            gsap.set(travelBottle, { autoAlpha: 1 });
+            if (compareBottle) gsap.set(compareBottle, { autoAlpha: 0 });
+          },
+          onLeave: () => {
+            gsap.set(travelBottle, { autoAlpha: 0 });
+            if (compareBottle) gsap.set(compareBottle, { autoAlpha: 1 });
+          },
+          onEnterBack: () => {
+            updateStartCoords();
+            gsap.set(travelBottle, { autoAlpha: 1 });
+            if (compareBottle) gsap.set(compareBottle, { autoAlpha: 0 });
+          },
+          onLeaveBack: () => {
+            gsap.set(travelBottle, { autoAlpha: 0 });
+            if (compareBottle) gsap.set(compareBottle, { autoAlpha: 0 });
+          },
+          onUpdate: (self) => {
+            const p = self.progress;
+            const targetRect = compareBottle ? compareBottle.getBoundingClientRect() : null;
+
+            const endX = targetRect ? targetRect.left : startX;
+            const endY = targetRect ? targetRect.top : startY + 400;
+            const endW = targetRect ? targetRect.width : startW;
+
+            const curX = startX + (endX - startX) * p;
+            const curY = startY + (endY - startY) * p;
+            const curW = startW + (endW - startW) * p;
+            const curRot = 8 * p;
+
+            gsap.set(travelBottle, {
+              left: curX,
+              top: curY,
+              width: curW,
+              height: "auto",
+              rotation: curRot,
+              transformOrigin: "50% 50%",
+              autoAlpha: 1,
+            });
+          },
+        });
       }
 
-      // ---- products ----
+      // ---- products float & parallax ----
       gsap.utils.toArray("[data-float]").forEach((el, i) => {
         gsap.from(el, {
           y: 90, opacity: 0, rotation: i % 2 ? 12 : -12, duration: 1, ease: "power3.out",
@@ -200,7 +283,13 @@ export default function Motion() {
       });
     });
 
-    return () => ctx.revert();
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      ctx.revert();
+    };
   }, []);
 
   return null;
