@@ -1034,7 +1034,7 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 /* ---------- BENEFITS SECTION REFINEMENTS ---------- */
 /* Give the supporting copy more breathing room below the headline. */
 #why .benefits-left > p {
-  margin-top: 22px;
+  margin-top: 122px;
 }
 
 /* Keep all benefit cards level while preserving the subtle hover lift. */
