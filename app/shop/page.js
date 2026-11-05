@@ -1,6 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import CartLink from "../../components/CartLink";
 import { products } from "../../lib/products";
 
 export default function ShopPage() {
@@ -15,7 +16,7 @@ export default function ShopPage() {
     return list;
   }, [category, sort, query]);
   return <main className="shop-page">
-    <header className="shop-header"><Link href="/" className="shop-back">← Home</Link><span>LIMITLESS NATURALS</span><Link href="/shop" className="shop-bag">Shop</Link></header>
+    <header className="shop-header"><Link href="/" className="shop-back">← Home</Link><span>LIMITLESS NATURALS</span><CartLink className="shop-bag"/></header>
     <section className="shop-hero"><p className="shop-eyebrow">YOUR DAILY WELLNESS</p><h1>Find your<br/><em>formula.</em></h1><p>Thoughtfully made essentials for the way you want to feel.</p></section>
     <section className="shop-catalog">
       <div className="shop-toolbar"><div className="shop-filters">{["All","Women","Men"].map(c=><button key={c} className={category===c?"active":""} onClick={()=>setCategory(c)}>{c}</button>)}</div><div className="shop-tools"><input aria-label="Search products" placeholder="Search formulas…" value={query} onChange={e=>setQuery(e.target.value)}/><select aria-label="Sort products" value={sort} onChange={e=>setSort(e.target.value)}><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="rating">Top rated</option></select></div></div>
