@@ -1,9 +1,9 @@
 import "./globals.css";
+import { CartProvider } from "../components/CartProvider";
 
 export const metadata = {
   title: "Limitless | Daily Wellness, One Simple Habit",
-  description:
-    "Science-backed nutrition designed to support energy, immunity and everyday performance with just two capsules a day.",
+  description: "Science-backed nutrition designed to support energy, immunity and everyday performance with just two capsules a day.",
 };
 
 export default function RootLayout({ children }) {
@@ -12,12 +12,9 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
       </head>
-      <body>{children}</body>
+      <body><CartProvider>{children}</CartProvider></body>
     </html>
   );
 }
