@@ -1274,7 +1274,3 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
  .detail-header-note { display:none; }
 }
 
-
-/* Product prices are displayed in Egyptian pounds */
-.shop-card-info strong::after,
-.detail-price::after { content: " EGP"; font-size: .72em; }
