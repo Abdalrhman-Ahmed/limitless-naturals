@@ -19,23 +19,26 @@ export function Benefits() {
   ];
   return (
     <section className="pad" id="why">
-      <div className="benefits-head">
-        <h2 className="title" data-reveal>Why Your Body<br />Will Love It</h2>
-        <div className="right" data-reveal>
-          <p>Carefully formulated with high-quality vitamins, minerals and botanical extracts to help support your daily wellness routine.</p>
+      <div className="benefits-wrap">
+        <div className="benefits-left" data-reveal>
+          <h2 className="title">Why Your Body<br />Will Love It</h2>
+                    <p data-reveal>Carefully formulated with high-quality vitamins, minerals and botanical extracts to help support your daily wellness routine.</p>
+
           <a href="#products" className="btn-outline">Discover the Formula <Arrow /></a>
         </div>
-      </div>
-      <div className="benefits">
-        {items.map(([k, t, d, r]) => (
-          <div className="benefit" key={k} style={{ "--r": r }}>
-            <div className="top">
-              <svg viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">{icons[k]}</svg>
-              <h3>{t}</h3>
-            </div>
-            <div className="bot">{d}</div>
+        <div className="benefits-right">
+          <div className="benefits">
+            {items.map(([k, t, d, r]) => (
+              <div className="benefit" key={k} style={{ "--r": r }}>
+                <div className="top">
+                  <svg viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">{icons[k]}</svg>
+                  <h3>{t}</h3>
+                </div>
+                <div className="bot">{d}</div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );
@@ -43,29 +46,135 @@ export function Benefits() {
 
 export function Products() {
   const rows = [
-    { side: "l", name: "Luna Balance", sub: "Complete daily nutrition", price: "$39", color: "#22406b", nameColor: "#e8d9b0", hand: "/images/hand-1.png" },
-    { side: "r", name: "Verde Renew", sub: "Energy & recovery", price: "$49", color: "#3d5a45", nameColor: "#e8d9b0", hand: "/images/hand-2.png", badge: true },
-    { side: "l", name: "Solara Vital", sub: "Energy & recovery", price: "$49", color: "#6d2b2b", nameColor: "#e8d9b0", hand: "/images/hand-3.png" },
+    {
+      id: "ashwa",
+      side: "l",
+      rowClass: "prow-ashwa",
+      name: "Luna Balance",
+      sub: "Complete daily nutrition",
+      price: "$39",
+      color: "#22406b",
+      nameColor: "#e8d9b0",
+      hand: "/images/handashwa.png",
+      handEmpty: "/images/hand.png",
+      transitionTarget: true,
+    },
+    {
+      id: "man",
+      side: "r",
+      rowClass: "prow-man",
+      name: "Limitless Man Max",
+      sub: "Multivitamin & Minerals",
+      price: "$29",
+      color: "#123b91",
+      nameColor: "#ffffff",
+      hand: "/images/hand-limitless-man.png",
+      manProduct: true,
+    },
+    {
+      id: "woman",
+      side: "l",
+      rowClass: "prow-woman",
+      name: "Solara Vital",
+      sub: "Energy & recovery",
+      price: "$49",
+      color: "#6d2b2b",
+      nameColor: "#e8d9b0",
+      hand: "/images/hand-woman.png",
+      handEmpty: "/images/hand-woman-empty.png",
+      womenProduct: true,
+    },
   ];
+    
   return (
     <section className="pad products" id="products">
       <h2 className="title" data-reveal>Find Your Daily<br />Formula</h2>
       {rows.map((r) => (
-        <div className={`prow ${r.side}`} key={r.name}>
-          <div className="hand" data-parallax={r.side === "l" ? "-12" : "12"}>
-            <Photo src={r.hand} alt="" />
-          </div>
-          <div className="pbottle" data-float>
-            <Bottle color={r.color} name={r.name.toUpperCase()} nameColor={r.nameColor} />
-          </div>
+        <div className={`prow ${r.side} ${r.rowClass}`} key={r.id || r.name}>
+          {r.transitionTarget ? (
+            <div className="hand">
+              <div className="hand-layer" data-hand-empty><Photo src={r.handEmpty} alt="" /></div>
+              <div className="hand-layer" data-hand-full style={{ opacity: 0 }}><Photo src={r.hand} alt="" /></div>
+            </div>
+          ) : r.manProduct ? (
+            <div className="hand man-hand">
+              <Photo src={r.hand} alt="Limitless Man Max" />
+            </div>
+          ) : r.womenProduct ? (
+            <div className="hand women-hand">
+              <div className="hand-inner-frame">
+                <div className="hand-layer women-hand-full" data-women-hand-full>
+                  <img src={r.hand} alt="" />
+                </div>
+                <div className="hand-layer women-hand-empty" data-women-hand-empty>
+                  <img src={r.handEmpty || "/images/hand-woman-empty.png"} alt="" />
+                </div>
+                <img
+                  className="women-floating-bottle"
+                  data-women-bottle
+                  src="/images/bottle-woman.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="hand">
+              <Photo src={r.hand} alt="" />
+            </div>
+          )}
+          {r.transitionTarget ? (
+            <div className="pbottle slot" data-bottle-slot aria-hidden="true" />
+          ) : (r.manProduct || r.womenProduct) ? null : (
+            <div className="pbottle" data-float>
+              <Bottle color={r.color} name={r.name.toUpperCase()} nameColor={r.nameColor} />
+            </div>
+          )}
           {r.badge && <ShopBadge />}
-          <div className="info" data-reveal>
-            <h4>{r.name}</h4>
-            <div className="sub">{r.sub}</div>
-            <div className="price">Starting at <b>{r.price}</b></div>
+          <div className={`info ${r.transitionTarget ? "ashwa-copy" : r.manProduct ? "man-copy" : r.womenProduct ? "women-copy" : ""}`} {...(r.transitionTarget || r.manProduct || r.womenProduct ? {} : { "data-reveal": true })}>
+            {r.transitionTarget ? (
+              <>
+                <h4 data-ashwa-step>ASHWAGANDHA</h4>
+                <div className="ashwa-dose" data-ashwa-step>600 mg</div>
+                <p className="ashwa-description" data-ashwa-step>Supports stress relief, mood balance, and restful sleep.</p>
+                <div className="ashwa-benefits" data-ashwa-step>
+                  <span>Stress Support</span>
+                  <span>Mood Balance</span>
+                  <span>Better Sleep</span>
+                </div>
+              </>
+            ) : r.manProduct ? (
+              <>
+                <h4 className="man-eyebrow" data-man-step>LIMITLESS MAN</h4>
+                <div className="man-dose" data-man-step>MAX</div>
+                <p className="man-description" data-man-step>Daily multivitamin support with 27 key vitamins and minerals to help maintain health and energy.</p>
+                <div className="man-benefits" data-man-step>
+                  <span>Daily Energy</span>
+                  <span>27 Key Elements</span>
+                  <span>Men's Wellness</span>
+                </div>
+              </>
+            ) : r.womenProduct ? (
+              <>
+                <h4 data-women-step>LIMITLESS WOMAN</h4>
+                <div className="women-dose" data-women-step>50+</div>
+                <p className="women-description" data-women-step>Daily multivitamin support designed for women 50+ to help support energy, immunity, and overall wellness.</p>
+                <div className="women-benefits" data-women-step>
+                  <span>Energy Support</span>
+                  <span>Immune Health</span>
+                  <span>Women's Wellness</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <h4>{r.name}</h4>
+                <div className="sub">{r.sub}</div>
+                <div className="price">Starting at <b>{r.price}</b></div>
+              </>
+            )}
           </div>
         </div>
       ))}
+      <img className="travel-woman-bottle" data-travel-woman-bottle src="/images/bottle-woman.png" alt="" aria-hidden="true" />
     </section>
   );
 }
@@ -81,27 +190,31 @@ const rowsCompare = [
 export function Compare() {
   return (
     <section className="pad compare" id="compare">
-      <h2 className="title" data-reveal>Compare the<br />Difference</h2>
-      <div className="grid">
-        <div className="col ours">
-          <span className="tag">Our Formula</span>
-          <span className="blob" />
-          <div className="bottle-wrap" data-compare-bottle><Bottle color="#2f4a38" name="VIDA GLOW" /></div>
-          <div className="pills">
-            {rowsCompare.map((t) => (
-              <div className="pill" data-pill="l" key={t}><i className="ok">✓</i>{t}</div>
-            ))}
-          </div>
+      <div className="compare-heading" data-reveal>
+        <span className="compare-kicker">Comparison</span>
+        <h2>Why Limitless Is <em>Different</em></h2>
+        <p>A clear comparison so you can choose with confidence.</p>
+      </div>
+      <div className="compare-layout">
+        <div className="compare-visual" aria-hidden="true">
+          <img className="compare-flowers" src="/images/flowers-1.png" alt="" />
+          <span className="compare-arrow" />
+          <img className="compare-woman-bottle" src="/images/bottle-woman.png" alt="" />
         </div>
-        <div className="col others">
-          <span className="tag">Others Formula</span>
-          <div className="pills">
+        <div className="compare-table-wrap">
+          <div className="compare-table">
+            <div className="compare-table-head">
+              <div className="compare-feature-head"> </div>
+              <div className="compare-brand ours-brand"><span className="compare-brand-icon">✧</span><strong>Limitless Woman</strong></div>
+              <div className="compare-brand other-brand"><span className="compare-brand-icon">⚗</span><strong>Other Brands</strong></div>
+            </div>
             {rowsCompare.map((t) => (
-              <div className="pill rev" data-pill="r" key={t}>{t}<i className="no">✕</i></div>
+              <div className="compare-row" key={t}>
+                <div className="compare-feature">{t}</div>
+                <div className="compare-result ours-result"><i className="ok">✓</i></div>
+                <div className="compare-result other-result"><i className="no">×</i></div>
+              </div>
             ))}
-          </div>
-          <div className="bottle-wrap" data-compare-bottle>
-            <Bottle color="#6b3a1d" cap="#f4f1ea" labelBg="#ffffff" name="Others Formula" nameColor="#3b7a4a" accent="#8bc27a" />
           </div>
         </div>
       </div>
@@ -110,20 +223,33 @@ export function Compare() {
 }
 
 export function Reviews() {
+  const testimonials = [
+    { name: "Sarah M.", detail: "Verified customer", quote: "I've tried dozens of supplements, and this is the first one that feels thoughtfully made.", image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=160&q=80" },
+    { name: "Emily R.", detail: "Verified customer", quote: "I love knowing exactly what's in every serving. The quality really stands out.", image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=160&q=80" },
+    { name: "Olivia K.", detail: "Verified customer", quote: "A simple addition to my routine that makes me feel good about my wellness.", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80" },
+    { name: "Jessica L.", detail: "Verified customer", quote: "The ingredients and attention to detail are what keep me coming back.", image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=160&q=80" },
+  ];
   return (
-    <section className="pad" id="reviews" style={{ paddingTop: 40 }}>
+    <section className="pad reviews-section" id="reviews">
       <div className="reviews">
-        <div>
+        <div className="reviews-intro">
           <h2 className="title" data-reveal>Trusted by<br />Thousands</h2>
-          <div className="score" data-reveal>4.9/5</div>
+          <div className="score" data-reveal>4.9/5 <span>★★★★★</span></div>
           <p className="small" data-reveal>Trusted by thousands of health enthusiasts for its purity and effectiveness.</p>
-          <div className="avatars"><i /><i /><i /></div>
+          <div className="avatars" aria-hidden="true"><i /><i /><i /></div>
         </div>
-        <div className="cards">
-          <VideoCard src="/images/review-1.jpg" caption="I've tried dozens of supplements." />
-          <VideoCard src="/images/review-2.jpg" playing />
-          <VideoCard src="/images/review-3.jpg" caption="The quality of the ingredients" />
-          <VideoCard src="/images/review-4.jpg" caption="Feels great every morning." />
+        <div className="review-cards">
+          {testimonials.map((review) => (
+            <article className="review-card" key={review.name}>
+              <div className="review-card-stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <p className="review-quote">“{review.quote}”</p>
+              <div className="review-person">
+                <img src={review.image} alt={review.name} loading="lazy" />
+                <div><strong>{review.name}</strong><span>{review.detail}</span></div>
+                <span className="review-verified" aria-label="Verified">✓</span>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -131,43 +257,39 @@ export function Reviews() {
 }
 
 export function Newsletter() {
-  return (
-    <section className="news">
-      <div className="hand" data-parallax="-10">
-        <Photo src="/images/hand-capsule.png" alt="" />
-        <span className="caps" />
-      </div>
-      <div className="form" data-reveal>
-        <h2>Stay in the Loop</h2>
-        <p>Be the first to hear about new formulas, wellness tips and exclusive offers.</p>
-        <form className="sub-row" action="#" onSubmit={undefined}>
-          <input type="email" placeholder="Email Address" aria-label="Email address" />
-          <button type="button">Subscribe ↗</button>
-        </form>
-      </div>
-    </section>
-  );
+  return null;
 }
 
 export function Footer() {
   const cols = [
-    ["All Products", "Bundles", "Subscriptions", "Gift Cards"],
-    ["Ingredients", "Science", "FAQs", "Blog"],
-    ["About", "Contact", "Careers", "Wholesale"],
+    { title: "Shop", links: ["All Products", "Bundles", "Subscriptions", "Gift Cards"] },
+    { title: "Discover", links: ["Ingredients", "Science", "FAQs", "Blog"] },
+    { title: "Company", links: ["About", "Contact", "Careers", "Wholesale"] },
   ];
   return (
-    <footer>
-      <div className="f-top">
-        {cols.map((c, i) => (
-          <ul key={i}>{c.map((l) => <li key={l}><a href="#top">{l}</a></li>)}</ul>
+    <footer className="site-footer">
+      <div className="footer-main">
+        <div className="footer-brand">
+          <a className="footer-logo" href="#top">Limitless<span>+</span></a>
+          <p>Wellness, made thoughtfully.<br />Feel good about what goes in.</p>
+          <div className="socials" aria-label="Social links"><a href="#instagram" aria-label="Instagram">◎</a><a href="#facebook" aria-label="Facebook">f</a><a href="#x" aria-label="X">𝕏</a></div>
+        </div>
+        {cols.map((c) => (
+          <div className="footer-links" key={c.title}>
+            <h3>{c.title}</h3>
+            <ul>{c.links.map((l) => <li key={l}><a href="#top">{l}</a></li>)}</ul>
+          </div>
         ))}
-        <div>
-          <p className="tagline">Get the scoop on new formulas, wellness tips, and sweet exclusive deals!</p>
-          <div className="socials"><i>f</i><i>𝕏</i><i>◎</i></div>
+        <div className="footer-signoff">
+          <span className="footer-note">Made for your everyday wellness</span>
+          <p>Clean formulas. Clear standards. A little more care in every detail.</p>
         </div>
       </div>
-      <div className="f-bottom">©Peno Lab. All rights reserved.</div>
-      <div className="mega"><span data-mega>Radiance+</span></div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} Limitless Naturals. All rights reserved.</span>
+        <div><a href="#privacy">Privacy</a><a href="#terms">Terms</a></div>
+      </div>
+      <div className="footer-wordmark" aria-hidden="true">Limitless</div>
     </footer>
   );
 }
