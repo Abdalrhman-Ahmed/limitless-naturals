@@ -221,15 +221,9 @@ export default function Hero3D() {
       const viewportH = Math.max(window.innerHeight, 1);
       const heroRect = hero?.getBoundingClientRect();
       const slotRect = slot?.getBoundingClientRect();
-      // Use the canvas's actual viewport rectangle as the coordinate space.
-      // The canvas is full-screen at every breakpoint, and this also accounts
-      // for its small GSAP parallax translation while scrolling.
-      const canvasRect = el.getBoundingClientRect();
-      const ppu = Math.max(canvasRect.height, 1) / visibleWorldHeight;
-      const canvasCenterX = canvasRect.left + canvasRect.width / 2;
-      const canvasCenterY = canvasRect.top + canvasRect.height / 2;
-      const toX = (px) => (px - canvasCenterX) / ppu;
-      const toY = (py) => -(py - canvasCenterY) / ppu;
+      const ppu = viewportH / visibleWorldHeight;
+      const toX = (px) => (px - viewportW / 2) / ppu;
+      const toY = (py) => -(py - viewportH / 2) / ppu;
       const canvasH = mobileLayout ? (heroRect?.height || viewportH) * 0.55 : (heroRect?.height || viewportH);
       const startX = (heroRect?.left || 0) + (heroRect?.width || viewportW) * (mobileLayout ? 0.5 : 0.72);
       const startY = (heroRect?.top || 0) + (heroRect?.height || viewportH) * (mobileLayout ? 0.725 : 0.5);
