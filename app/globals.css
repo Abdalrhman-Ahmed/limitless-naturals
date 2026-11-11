@@ -1334,16 +1334,14 @@ button, input, select, textarea { max-width: 100%; }
 section.pad { padding-inline: clamp(18px, 4.4vw, 56px); }
 h1, h2, h3, h4, p { overflow-wrap: break-word; }
 
-/* Fluid hero sizing without changing the desktop composition. */
-.hero {
-  min-height: clamp(680px, 56.25vw, 820px);
-  min-height: clamp(680px, 100svh, 900px);
-}
-.hero-card { width: clamp(260px, 24vw, 320px); }
-.hero-card h1 { font-size: clamp(22px, 2.1vw, 28px); }
-.hero-card p { font-size: clamp(10px, .82vw, 12px); }
+/* Keep the original desktop composition; use fluid sizing only at tablet widths. */
 .hero-rating { max-width: calc(100% - 36px); }
-.hero-checks { flex-wrap: wrap; row-gap: 10px; }
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .hero-card { width: clamp(260px, 28vw, 320px); }
+  .hero-card h1 { font-size: clamp(22px, 2.1vw, 28px); }
+  .hero-card p { font-size: clamp(10px, .82vw, 12px); }
+}
 
 /* Tablet: prevent the hero navigation and section grids from crowding. */
 @media (max-width: 1024px) {
@@ -1368,7 +1366,7 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
     min-height: clamp(760px, 112svh, 980px);
   }
   .hero-photo { height: 54%; }
-  .hero-canvas { position: fixed; top: 35%; left: 0; right: 0; width: 100%; height: 48%; }
+  .hero-canvas { position: fixed; inset: 0; width: 100%; height: 100%; }
   .hero-card { left: 50%; bottom: 17%; width: min(340px, calc(100% - 44px)); }
   .hero .badge { left: auto; right: clamp(18px, 8vw, 70px); bottom: 16%; transform: none; }
   .hero-rating { left: 20px; bottom: 5%; }
@@ -1397,7 +1395,7 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
   .logo { font-size: clamp(20px, 6vw, 23px); }
   .mobile-menu summary { width: 44px; height: 44px; }
   .hero-photo { height: 48%; border-radius: 0 0 38% 38% / 0 0 18% 18%; }
-  .hero-canvas { top: 28%; height: 48%; }
+  .hero-canvas { inset: 0; width: 100%; height: 100%; }
   .hero-card {
     left: 50%;
     bottom: 16%;
@@ -1523,6 +1521,6 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
   .hero { min-height: 680px; }
   .hero-photo { height: 62%; }
   .hero-card { bottom: 9%; }
-  .hero-canvas { top: 25%; height: 55%; }
+  .hero-canvas { inset: 0; width: 100%; height: 100%; }
   .hero-checks { bottom: 10px; }
 }
