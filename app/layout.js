@@ -1,5 +1,6 @@
 import "./globals.css";
 import { CartProvider } from "../components/CartProvider";
+import IntroLoader from "../components/IntroLoader";
 
 export const metadata = {
   title: "Limitless | Daily Wellness, One Simple Habit",
@@ -14,7 +15,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
       </head>
-      <body><CartProvider>{children}</CartProvider></body>
+      <body><IntroLoader /><CartProvider>{children}</CartProvider></body>
     </html>
   );
 }
