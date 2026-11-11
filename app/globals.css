@@ -1319,3 +1319,210 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
 /* Shopping bag icon */
 .shop-bag { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-width:34px; min-height:34px; }
 .cart-link-count { font-size:11px; line-height:1; }
+
+
+/* ---------- RESPONSIVE HARDENING: ALL VIEWPORTS ---------- */
+/* Keep intrinsic media and long content inside the viewport. */
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+body { min-width: 320px; }
+img, video, canvas, svg { max-width: 100%; }
+button, input, select, textarea { max-width: 100%; }
+.frame, .shell, main, section, footer { min-width: 0; }
+section.pad { padding-inline: clamp(18px, 4.4vw, 56px); }
+h1, h2, h3, h4, p { overflow-wrap: break-word; }
+
+/* Fluid hero sizing without changing the desktop composition. */
+.hero {
+  min-height: clamp(680px, 56.25vw, 820px);
+  min-height: clamp(680px, 100svh, 900px);
+}
+.hero-card { width: clamp(260px, 24vw, 320px); }
+.hero-card h1 { font-size: clamp(22px, 2.1vw, 28px); }
+.hero-card p { font-size: clamp(10px, .82vw, 12px); }
+.hero-rating { max-width: calc(100% - 36px); }
+.hero-checks { flex-wrap: wrap; row-gap: 10px; }
+
+/* Tablet: prevent the hero navigation and section grids from crowding. */
+@media (max-width: 1024px) {
+  .hero { min-height: 800px; }
+  .nav { left: clamp(18px, 3vw, 28px); right: clamp(18px, 3vw, 28px); }
+  .hero .nav > .desktop-nav { gap: clamp(8px, 1.2vw, 14px); padding: 13px clamp(12px, 1.6vw, 18px); }
+  .hero .nav > .desktop-nav a { white-space: nowrap; }
+  .hero-card { width: min(320px, 34vw); }
+  .benefits-wrap { gap: clamp(20px, 3vw, 36px); }
+  .benefits-left, .benefits-right { min-width: 0; }
+  .benefits { gap: 18px 14px; }
+  .benefit { min-width: 0; }
+  .compare-layout { grid-template-columns: minmax(0, .7fr) minmax(0, 1.5fr); gap: 22px; }
+  .compare-table-head, .compare-row { grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(78px, .8fr)); }
+  .footer-main { gap: 24px; }
+}
+
+/* Phones and small tablets. */
+@media (max-width: 900px) {
+  .hero {
+    min-height: clamp(760px, 112vh, 980px);
+    min-height: clamp(760px, 112svh, 980px);
+  }
+  .hero-photo { height: 54%; }
+  .hero-canvas { position: fixed; top: 35%; left: 0; right: 0; width: 100%; height: 48%; }
+  .hero-card { left: 50%; bottom: 17%; width: min(340px, calc(100% - 44px)); }
+  .hero .badge { left: auto; right: clamp(18px, 8vw, 70px); bottom: 16%; transform: none; }
+  .hero-rating { left: 20px; bottom: 5%; }
+  .hero-checks { bottom: 20px; padding-inline: 18px; }
+  .products { padding-top: 42px; }
+  .prow-ashwa, .prow-man, .prow-woman { min-width: 0; }
+  .prow-ashwa .ashwa-copy, .prow-man .man-copy, .prow-woman .women-copy { overflow-wrap: anywhere; }
+  .compare-layout { grid-template-columns: 1fr; }
+  .compare-visual { min-height: clamp(240px, 42vw, 340px); }
+  .compare-table-wrap { width: 100%; min-width: 0; }
+  .reviews { min-width: 0; }
+  .review-cards { min-width: 0; }
+  .shop-header { gap: 12px; }
+  .detail-layout { min-width: 0; }
+}
+
+/* Compact phones: stack content cleanly and keep touch targets usable. */
+@media (max-width: 600px) {
+  section.pad { padding: 52px 18px; }
+  h2.title { font-size: clamp(29px, 8vw, 36px); }
+  .hero {
+    min-height: max(760px, 100vh);
+    min-height: max(760px, 100svh);
+  }
+  .nav { left: 14px; right: 14px; top: 14px; padding: 8px 10px; min-height: 62px; }
+  .logo { font-size: clamp(20px, 6vw, 23px); }
+  .mobile-menu summary { width: 44px; height: 44px; }
+  .hero-photo { height: 48%; border-radius: 0 0 38% 38% / 0 0 18% 18%; }
+  .hero-canvas { top: 28%; height: 48%; }
+  .hero-card {
+    left: 50%;
+    bottom: 16%;
+    width: min(330px, calc(100% - 36px));
+    padding: 28px 22px 22px;
+  }
+  .hero-card h1 { font-size: clamp(22px, 6.2vw, 27px); }
+  .hero-card p { font-size: 10px; line-height: 1.5; }
+  .hero .badge { left: auto; width: 48px; height: 48px; right: 18px; bottom: 15%; transform: none; }
+  .hero .badge .arrow { width: 21px; height: 21px; }
+  .hero-rating { left: 14px; bottom: 4%; padding: 8px 10px; }
+  .hero-rating .row { font-size: 11px; }
+  .hero-checks { bottom: 14px; gap: 7px 14px; padding-inline: 14px; font-size: 9px; }
+
+  .benefits-wrap, .benefits-head { gap: 22px; }
+  #why .benefits-left > p { margin-top: 22px; }
+  .benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .benefit { height: clamp(150px, 42vw, 180px); border-width: 3px; border-radius: 16px; }
+  .benefit .top { height: 60%; padding: 13px 11px; }
+  .benefit .top h3 { font-size: clamp(14px, 4vw, 17px); }
+  .benefit .bot { height: 40%; padding: 9px 10px; font-size: clamp(9px, 2.7vw, 10px); line-height: 1.35; }
+
+  .prow-ashwa, .prow-man, .prow-woman {
+    min-height: 390px;
+    margin: 28px 0;
+  }
+  .prow-ashwa > .hand, .prow-woman > .women-hand,
+  .prow-man > .hand, .prow-man .man-hand {
+    width: 43vw !important;
+    max-width: 168px !important;
+    height: 220px !important;
+  }
+  .prow-ashwa .ashwa-copy, .prow-woman .women-copy {
+    left: 45% !important;
+    right: 8px !important;
+    max-width: 55% !important;
+  }
+  .prow-man .man-copy {
+    left: 8px !important;
+    right: 45% !important;
+    max-width: 55% !important;
+  }
+  .ashwa-copy .ashwa-description, .man-copy .man-description, .women-copy .women-description {
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+  }
+  .ashwa-copy .ashwa-benefits span, .man-copy .man-benefits span, .women-copy .women-benefits span {
+    font-size: 7.5px !important;
+    padding: 4px 6px !important;
+  }
+
+  .compare { padding: 52px 18px 58px; }
+  .compare-heading h2 { font-size: clamp(28px, 7.5vw, 36px); }
+  .compare-heading p { font-size: 12px; line-height: 1.5; }
+  .compare-visual { min-height: 235px; }
+  .compare-visual .compare-woman-bottle { width: min(48vw, 180px); max-height: 230px; }
+  .compare-table-head, .compare-row {
+    grid-template-columns: minmax(0, 1.25fr) repeat(2, minmax(58px, .72fr));
+  }
+  .compare-brand { min-height: 72px; padding: 8px 4px; }
+  .compare-brand strong { font-size: clamp(9px, 2.7vw, 11px); text-align: center; }
+  .compare-feature { padding: 8px 9px; font-size: clamp(8px, 2.5vw, 10px); overflow-wrap: anywhere; }
+  .compare-result i { width: 22px; height: 22px; font-size: 14px; }
+
+  .reviews-section { padding: 42px 18px 50px; }
+  .review-card { min-width: 0; }
+  .site-footer { padding: 40px 18px 0; }
+  .footer-main { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-wordmark { font-size: clamp(62px, 18vw, 100px); }
+
+  .shop-header { padding: 16px 18px; }
+  .shop-header > span { font-size: 8px; letter-spacing: .08em; }
+  .shop-hero { padding: 52px 20px 34px; }
+  .shop-hero h1 { font-size: clamp(48px, 15vw, 72px); }
+  .shop-catalog { padding: 18px 18px 64px; }
+  .shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; }
+  .shop-card-image { height: clamp(190px, 58vw, 270px); }
+  .shop-card-image img { width: 84%; height: 80%; }
+  .shop-card-info { align-items: flex-start; flex-direction: column; gap: 6px; margin-top: 12px; }
+  .shop-card-info h2 { font-size: 13px; }
+  .shop-card-info strong { font-size: 12px; }
+  .shop-card-rating { font-size: 9px; }
+  .shop-footer { padding: 20px 18px; }
+
+  .detail-breadcrumb { padding: 16px 18px; line-height: 1.5; }
+  .detail-layout { padding: 8px 18px 48px; gap: 22px; }
+  .detail-image { height: clamp(300px, 92vw, 440px); border-radius: 18px; }
+  .detail-info h1 { font-size: clamp(34px, 10vw, 48px); }
+  .detail-description { font-size: 13px; }
+  .detail-bottom { padding: 34px 18px; }
+  .detail-bottom h2 { font-size: clamp(24px, 7vw, 32px); }
+  .checkout-shell { padding: 42px 18px 64px; }
+  .checkout-title { font-size: clamp(42px, 13vw, 60px); }
+  .cart-layout, .checkout-layout { gap: 24px; margin-top: 30px; }
+  .cart-item { grid-template-columns: 68px minmax(0, 1fr); gap: 10px; }
+  .cart-item-image { height: 82px; }
+  .cart-item > strong { grid-column: 2; justify-self: start; }
+  .cart-item-actions { flex-wrap: wrap; gap: 12px; }
+  .cart-summary { padding: 18px; }
+  .checkout-fields { grid-template-columns: 1fr; }
+}
+
+/* Very narrow phones and short landscape viewports. */
+@media (max-width: 380px) {
+  section.pad { padding-inline: 14px; }
+  .hero { min-height: 790px; }
+  .hero-card { width: calc(100% - 28px); padding-inline: 18px; }
+  .hero .badge { right: 12px; }
+  .hero-rating { left: 10px; }
+  .hero-checks { font-size: 8px; gap: 6px 10px; }
+  .benefits { gap: 9px; }
+  .benefit .top { padding: 10px 8px; }
+  .benefit .bot { padding: 8px; font-size: 8.5px; }
+  .shop-grid { grid-template-columns: 1fr; }
+  .shop-card-image { height: min(88vw, 330px); }
+  .compare-table-head, .compare-row { grid-template-columns: minmax(0, 1.15fr) repeat(2, minmax(54px, .7fr)); }
+  .compare-feature { padding-inline: 7px; font-size: 8px; }
+  .cart-item { grid-template-columns: 60px minmax(0, 1fr); }
+}
+
+/* Respect landscape phones where vertical space is limited. */
+@media (max-height: 520px) and (max-width: 900px) {
+  .hero { min-height: 680px; }
+  .hero-photo { height: 62%; }
+  .hero-card { bottom: 9%; }
+  .hero-canvas { top: 25%; height: 55%; }
+  .hero-checks { bottom: 10px; }
+}
