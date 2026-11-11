@@ -394,8 +394,10 @@ footer { background: linear-gradient(180deg,#5f7f65,#3f5c47); color: #fff; paddi
     align-self: flex-start;
   }
   .benefits {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 14px;
+    grid-template-columns: minmax(0, 1fr);
+    width: min(58%, 280px);
+    margin-left: auto;
+    gap: 12px;
   }
   .prow .hand { display: block; }
   .prow.l .pbottle, .prow.r .pbottle { margin-left: 8%; }
