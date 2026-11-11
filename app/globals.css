@@ -1327,7 +1327,7 @@ html, body {
   max-width: 100%;
   overflow-x: clip;
 }
-body { min-width: 320px; }
+body { min-width: 0; }
 img, video, canvas, svg { max-width: 100%; }
 button, input, select, textarea { max-width: 100%; }
 .frame, .shell, main, section, footer { min-width: 0; }
@@ -1496,6 +1496,12 @@ h1, h2, h3, h4, p { overflow-wrap: break-word; }
   .cart-item-actions { flex-wrap: wrap; gap: 12px; }
   .cart-summary { padding: 18px; }
   .checkout-fields { grid-template-columns: 1fr; }
+}
+
+/* Narrow phones: keep the catalog readable instead of squeezing two cards. */
+@media (max-width: 480px) {
+  .shop-grid { grid-template-columns: minmax(0, 1fr); }
+  .shop-card-image { height: min(88vw, 330px); }
 }
 
 /* Very narrow phones and short landscape viewports. */
