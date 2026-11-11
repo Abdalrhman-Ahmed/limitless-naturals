@@ -226,7 +226,7 @@ export default function Hero3D() {
       const toY = (py) => -(py - viewportH / 2) / ppu;
       const canvasH = mobileLayout ? (heroRect?.height || viewportH) * 0.55 : (heroRect?.height || viewportH);
       const startX = (heroRect?.left || 0) + (heroRect?.width || viewportW) * (mobileLayout ? 0.5 : 0.72);
-      const startY = (heroRect?.top || 0) + (heroRect?.height || viewportH) * (mobileLayout ? 0.69 : 0.5);
+      const startY = (heroRect?.top || 0) + (heroRect?.height || viewportH) * (mobileLayout ? 0.63 : 0.5);
       const startHeight = canvasH * 4.65 / visibleWorldHeight;
       let progress = 0;
       if (!reduceMotion && slotRect) {
