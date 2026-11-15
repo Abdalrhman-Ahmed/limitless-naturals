@@ -1,0 +1,20 @@
+import "./globals.css";
+import { CartProvider } from "../components/cart/CartProvider";
+
+export const metadata = {
+  title: "Limitless | Daily Wellness, One Simple Habit",
+  description: "Science-backed nutrition designed to support energy, immunity and everyday performance with just two capsules a day.",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+      </head>
+      <body><CartProvider>{children}</CartProvider></body>
+    </html>
+  );
+}
