@@ -245,7 +245,7 @@ export default function Motion() {
         gsap.to(el, { y: -14, duration: 2.2 + i * 0.3, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 1 });
       });
       gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
-        const amt = parseFloat(el.dataset.parallax) || 10;
+        const amt = parseFloat(el.dataset.parallax ?? "") || 10;
         gsap.fromTo(el, { yPercent: -amt }, {
           yPercent: amt, ease: "none",
           scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
