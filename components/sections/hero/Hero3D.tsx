@@ -19,9 +19,10 @@ export default function Hero3D() {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const cameraZ = 8.5;
     const visibleWorldHeight = 2 * cameraZ * Math.tan((32 * Math.PI) / 360);
-    const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
-    const smooth = (v) => v * v * (3 - 2 * v);
+    const clamp = (v: number, min = 0, max = 1): number =>
+  Math.min(max, Math.max(min, v));
 
+const smooth = (v: number): number => v * v * (3 - 2 * v);
     let disposed = false;
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -45,10 +46,10 @@ export default function Hero3D() {
     scene.add(product);
 
     const textureLoader = new THREE.TextureLoader();
-    let productTexture;
-    let productMaterial;
-    let productPlane;
-    let bottleShadow;
+   let productTexture: THREE.CanvasTexture | undefined;
+let productMaterial: THREE.MeshBasicMaterial | undefined;
+let productPlane: THREE.Mesh | undefined;
+let bottleShadow: THREE.Mesh | undefined;
     const entranceScale = { value: 0.88 };
     let shadowTexture;
 
@@ -57,7 +58,8 @@ export default function Hero3D() {
     const shadowCanvas = document.createElement("canvas");
     shadowCanvas.width = 256;
     shadowCanvas.height = 384;
-    const shadowContext = shadowCanvas.getContext("2d");
+const shadowContext = shadowCanvas.getContext("2d")!;
+    if (!shadowContext) return;
     const shadowGradient = shadowContext.createRadialGradient(128, 192, 12, 128, 192, 126);
     shadowGradient.addColorStop(0, "rgba(8, 22, 13, 0.38)");
     shadowGradient.addColorStop(0.48, "rgba(8, 22, 13, 0.22)");
@@ -137,7 +139,7 @@ export default function Hero3D() {
         const canvas = document.createElement("canvas");
         canvas.width = source.naturalWidth || source.width;
         canvas.height = source.naturalHeight || source.height;
-        const context = canvas.getContext("2d", { willReadFrequently: true });
+const context = canvas.getContext("2d", { willReadFrequently: true })!;
         context.drawImage(source, 0, 0, canvas.width, canvas.height);
         const frame = context.getImageData(0, 0, canvas.width, canvas.height);
         const pixels = frame.data;
@@ -209,7 +211,7 @@ export default function Hero3D() {
     resize();
 
     const clock = new THREE.Clock();
-    let frameId;
+    let frameId: number | undefined;
     const tick = () => {
       const time = clock.getElapsedTime();
       pointer.x += (pointer.targetX - pointer.x) * 0.045;
