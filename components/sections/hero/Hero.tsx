@@ -1,6 +1,6 @@
 import Hero3D from "./Hero3D";
-import Photo from "./Photo";
-import { ShopBadge } from "./ShopBadge";
+import Photo from "../../media/Photo";
+import { ShopBadge } from "../../ui/ShopBadge";
 
 export default function Hero() {
   return (
@@ -23,14 +23,11 @@ export default function Hero() {
           </ul>
         </details>
       </nav>
-
       <div className="hero-photo">
         <div className="ph-label">A daily ritual for your wellbeing</div>
         <Photo src="/images/hero-woman.jpg" alt="Smiling woman among plants" />
       </div>
-
       <Hero3D />
-
       <div className="hero-card">
         <svg className="hero-card-shape" viewBox="0 0 600 360" preserveAspectRatio="none" aria-hidden="true">
           <path d="M18 112 C22 70 56 48 112 42 C205 34 292 30 372 18 C451 6 520 24 558 66 C587 98 590 157 579 216 C569 274 526 319 463 333 C384 351 282 346 190 341 C103 337 43 314 23 270 C7 236 7 159 18 112 Z" />
@@ -41,15 +38,10 @@ export default function Hero() {
         </div>
       </div>
       <ShopBadge />
-
       <div className="hero-rating">
-        <div className="row">
-          <span className="avatars"><i /><i /><i /></span>
-          8k+
-        </div>
+        <div className="row"><span className="avatars"><i /><i /><i /></span>8k+</div>
         <div className="stars">★★★★★ <b>4.9</b></div>
       </div>
-
       <div className="hero-checks">
         <span>Clinically Inspired</span>
         <span>Premium Ingredients</span>

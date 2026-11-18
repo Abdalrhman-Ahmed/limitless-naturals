@@ -24,3 +24,6 @@ pnpm-debug.log*
 Thumbs.db
 .vscode/
 public/images/
+
+# TypeScript build info
+*.tsbuildinfo

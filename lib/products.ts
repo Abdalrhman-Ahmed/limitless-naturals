@@ -1,4 +1,24 @@
-export const products = [
+
+export interface Product {
+  slug: string;
+  name: string;
+  category: string;
+  type: string;
+  price: number;
+  originalPrice: number;
+  rating: number;
+  reviews: number;
+  image: string;
+  color: string;
+  description: string;
+  benefits: string[];
+  ingredients: string[];
+  dosage: string;
+  count: string;
+  officialUrl: string;
+}
+
+export const products: Product[] = [
   {
     "slug": "ashwagandha",
     "name": "Limitless Ashwagandha 600 mg",

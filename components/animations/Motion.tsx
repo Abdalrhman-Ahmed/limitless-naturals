@@ -33,7 +33,7 @@ export default function Motion() {
       });
 
       // ---- generic reveals ----
-      gsap.utils.toArray("[data-reveal]").forEach((el) => {
+      gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
         gsap.from(el, {
           y: 50, opacity: 0, duration: 0.9, ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none reverse" },
@@ -49,8 +49,8 @@ export default function Motion() {
       // =========================================================================
       // 1. Ashwagandha (Luna Balance): Hand holds bottle -> text reveals on scroll
       // =========================================================================
-      const ashwaSteps = gsap.utils.toArray(".ashwa-copy [data-ashwa-step]");
-      const ashwaRow = document.querySelector(".prow-ashwa");
+      const ashwaSteps = gsap.utils.toArray<HTMLElement>(".ashwa-copy [data-ashwa-step]");
+      const ashwaRow = document.querySelector<HTMLElement>(".prow-ashwa");
       if (ashwaRow && ashwaSteps.length) {
         gsap.set(ashwaSteps, { y: 24, opacity: 0 });
         const ashwaTimeline = gsap.timeline({
@@ -77,8 +77,8 @@ export default function Motion() {
       // =========================================================================
       // 2. Limitless Man Max: Hand holds bottle -> text reveals on scroll
       // =========================================================================
-      const manSteps = gsap.utils.toArray(".man-copy [data-man-step]");
-      const manRow = document.querySelector(".prow-man");
+      const manSteps = gsap.utils.toArray<HTMLElement>(".man-copy [data-man-step]");
+      const manRow = document.querySelector<HTMLElement>(".prow-man");
       if (manRow && manSteps.length) {
         gsap.set(manSteps, { y: 24, opacity: 0 });
         const manTimeline = gsap.timeline({
@@ -108,13 +108,13 @@ export default function Motion() {
       //    Step 2: Swap to empty hand at end of text -> UNPIN!
       //    Step 3: User descends down page with the bottle into Compare!
       // =========================================================================
-      const womenRow = document.querySelector(".prow-woman");
-      const womenSteps = gsap.utils.toArray(".women-copy [data-women-step]");
+      const womenRow = document.querySelector<HTMLElement>(".prow-woman");
+      const womenSteps = gsap.utils.toArray<HTMLElement>(".women-copy [data-women-step]");
       const womenHandFull = womenRow?.querySelector("[data-women-hand-full]");
       const womenHandEmpty = womenRow?.querySelector("[data-women-hand-empty]");
-      const travelBottle = document.querySelector("[data-travel-woman-bottle]");
-      const compareSection = document.querySelector(".compare");
-      const compareBottle = document.querySelector("[data-compare-woman-bottle]");
+      const travelBottle = document.querySelector<HTMLElement>("[data-travel-woman-bottle]");
+      const compareSection = document.querySelector<HTMLElement>(".compare");
+      const compareBottle = document.querySelector<HTMLElement>("[data-compare-woman-bottle]");
 
       if (womenRow && womenSteps.length && womenHandFull && womenHandEmpty && travelBottle) {
         // Initial setup
@@ -174,7 +174,7 @@ export default function Motion() {
         let startX = 0, startY = 0, startW = 180;
 
         const updateStartCoords = () => {
-          const handFrame = womenRow.querySelector(".hand-inner-frame") || womenRow.querySelector(".women-hand");
+          const handFrame = womenRow.querySelector<HTMLElement>(".hand-inner-frame") || womenRow.querySelector<HTMLElement>(".women-hand");
           const handRect = handFrame ? handFrame.getBoundingClientRect() : null;
           if (handRect) {
             startW = Math.round(handRect.width * 0.44);
@@ -237,15 +237,15 @@ export default function Motion() {
       }
 
       // ---- products float & parallax ----
-      gsap.utils.toArray("[data-float]").forEach((el, i) => {
+      gsap.utils.toArray<HTMLElement>("[data-float]").forEach((el, i) => {
         gsap.from(el, {
           y: 90, opacity: 0, rotation: i % 2 ? 12 : -12, duration: 1, ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 90%" },
         });
         gsap.to(el, { y: -14, duration: 2.2 + i * 0.3, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 1 });
       });
-      gsap.utils.toArray("[data-parallax]").forEach((el) => {
-        const amt = parseFloat(el.dataset.parallax) || 10;
+      gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
+        const amt = parseFloat(el.dataset.parallax ?? "") || 10;
         gsap.fromTo(el, { yPercent: -amt }, {
           yPercent: amt, ease: "none",
           scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
