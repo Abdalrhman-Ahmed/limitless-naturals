@@ -7,21 +7,22 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero3D() {
-  const mount = useRef(null);
+  const mount = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = mount.current;
     if (!el) return;
-    const hero = document.querySelector(".hero");
-    const slot = document.querySelector("[data-bottle-slot]");
-    const handEmpty = document.querySelector("[data-hand-empty]");
-    const handFull = document.querySelector("[data-hand-full]");
+    const hero = document.querySelector<HTMLElement>(".hero");
+    const slot = document.querySelector<HTMLElement>("[data-bottle-slot]");
+    const handEmpty = document.querySelector<HTMLElement>("[data-hand-empty]");
+    const handFull = document.querySelector<HTMLElement>("[data-hand-full]");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const cameraZ = 8.5;
     const visibleWorldHeight = 2 * cameraZ * Math.tan((32 * Math.PI) / 360);
-    const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
-    const smooth = (v) => v * v * (3 - 2 * v);
+    const clamp = (v: number, min = 0, max = 1): number =>
+  Math.min(max, Math.max(min, v));
 
+const smooth = (v: number): number => v * v * (3 - 2 * v);
     let disposed = false;
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -45,10 +46,10 @@ export default function Hero3D() {
     scene.add(product);
 
     const textureLoader = new THREE.TextureLoader();
-    let productTexture;
-    let productMaterial;
-    let productPlane;
-    let bottleShadow;
+   let productTexture: THREE.CanvasTexture | undefined;
+let productMaterial: THREE.MeshBasicMaterial | undefined;
+let productPlane: THREE.Mesh | undefined;
+let bottleShadow: THREE.Mesh | undefined;
     const entranceScale = { value: 0.88 };
     let shadowTexture;
 
@@ -57,7 +58,8 @@ export default function Hero3D() {
     const shadowCanvas = document.createElement("canvas");
     shadowCanvas.width = 256;
     shadowCanvas.height = 384;
-    const shadowContext = shadowCanvas.getContext("2d");
+const shadowContext = shadowCanvas.getContext("2d")!;
+    if (!shadowContext) return;
     const shadowGradient = shadowContext.createRadialGradient(128, 192, 12, 128, 192, 126);
     shadowGradient.addColorStop(0, "rgba(8, 22, 13, 0.38)");
     shadowGradient.addColorStop(0.48, "rgba(8, 22, 13, 0.22)");
@@ -137,7 +139,7 @@ export default function Hero3D() {
         const canvas = document.createElement("canvas");
         canvas.width = source.naturalWidth || source.width;
         canvas.height = source.naturalHeight || source.height;
-        const context = canvas.getContext("2d", { willReadFrequently: true });
+const context = canvas.getContext("2d", { willReadFrequently: true })!;
         context.drawImage(source, 0, 0, canvas.width, canvas.height);
         const frame = context.getImageData(0, 0, canvas.width, canvas.height);
         const pixels = frame.data;
@@ -190,7 +192,7 @@ export default function Hero3D() {
     );
 
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
-    const onMove = (event) => {
+    const onMove = (event: PointerEvent) => {
       const rect = el.getBoundingClientRect();
       pointer.targetX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
       pointer.targetY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
@@ -209,7 +211,7 @@ export default function Hero3D() {
     resize();
 
     const clock = new THREE.Clock();
-    let frameId;
+    let frameId: number | undefined;
     const tick = () => {
       const time = clock.getElapsedTime();
       pointer.x += (pointer.targetX - pointer.x) * 0.045;
@@ -222,11 +224,11 @@ export default function Hero3D() {
       const heroRect = hero?.getBoundingClientRect();
       const slotRect = slot?.getBoundingClientRect();
       const ppu = viewportH / visibleWorldHeight;
-      const toX = (px) => (px - viewportW / 2) / ppu;
-      const toY = (py) => -(py - viewportH / 2) / ppu;
+      const toX = (px: number) => (px - viewportW / 2) / ppu;
+      const toY = (py: number) => -(py - viewportH / 2) / ppu;
       const canvasH = mobileLayout ? (heroRect?.height || viewportH) * 0.55 : (heroRect?.height || viewportH);
       const startX = (heroRect?.left || 0) + (heroRect?.width || viewportW) * (mobileLayout ? 0.5 : 0.72);
-      const startY = (heroRect?.top || 0) + (heroRect?.height || viewportH) * (mobileLayout ? 0.60 : 0.5);
+      const startY = (heroRect?.top || 0) + (heroRect?.height || viewportH) * (mobileLayout ? 0.725 : 0.5);
       const startHeight = canvasH * 4.65 / visibleWorldHeight;
       let progress = 0;
       if (!reduceMotion && slotRect) {
@@ -249,7 +251,7 @@ export default function Hero3D() {
       product.rotation.x = (-pointer.y * 0.08) * (1 - eased);
       product.rotation.z = 0.11 * (1 - eased);
 
-      const fullImage = handFull?.querySelector("img");
+      const fullImage = handFull?.querySelector<HTMLImageElement>("img");
       const fullImageLoaded = !!(fullImage && fullImage.complete && fullImage.naturalWidth > 0);
       const handFade = fullImageLoaded && slotRect ? smooth(clamp((progress - 0.72) / 0.28)) : 0;
       if (handFull) handFull.style.opacity = String(handFade);
@@ -282,7 +284,7 @@ export default function Hero3D() {
 
     return () => {
       disposed = true;
-      cancelAnimationFrame(frameId);
+      if (frameId !== undefined) cancelAnimationFrame(frameId);
       window.removeEventListener("pointermove", onMove);
       observer.disconnect();
       gsap.killTweensOf(entranceScale);
